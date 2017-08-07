@@ -6,10 +6,11 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-      <Header />
-        <Text style={styles.text}>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menufuck</Text>
+        <View style={styles.header}>
+          <Header />
+        </View>
+
+        <Text style={styles.text}>Welcome to the nightmare!</Text>
       </View>
     );
   }
@@ -18,10 +19,13 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
+  header: {
+    
+  }
   text: {
     color: 'red',
   }
