@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './src/components/header';
 import { MapView } from 'expo';
+import SessionForm from './src/components/session/sessionForm';
 
 export default class App extends React.Component {
   render() {
@@ -10,15 +11,10 @@ export default class App extends React.Component {
         <View style={styles.header}>
           <Header />
         </View>
-        <MapView
-           style={styles.map}
-           initialRegion={{
-             latitude: 37.78825,
-             longitude: -122.4324,
-             latitudeDelta: 0.0922,
-             longitudeDelta: 0.0421,
-           }}
-         />
+        <View>
+          <SessionForm />
+        </View>
+
         <Text style={styles.text}>Welcome to the nightmare!</Text>
       </View>
     );
@@ -43,3 +39,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
+
+// <MapView
+//    style={styles.map}
+//    initialRegion={{
+//      latitude: 37.78825,
+//      longitude: -122.4324,
+//      latitudeDelta: 0.0922,
+//      longitudeDelta: 0.0421,
+//    }}
+//  />
