@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-// import configureStore from './src/store/store';
+import configureStore from './src/store/store';
 import Root from './src/root';
-// import { requestAllEvents } from './src/components/actions/eventActions';
+import { requestAllEvents, receiveAllEvents } from './src/actions/eventActions';
 //
-// const store = configureStore();
-// window.store = store;
-// window.requestAllEvents = requestAllEvents;
+const store = configureStore();
+console.log(store.dispatch(receiveAllEvents()));
+window.store = store;
+window.requestAllEvents = requestAllEvents;
+window.getState = store.getState;
 
 export default class Entry extends Component {
   render() {
     return(
-      <Root />
+      <Root store={store} />
     );
   }
 }
