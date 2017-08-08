@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt-nodejs';
 
 const UserSchema = new Schema({
 	local: {
@@ -16,7 +16,7 @@ const UserSchema = new Schema({
 			required: true
 		}
 	},
-	
+
 	facebook: {
 		id: String,
 		token: String,
@@ -32,4 +32,5 @@ UserSchema.methods.generateHash = password => {
 UserSchema.methods.validPassword = password => {
 	return bcrypt.compareSync(password, this.user.password);
 };
+
 export default mongoose.model('User', UserSchema);

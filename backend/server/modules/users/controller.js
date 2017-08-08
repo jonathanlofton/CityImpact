@@ -11,6 +11,15 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const loginUser = (req, res) => {
+export const getAllUsers = async (req, res) => {
+  try {
+    return res.status(201).json({ meetup: await User.find({}) });
+  } catch (e) {
+    return res.status(e.status).json({ error: true, message: 'Error with Users' });
+  }
+};
 
-}
+
+// export const loginUser = (req, res) => {
+//
+// }
