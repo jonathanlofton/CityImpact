@@ -1,13 +1,13 @@
 import express from 'express';
 import dbConfig from './config/db';
-import middlewaresConfig from './config/middleware';
+import middlewareConfig from './config/middleware';
 import { MeetupRoutes } from './modules';
 
 const app = express();
 
 dbConfig();
 
-middlewaresConfig(app);
+middlewareConfig(app);
 
 app.use('/api', [MeetupRoutes]);
 
