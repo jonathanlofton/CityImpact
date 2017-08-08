@@ -19,6 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "cross-env": "^5.0.4",
     "expo": "^19.0.0",
     "react": "16.0.0-alpha.12",
