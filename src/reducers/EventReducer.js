@@ -18,6 +18,7 @@ const EventReducer = (state = defaultState, action) => {
       return merge({}, state, { entities: events, errors: []});
     default:
       return state;
-
   }
 };
+
+export default EventReducer;
