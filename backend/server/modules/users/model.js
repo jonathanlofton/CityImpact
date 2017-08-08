@@ -2,7 +2,22 @@ import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 const UserSchema = new Schema({
-	user: {
+	local: {
+			username: {
+			type: String,
+			required: true
+		},
+		email: {
+			type: String,
+			required: true
+		},
+		passwordDigest: {
+			type: String,
+			required: true
+		}
+	},
+	
+	facebook: {
 		id: String,
 		token: String,
 		email: String,
@@ -17,5 +32,4 @@ UserSchema.methods.generateHash = password => {
 UserSchema.methods.validPassword = password => {
 	return bcrypt.compareSync(password, this.user.password);
 };
-
 export default mongoose.model('User', UserSchema);

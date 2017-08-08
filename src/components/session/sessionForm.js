@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { CardSection, Card, Button, Input } from '../common'
+import { Text, View, TextInput, TouchableOpacity, StackNavigator } from 'react-native';
+import { CardSection, Card, Button, Input } from '../common';
 
 class SessionForm extends Component {
   constructor(props) {
@@ -18,26 +18,36 @@ class SessionForm extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.login) {
       return(
-        <View style={style.container}>
+        <Card>
+          <CardSection>
+            <Input
+              placeholder="example@email.com"
+              label="email"
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+              secureTextEntry
+              placeholder="password"
+              label="password"
+            />
+          </CardSection>
           <CardSection>
             <TouchableOpacity
               onPress={() => navigate('LandingPage')}
               style={style.buttonStyle}
               >
-              <Text>Guest Login</Text>
+              <Text style={style.buttonText}>Guest Log In</Text>
             </TouchableOpacity>
-          </CardSection>
-        </View>
+            </CardSection>
+
+        </Card>
       );
     }
   }
 }
 
 export default SessionForm;
-<Button
-  title="go to maps"
-  onPress={() => navigate('LandingPage')}
-  />
 
   const style = {
     buttonStyle: {
@@ -54,6 +64,12 @@ export default SessionForm;
     container: {
       flex: 1,
       justifyContent: 'center',
-      alignContent: 'center',
+      alignItems: 'center',
+    },
+    buttonText: {
+      alignSelf: 'center',
+      color: '#00AB6C',
+      fontSize: 20,
+      padding: 15
     }
   };
