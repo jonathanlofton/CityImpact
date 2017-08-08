@@ -1,26 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './src/components/header';
-import { MapView } from 'expo';
-import SessionForm from './src/components/session/sessionForm';
+import React, { Component } from 'react';
+// import configureStore from './src/store/store';
+import Root from './src/root';
+//
+// const store = configureStore();
+// window.store = store;
 
-export default class App extends React.Component {
+export default class Entry extends Component {
   render() {
-    return (
-      <View>
-        <View>
-          <Header />
-        </View>
-        <View>
-          <SessionForm />
-        </View>
-
-        <Text>Welcome to the nightmare!</Text>
-      </View>
+    return(
+      <Root />
     );
   }
 }
-
-const styles = StyleSheet.create({
-
-});
