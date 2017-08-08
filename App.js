@@ -1,45 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './src/components/header';
-import { MapView } from 'expo';
+import React, { Component } from 'react';
+// import configureStore from './src/store/store';
+import Root from './src/root';
+//
+// const store = configureStore();
+// window.store = store;
 
-export default class App extends React.Component {
+export default class Entry extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Header />
-        </View>
-        <MapView
-           style={styles.map}
-           initialRegion={{
-             latitude: 37.78825,
-             longitude: -122.4324,
-             latitudeDelta: 0.0922,
-             longitudeDelta: 0.0421,
-           }}
-         />
-        <Text style={styles.text}>Welcome to the nightmare!</Text>
-      </View>
+    return(
+      <Root />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-});
