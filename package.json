@@ -25,6 +25,7 @@
     "react-native-maps": "^0.15.3",
     "react-redux": "file:node_modules/react-redux",
     "redux": "file:node_modules/redux",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "yarn": "^0.27.5"
   }
 }
