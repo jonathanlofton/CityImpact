@@ -5,8 +5,10 @@ class SessionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: ""
+      fname: "",
+      lname: "",
+      email: "",
+      password: "",
     };
   }
 
