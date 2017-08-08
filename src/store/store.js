@@ -4,7 +4,7 @@ import logger from 'redux-logger';
 import RootReducer from '../reducers/RootReducer';
 
 const configureStore = (preloadedState = {}) => {
-  createStore(
+  return createStore(
     RootReducer,
     preloadedState,
     applyMiddleware(thunk)
