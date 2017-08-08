@@ -7,4 +7,11 @@ export default app => {
     extended: true
   }));
   app.use(morgan('dev'));
+
+  //aded for auth
+  app.use(cookieParser());
+  app.use(session({ secret: 'ilovescotchscotchyscotchscotch' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
 };
