@@ -8,11 +8,23 @@ const AuthRoutes = passport => {
 
   routes.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/api/users/login',
+      successRedirect: '/profile',
       failureRedirect: '/api/events'
     })
   );
+
+  routes.get('/profile', isLoggedIn, (req, res) => {
+		// res.redirect()
+	});
+
   return routes;
+};
+
+const isLoggedIn = (req, res, next) => {
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/api/events');
 };
 
 export default AuthRoutes;

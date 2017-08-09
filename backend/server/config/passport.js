@@ -24,23 +24,25 @@ export default passport => {
       profileFields: ['id', 'displayName', 'name', 'emails']
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({'facebook.id': profile.id}, (err, user) => {
-        if (err) { return done(err); }
-  			if (user) {
-          return done(null, user);
-        } else {
-  				const newUser = new User();
-  				newUser.facebook.id = profile.id;
-  				newUser.facebook.token = accessToken;
-  				newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-  				newUser.facebook.email = profile.emails ? profile.emails[0].value : "";
+      process.nextTick(() => {
+        User.findOne({'facebook.id': profile.id}, (err, user) => {
+          if (err) { return done(err); }
+    			if (user) {
+            return done(null, user);
+          } else {
+    				const newUser = new User();
+    				newUser.facebook.id = profile.id;
+    				newUser.facebook.token = accessToken;
+    				newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+    				newUser.facebook.email = profile.emails ? profile.emails[0].value : "";
 
-  				newUser.save(err => {
-  					if (err) { throw err; }
-  					return done(null, newUser);
-  				});
-  				console.log(profile);
-  			}
+    				newUser.save(err => {
+    					if (err) { throw err; }
+    					return done(null, newUser);
+    				});
+    				console.log(profile);
+    			}
+        });
       });
     }
   ));
