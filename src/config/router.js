@@ -1,12 +1,12 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
-import SessionForm from '../components/session/sessionForm';
+import SessionFormContainer from '../components/session/sessionFormContainer';
 import LandingPage from '../components/landingPage/landingPage';
 
 export const Tabs = StackNavigator({
   SessionForm: {
-    screen: SessionForm,
+    screen: SessionFormContainer,
   },
   LandingPage: {
     screen: LandingPage,

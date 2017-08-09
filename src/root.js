@@ -10,7 +10,6 @@ class Root extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Provider store={this.props.store}>
         <App />

@@ -14,6 +14,8 @@ class SessionForm extends Component {
     };
   }
 
+
+
   render() {
     const { navigate } = this.props.navigation;
     if (this.state.login) {
@@ -73,3 +75,10 @@ export default SessionForm;
       padding: 15
     }
   };
+
+  // <TouchableOpacity
+  //   onPress={() => navigate('LandingPage')}
+  //   style={style.buttonStyle}
+  //   >
+  //   <Text style={style.buttonText}>Guest Log In</Text>
+  // </TouchableOpacity>
