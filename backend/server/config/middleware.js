@@ -1,5 +1,4 @@
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import morgan from 'morgan';
 import passport from 'passport';
@@ -16,7 +15,6 @@ export default app => {
   app.use(morgan('dev'));
 
   //aded for auth
-  app.use(cookieParser());
   app.use(session({secret: 'anystringoftext',
   				 saveUninitialized: true,
   				 resave: true}));
