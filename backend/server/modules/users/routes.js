@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import * as UserController from './controller';
-// import passport from 'passport';
 
 const routes = new Router();
 

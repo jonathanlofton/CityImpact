@@ -11,9 +11,13 @@ dbConfig();
 
 middlewareConfig(app);
 
+// console.log(UserRoutes);
+// console.log(EventRoutes);
+
 app.use('/api', [EventRoutes]);
 app.use('/', [ UserRoutes(passport) ]);
 // console.log(UserRoutes(passport));
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, err => {
