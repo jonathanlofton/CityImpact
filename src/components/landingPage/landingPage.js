@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { MapView } from 'expo';
 import { Button, Card, CardSection } from '../common';
 import Expo from 'expo';
@@ -41,7 +41,7 @@ class LandingPage extends React.Component {
   }
 
   setModalVisible() {
-    this.setState({modalVisible: true})
+    this.setState({modalVisible: !this.state.modalVisible})
   }
 
   _renderModalContent = () => (
@@ -60,6 +60,13 @@ class LandingPage extends React.Component {
             >
             <Text style={styles.buttonText}>Report Issue</Text>
           </TouchableOpacity>
+        </CardSection>
+        <CardSection>
+          <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <Text>X</Text>
+            </TouchableHighlight>
         </CardSection>
       </Card>
     </View>
