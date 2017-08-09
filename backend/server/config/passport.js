@@ -6,6 +6,17 @@ import configAuth from './auth';
 
 
 export default passport => {
+
+  passport.serializeUser((user, done) => {
+		done(null, user.id);
+	});
+
+	passport.deserializeUser((id, done) => {
+		User.findById(id, (err, user) => {
+			done(err, user);
+		});
+	});
+
   passport.use(new FacebookStrategy({
       clientID: configAuth.facebookAuth.clientID,
       clientSecret: configAuth.facebookAuth.clientSecret,
@@ -21,7 +32,7 @@ export default passport => {
   				newUser.facebook.id = profile.id;
   				newUser.facebook.token = accessToken;
   				newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-  				newUser.facebook.email = profile.emails[0].value;
+  				newUser.facebook.email = profile.emails ? profile.emails[0].value : "";
 
   				newUser.save(err => {
   					if (err) { throw err; }

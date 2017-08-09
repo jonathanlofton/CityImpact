@@ -2,20 +2,20 @@ import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 
 const UserSchema = new Schema({
-	local: {
-			username: {
-			type: String,
-			required: true
-		},
-		email: {
-			type: String,
-			required: true
-		},
-		passwordDigest: {
-			type: String,
-			required: true
-		}
-	},
+	// local: {
+	// 		username: {
+	// 		type: String,
+	// 		required: true
+	// 	},
+	// 	email: {
+	// 		type: String,
+	// 		required: true
+	// 	},
+	// 	passwordDigest: {
+	// 		type: String,
+	// 		required: true
+	// 	}
+	// },
 
 	facebook: {
 		id: String,
