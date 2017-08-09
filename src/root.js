@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-// import configureStore from '../store/store';
+import configureStore from './store/store';
 import App from './app';
 
 class Root extends Component {
@@ -10,8 +10,11 @@ class Root extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
-      <App />
+      <Provider store={this.props.store}>
+        <App />
+      </Provider>
     );
   }
 }
