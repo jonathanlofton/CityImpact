@@ -40,7 +40,6 @@ class SessionForm extends Component {
               <Text style={style.buttonText}>Guest Log In</Text>
             </TouchableOpacity>
             </CardSection>
-
         </Card>
       );
     }
