@@ -66,6 +66,7 @@ class LandingPage extends React.Component {
   )
 
   render() {
+    const { navigate } = this.props.navigation;
     if (!this.state.location) {
       return null
     }
@@ -94,6 +95,7 @@ class LandingPage extends React.Component {
 
              <CardSection style={styles.eventIndexButton}>
                <TouchableOpacity
+                 onPress={() => navigate('EventIndexContainer')}
                  style={styles.buttonStyle}
                  >
                  <Text style={styles.buttonText}>Event Index</Text>

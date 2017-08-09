@@ -12,4 +12,4 @@ const mapDispatchToProps = (dispatch) => ({
   requestSingleEvent: event => dispatch(requestSingleEvent({ event }))
 });
 
-connect(mapStateToProps, mapDispatchToProps)(EventIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(EventIndex);

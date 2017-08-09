@@ -19,5 +19,7 @@ export const createEvent = (event) => (
     method: 'post',
     url: '/api/events',
     data: event
+  }).then(res => console.log(res)).then(console.log('event created')).catch(error => {
+    console.log(error);
   })
 );
