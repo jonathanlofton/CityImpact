@@ -14,7 +14,8 @@ const AuthRoutes = passport => {
   );
 
   routes.get('/profile', isLoggedIn, (req, res) => {
-		// res.redirect()
+		// res.redirect(`/api/users/${req.user.id}`);
+    res.json(req.user);
 	});
 
   return routes;
