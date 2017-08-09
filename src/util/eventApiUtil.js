@@ -7,6 +7,13 @@ export const fetchAllEvents = () => (
   })
 );
 
+export const fetchSingleEvent = (id) => (
+  axios({
+    method: 'get',
+    url: `/api/events/${id}`
+  })
+);
+
 export const createEvent = (event) => (
   axios({
     method: 'post',
