@@ -16,3 +16,5 @@ class EventIndex extends React.Component {
     // );
   }
 }
+
+export default EventIndex;
