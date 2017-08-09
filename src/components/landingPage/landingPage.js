@@ -6,6 +6,11 @@ import Expo from 'expo';
 const markers = [];
 
 class LandingPage extends React.Component {
+
+  static navigationOptions = {
+      title: 'Map',
+    };
+
   constructor(props) {
     super(props)
     this.state = {
@@ -118,6 +123,8 @@ class LandingPage extends React.Component {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

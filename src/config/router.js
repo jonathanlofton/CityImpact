@@ -15,4 +15,9 @@ export const Tabs = StackNavigator({
   EventIndexContainer: {
     screen: EventIndexContainer,
   }
-});
+},
+{
+  initialRouteName: 'SessionForm',
+  headerMode: 'screen'
+}
+);

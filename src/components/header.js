@@ -5,7 +5,6 @@ export default class Header extends React.Component {
   render() {
     return (
       <View>
-        <Text style={styles.header}>CityImpact</Text>
       </View>
     );
   }
