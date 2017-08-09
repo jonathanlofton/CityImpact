@@ -12,8 +12,8 @@ class LandingPage extends React.Component {
       errorMessage: null,
       modalVisible: false,
     }
-    this.mapPress = this.mapPress.bind(this);
-    this.setModalVisible = this.setModalVisible.bind(this);
+    this.mapPressLong = this.mapPressLong.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount(){
@@ -33,40 +33,37 @@ class LandingPage extends React.Component {
     this.setState({ location });
   };
 
-  mapPress(e) {
+  mapPressLong(e) {
     //nativeEvent.coordinate will obtain coordinates
     console.log(e.nativeEvent.coordinate)
-    this.setState({modalVisible: true})
+    this.toggleModal()
     console.log(this.state.modalVisible)
   }
 
-  setModalVisible() {
+  toggleModal() {
     this.setState({modalVisible: !this.state.modalVisible})
   }
+
+  _renderTouchableOpacity = (text, onPress = null) => (
+    <TouchableOpacity
+      style={styles.buttonStyle}
+      onPress={onPress}
+      >
+      <Text style={styles.buttonText}>{text}</Text>
+    </TouchableOpacity>
+  )
 
   _renderModalContent = () => (
     <View style={styles.modalFullScreen}>
       <Card style={styles.modalContent}>
         <CardSection>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            >
-            <Text style={styles.buttonText}>Create Event</Text>
-          </TouchableOpacity>
+          {this._renderTouchableOpacity("Create Event")}
         </CardSection>
         <CardSection>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            >
-            <Text style={styles.buttonText}>Report Issue</Text>
-          </TouchableOpacity>
+          {this._renderTouchableOpacity("Report Issue")}
         </CardSection>
         <CardSection>
-          <TouchableHighlight onPress={() => {
-              this.setModalVisible(!this.state.modalVisible)
-            }}>
-              <Text>X</Text>
-            </TouchableHighlight>
+          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()})}
         </CardSection>
       </Card>
     </View>
@@ -90,7 +87,7 @@ class LandingPage extends React.Component {
                latitudeDelta: 0.0922,
                longitudeDelta: 0.0421,
              }}
-             onLongPress={this.mapPress}
+             onLongPress={this.mapPressLong}
            >
              <MapView.Marker
                coordinate={{
@@ -99,7 +96,7 @@ class LandingPage extends React.Component {
                }}
                title="Current Location"
               />
-
+            
              <CardSection style={styles.eventIndexButton}>
                <TouchableOpacity
                  onPress={() => navigate('EventIndexContainer')}
