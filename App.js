@@ -4,7 +4,7 @@ import Root from './src/root';
 import { requestAllEvents, receiveAllEvents } from './src/actions/eventActions';
 //
 const store = configureStore();
-console.log(store.dispatch(receiveAllEvents()));
+// console.log(store.dispatch(receiveAllEvents()));
 window.store = store;
 window.requestAllEvents = requestAllEvents;
 window.getState = store.getState;
