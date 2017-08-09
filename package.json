@@ -29,9 +29,16 @@
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.1",
     "react-native-maps": "^0.15.3",
+<<<<<<< HEAD
+    "react-redux": "file:node_modules/react-redux",
+    "redux": "file:node_modules/redux",
+    "redux-thunk": "^2.2.0",
+    "yarn": "^0.27.5"
+=======
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
+>>>>>>> 8b52f53b1aacde4871ad0ace63c11f612664cf86
   }
 }
