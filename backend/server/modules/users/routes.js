@@ -8,8 +8,8 @@ const UserRoutes = passport => {
 
   routes.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: 'api/events',
-      failureRedirect: 'api/events'
+      successRedirect: '/api/events',
+      failureRedirect: '/api/events'
     })
   );
   return routes;
