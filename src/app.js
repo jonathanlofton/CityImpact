@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Tabs } from './config/router';
 
 class App extends Component {
+
   render() {
     return(
       <Tabs />
