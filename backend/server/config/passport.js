@@ -20,7 +20,8 @@ export default passport => {
   passport.use(new FacebookStrategy({
       clientID: configAuth.facebookAuth.clientID,
       clientSecret: configAuth.facebookAuth.clientSecret,
-      callbackURL: configAuth.facebookAuth.callbackURL
+      callbackURL: configAuth.facebookAuth.callbackURL,
+      profileFields: ['id', 'displayName', 'name', 'emails']
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({'facebook.id': profile.id}, (err, user) => {
