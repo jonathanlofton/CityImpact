@@ -1,6 +1,6 @@
 import React from 'react';
 import EventIndexItem from './eventIndexItem';
-import { Card } from '../common'
+import { Card } from '../common';
 
 class EventIndex extends React.Component {
 
@@ -9,6 +9,9 @@ class EventIndex extends React.Component {
   }
 
   render() {
+    if (!this.props.events) {
+      return null;
+    }
     const { events } = this.props;
     const allEvents =
       events.map((event, id) => (<EventIndexItem key={`event-${id}`} event={event}/>));

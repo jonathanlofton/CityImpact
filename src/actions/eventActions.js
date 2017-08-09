@@ -24,3 +24,11 @@ export const requestSingleEvent = () => dispatch => (
     dispatch(receiveSingleEvent(event))
   ))
 );
+
+export const createEvent = (event) => dispatch => (
+  EventApiUtil.createEvent(event).then(newEvent => {
+    return (
+      dispatch(receiveSingleEvent(newEvent))
+    );
+  })
+);
