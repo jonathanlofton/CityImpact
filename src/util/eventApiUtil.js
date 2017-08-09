@@ -10,7 +10,7 @@ export const fetchAllEvents = () => (
 export const fetchSingleEvent = (id) => (
   axios({
     method: 'get',
-    url: `/api/events/${id}`
+    url: `/api/event/${id}`
   })
 );
 
