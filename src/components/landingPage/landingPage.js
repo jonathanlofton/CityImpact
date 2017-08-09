@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableHighlight } f
 import { MapView } from 'expo';
 import { Button, Card, CardSection } from '../common';
 import Expo from 'expo';
+const markers = [];
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -35,9 +36,9 @@ class LandingPage extends React.Component {
 
   mapPressLong(e) {
     //nativeEvent.coordinate will obtain coordinates
-    console.log(e.nativeEvent.coordinate)
+    const long = e.nativeEvent.coordinate.longitude
+    const lat = e.nativeEvent.coordinate.latitude
     this.toggleModal()
-    console.log(this.state.modalVisible)
   }
 
   toggleModal() {
@@ -56,7 +57,7 @@ class LandingPage extends React.Component {
   _renderModalContent = () => (
     <View style={styles.modalFullScreen}>
       <Card style={styles.modalContent}>
-        <CardSection>
+        <CardSection style={styles.cardSection}>
           {this._renderTouchableOpacity("Create Event")}
         </CardSection>
         <CardSection>
@@ -96,17 +97,13 @@ class LandingPage extends React.Component {
                }}
                title="Current Location"
               />
-            
-             <CardSection style={styles.eventIndexButton}>
-               <TouchableOpacity
-                 onPress={() => navigate('EventIndexContainer')}
-                 style={styles.buttonStyle}
-                 >
-                 <Text style={styles.buttonText}>Event Index</Text>
-               </TouchableOpacity>
-             </CardSection>
-
            </ MapView>
+
+           <CardSection style={styles.bottomNavigation}>
+              {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'))}
+              {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'))}
+            </CardSection>
+
            <Modal
             animationType={"slide"}
             transparent={true}
@@ -137,7 +134,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: '10%',
   },
   modalFullScreen: {
     height: '100%',
@@ -152,6 +149,7 @@ const styles = StyleSheet.create({
     height: '20%',
   },
   buttonStyle: {
+    flex: 1,
     alignSelf: 'center',
     borderRadius: 3,
     alignContent: 'center',
@@ -168,6 +166,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 5
   },
+  cardSection: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomNavigation: {
+    position: 'absolute',
+    top: '90%',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  }
 });
 
 export default LandingPage;
