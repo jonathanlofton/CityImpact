@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import configureStore from './src/store/store';
 import Root from './src/root';
-import { requestAllEvents, receiveAllEvents, createEvent } from './src/actions/eventActions';
-import { fetchAllEvents} from './src/util/eventApiUtil';
+import { requestAllEvents, receiveAllEvents} from './src/actions/eventActions';
+import { fetchAllEvents, createEvent } from './src/util/eventApiUtil';
 //
 const store = configureStore();
 // console.log(store.dispatch(receiveAllEvents()));

@@ -3,9 +3,14 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "6.10.1",
+    "npm": "3.10.10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon index.js"
+    "dev": "NODE_ENV=development nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

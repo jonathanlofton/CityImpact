@@ -1,25 +1,38 @@
 import axios from 'axios';
+import { HOST_URL } from './host_util';
 
 export const fetchAllEvents = () => (
   axios({
     method: 'get',
-    url: '/api/events'
+    url: `${HOST_URL}/api/events`
   })
 );
 
 export const fetchSingleEvent = (id) => (
   axios({
     method: 'get',
-    url: `/api/event/${id}`
+    url: `${HOST_URL}/api/event/${id}`
   })
 );
 
-export const createEvent = (event) => (
-  axios({
+export const createEvent = (event) => {
+  // return fetch(`${HOST_URL}/api/events`, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Accept': 'application/json'
+  //   },
+  //   body: JSON.stringify({ event })
+  // })
+  //   .then(res => {
+  //     return res.json();
+  //   })
+  //   .catch(error => console.log(error));
+  return axios({
     method: 'post',
-    url: '/api/events',
+    url: `${HOST_URL}/api/events`,
     data: event
-  }).then(res => console.log(res)).then(console.log('event created')).catch(error => {
+  }).then(res => console.log(res), error => {
     console.log(error);
-  })
-);
+  });
+};
