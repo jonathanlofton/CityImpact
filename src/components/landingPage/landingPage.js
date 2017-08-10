@@ -1,10 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { MapView } from 'expo';
 import { Button, Card, CardSection } from '../common';
 import Expo from 'expo';
+const markers = [];
 
 class LandingPage extends React.Component {
+
+  static navigationOptions = {
+      title: 'Map',
+    };
+
   constructor(props) {
     super(props)
     this.state = {
@@ -12,8 +18,8 @@ class LandingPage extends React.Component {
       errorMessage: null,
       modalVisible: false,
     }
-    this.mapPress = this.mapPress.bind(this);
-    this.setModalVisible = this.setModalVisible.bind(this);
+    this.mapPressLong = this.mapPressLong.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount(){
@@ -33,33 +39,37 @@ class LandingPage extends React.Component {
     this.setState({ location });
   };
 
-  mapPress(e) {
+  mapPressLong(e) {
     //nativeEvent.coordinate will obtain coordinates
-    console.log(e.nativeEvent.coordinate)
-    this.setState({modalVisible: true})
-    console.log(this.state.modalVisible)
+    const long = e.nativeEvent.coordinate.longitude
+    const lat = e.nativeEvent.coordinate.latitude
+    this.toggleModal()
   }
 
-  setModalVisible() {
-    this.setState({modalVisible: true})
+  toggleModal() {
+    this.setState({modalVisible: !this.state.modalVisible})
   }
+
+  _renderTouchableOpacity = (text, onPress = null) => (
+    <TouchableOpacity
+      style={styles.buttonStyle}
+      onPress={onPress}
+      >
+      <Text style={styles.buttonText}>{text}</Text>
+    </TouchableOpacity>
+  )
 
   _renderModalContent = () => (
     <View style={styles.modalFullScreen}>
       <Card style={styles.modalContent}>
-        <CardSection>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            >
-            <Text style={styles.buttonText}>Create Event</Text>
-          </TouchableOpacity>
+        <CardSection style={styles.cardSection}>
+          {this._renderTouchableOpacity("Create Event")}
         </CardSection>
         <CardSection>
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            >
-            <Text style={styles.buttonText}>Report Issue</Text>
-          </TouchableOpacity>
+          {this._renderTouchableOpacity("Report Issue")}
+        </CardSection>
+        <CardSection>
+          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()})}
         </CardSection>
       </Card>
     </View>
@@ -83,7 +93,7 @@ class LandingPage extends React.Component {
                latitudeDelta: 0.0922,
                longitudeDelta: 0.0421,
              }}
-             onLongPress={this.mapPress}
+             onLongPress={this.mapPressLong}
            >
              <MapView.Marker
                coordinate={{
@@ -92,17 +102,13 @@ class LandingPage extends React.Component {
                }}
                title="Current Location"
               />
-
-             <CardSection style={styles.eventIndexButton}>
-               <TouchableOpacity
-                 onPress={() => navigate('EventIndexContainer')}
-                 style={styles.buttonStyle}
-                 >
-                 <Text style={styles.buttonText}>Event Index</Text>
-               </TouchableOpacity>
-             </CardSection>
-
            </ MapView>
+
+           <CardSection style={styles.bottomNavigation}>
+              {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'))}
+              {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'))}
+            </CardSection>
+
            <Modal
             animationType={"slide"}
             transparent={true}
@@ -117,6 +123,8 @@ class LandingPage extends React.Component {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -133,7 +141,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: '10%',
   },
   modalFullScreen: {
     height: '100%',
@@ -148,6 +156,7 @@ const styles = StyleSheet.create({
     height: '20%',
   },
   buttonStyle: {
+    flex: 1,
     alignSelf: 'center',
     borderRadius: 3,
     alignContent: 'center',
@@ -164,6 +173,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 5
   },
+  cardSection: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomNavigation: {
+    position: 'absolute',
+    top: '90%',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  }
 });
 
 export default LandingPage;

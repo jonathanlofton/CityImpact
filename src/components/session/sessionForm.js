@@ -3,6 +3,11 @@ import { Text, View, TextInput, TouchableOpacity, StackNavigator } from 'react-n
 import { CardSection, Card, Button, Input } from '../common';
 
 class SessionForm extends Component {
+
+  static navigationOptions = {
+      title: 'Session Form',
+    };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,8 +18,6 @@ class SessionForm extends Component {
       login: true
     };
   }
-
-
 
   render() {
     const { navigate } = this.props.navigation;

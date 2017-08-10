@@ -11,7 +11,6 @@ const CardSection = (props) => {
 
 const styles = {
   containerStyle: {
-    alignItems: 'center',
     width: '100%',
     borderBottomWidth: 1,
     padding: 5,
