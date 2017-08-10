@@ -50,28 +50,22 @@ class LandingPage extends React.Component {
     this.setState({modalVisible: !this.state.modalVisible})
   }
 
-  _renderTouchableOpacity = (text, onPress = null) => (
+  _renderTouchableOpacity = (text, onPress = null, buttonStyle = null, textStyle = null) => (
     <TouchableOpacity
-      style={styles.buttonStyle}
+      style={buttonStyle}
       onPress={onPress}
       >
-      <Text style={styles.buttonText}>{text}</Text>
+      <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   )
 
   _renderModalContent = () => (
     <View style={styles.modalFullScreen}>
-      <Card style={styles.modalContent}>
-        <CardSection style={styles.cardSection}>
-          {this._renderTouchableOpacity("Create Event")}
-        </CardSection>
-        <CardSection>
-          {this._renderTouchableOpacity("Report Issue")}
-        </CardSection>
-        <CardSection>
-          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()})}
-        </CardSection>
-      </Card>
+      <View style={styles.modalContent}>
+        {this._renderTouchableOpacity("Create Event", null, styles.modalButton, styles.modalButtonText)}
+        {this._renderTouchableOpacity("Report Issue", null, styles.modalButton, styles.modalButtonText)}
+        {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton, styles.modalButtonText)}
+      </View>
     </View>
   )
 
@@ -105,8 +99,8 @@ class LandingPage extends React.Component {
            </ MapView>
 
            <CardSection style={styles.bottomNavigation}>
-              {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'))}
-              {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'))}
+              {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
+              {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
             </CardSection>
 
            <Modal
@@ -153,7 +147,9 @@ const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: 'white',
     width: '60%',
-    height: '20%',
+    height: '30%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonStyle: {
     flex: 1,
@@ -177,6 +173,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+
   },
   bottomNavigation: {
     position: 'absolute',
@@ -184,6 +181,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  modalButtonText: {
+    margin: '10%',
   }
 });
 
