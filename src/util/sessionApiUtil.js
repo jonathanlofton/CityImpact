@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { HOST_URL } from './host_util';
 
-export const loginFacebook = () => (
-  axios({
-    method: 'get',
-    url: '/auth/facebook'
-  })
-);
+export const loginFacebook = () => {
+  return fetch({
+    method: 'GET',
+    url: `${HOST_URL}/auth/facebook`
+  });
+};

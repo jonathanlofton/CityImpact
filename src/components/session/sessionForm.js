@@ -19,6 +19,7 @@ class SessionForm extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.login) {
       return(
+
         <View style={style.fullPage}>
           <ScrollView scrollEnabled={false} >
             <Text style={style.appTitle}>CityImpact</Text>
@@ -42,22 +43,22 @@ class SessionForm extends Component {
                 />
               </CardSection>
 
-              <View style={style.buttons}>
-                <TouchableOpacity
-                  onPress={() => navigate('LandingPage')}
-                  style={style.buttonStyle}
-                  >
-                  <Text style={style.buttonText}>Guest Log In</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => navigate('LandingPage')}
-                  style={style.facebookStyle}
-                  >
-                  <Text style={style.facebookText}>Facebook Log In</Text>
-                </TouchableOpacity>
-              </View>
-            </Card>
-          </ScrollView>
+            <View style={style.buttons}>
+              <TouchableOpacity
+                onPress={() => navigate('LandingPage')}
+                style={style.buttonStyle}
+                >
+                <Text style={style.buttonText}>Guest Log In</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.facebookAuth()}
+                style={style.facebookStyle}
+                >
+                <Text style={style.facebookText}>Facebook Log In</Text>
+              </TouchableOpacity>
+            </View>
+          </Card>
+
         </View>
       );
     }

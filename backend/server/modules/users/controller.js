@@ -3,7 +3,7 @@ import User from './model';
 export const createUser = async (req, res) => {
   const { username, email, passwordDigest } = req.body;
   const newUser = new User({ username, email, passwordDigest });
-
+  
   try {
     return res.status(201).json({ user: await newUser.save() });
   } catch (e) {
@@ -19,7 +19,3 @@ export const getAllUsers = async (req, res) => {
     return res.status(e.status).json({ error: true, message: 'Error with Users Fetch' });
   }
 };
-
-// export const loginUser = (req, res) => {
-//
-// }
