@@ -10,10 +10,12 @@ class EventIndex extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     if (!this.props.events) {
       return null;
     }
     const { events } = this.props;
+
     const allEvents =
       events.map((event, id) => (<EventIndexItem key={`event-${id}`} event={event}/>));
 

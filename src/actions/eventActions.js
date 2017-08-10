@@ -19,8 +19,8 @@ export const requestAllEvents = () => dispatch => (
   ))
 );
 
-export const requestSingleEvent = () => dispatch => (
-  EventApiUtil.fetchSingleEvent().then(event => (
+export const requestSingleEvent = (id) => dispatch => (
+  EventApiUtil.fetchSingleEvent(id).then(event => (
     dispatch(receiveSingleEvent(event))
   ))
 );
