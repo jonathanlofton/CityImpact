@@ -20,8 +20,7 @@ const EventReducer = (state = defaultState, action) => {
       return merge({}, state, { entities: action.events, errors: []});
     case RECEIVE_SINGLE_EVENT:
       const event = action.event;
-      newState = merge({}, state);
-      newState.entities[event.id] = event;
+      newState = merge({}, state, { entities: event });
       return newState;
     default:
       return state;

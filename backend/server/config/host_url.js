@@ -1,1 +1,1 @@
-export const HOST_URL = 'localhost:3000';
+export const HOST_URL = 'https://cityimpact.herokuapp.com';

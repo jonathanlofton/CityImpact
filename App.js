@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import configureStore from './src/store/store';
 import Root from './src/root';
-import { requestAllEvents, receiveAllEvents, createEvent } from './src/actions/eventActions';
+import { requestAllEvents, receiveAllEvents, createEvent, requestSingleEvent } from './src/actions/eventActions';
 import { fetchAllEvents} from './src/util/eventApiUtil';
 //
 const store = configureStore();
@@ -9,6 +9,7 @@ const store = configureStore();
 window.store = store;
 window.requestAllEvents = requestAllEvents;
 window.receiveAllEvents = receiveAllEvents;
+window.requestSingleEvent = requestSingleEvent;
 window.fetchAllEvents = fetchAllEvents;
 window.createEvent = createEvent;
 window.getState = store.getState;
