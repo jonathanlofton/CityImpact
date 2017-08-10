@@ -4,7 +4,7 @@ import { selectAllEvents } from '../../reducers/selectors';
 import EventIndex from './eventIndex';
 
 const mapStateToProps = state => ({
-  songs: selectAllEvents(state)
+  events: selectAllEvents(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
