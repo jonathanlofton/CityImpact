@@ -18,22 +18,23 @@ class EventIndexItem extends React.Component {
   }
 
   _renderModalContent = () => (
-    <View style={styles.fullScreen}>
+    <View style={modalStyle.fullScreen}>
       <Image
       style={{width: '100%', height: '30%'}}
       source={{uri: 'http://res.cloudinary.com/jlofton/image/upload/v1502388682/jungle_qlctue.jpg'}}
       />
       <View>
-        <View style={styles.dateTitle}>
-          <Text>August 8th</Text>
-          <Text style={styles.showTitle}>{this.props.event.title}</Text>
+        <View style={modalStyle.dateTitle}>
+          <Text style={modalStyle.date}>August 8th</Text>
+          <Text style={modalStyle.showTitle}>{this.props.event.title}</Text>
         </View>
-        <Text>{this.props.event.description}</Text>
-          <TouchableOpacity
-            onPress={() => {this.toggleModal()}}
-            >
-            <Text style={styles.backButton}>Close</Text>
-          </TouchableOpacity>
+        <Text style={modalStyle.description}>{this.props.event.description}</Text>
+        <TouchableOpacity
+          style={modalStyle.backButton}
+          onPress={() => {this.toggleModal()}}
+          >
+          <Text style={modalStyle.backButtonText}>Close</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -100,6 +101,31 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+});
+
+const modalStyle = StyleSheet.create({
+  backButton: {
+    alignSelf: 'flex-end',
+  },
+  backButtonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    justifyContent: 'flex-end',
+  },
+  dateTitle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  date: {
+    marginRight: 10,
+  },
+  description: {
+    marginTop: '10%',
+    marginBottom: '10%',
+    width: '60%',
+    alignSelf: 'center',
+  },
   fullScreen: {
     marginTop: 30,
     width: '100%',
@@ -114,13 +140,4 @@ const styles = StyleSheet.create({
   showDescription: {
 
   },
-  backButton: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    justifyContent: 'flex-end',
-  },
-  dateTitle: {
-    flexDirection: 'row',
-  }
 });
