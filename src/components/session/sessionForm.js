@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableOpacity, StackNavigator } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
 
 class SessionForm extends Component {
-
-  static navigationOptions = {
-      title: 'Session Form',
-    };
 
   constructor(props) {
     super(props);
@@ -24,37 +20,44 @@ class SessionForm extends Component {
     if (this.state.login) {
       return(
         <View style={style.fullPage}>
-          <Text style={style.appTitle}>CityImpact</Text>
-          <Card style={style.container}>
-            <CardSection>
-              <Input
-                placeholder="example@email.com"
-                label="email"
-              />
-            </CardSection>
-            <CardSection>
-              <Input
-                secureTextEntry
-                placeholder="password"
-                label="password"
-              />
-            </CardSection>
+          <ScrollView scrollEnabled={false} >
+            <Text style={style.appTitle}>CityImpact</Text>
+            <Card style={style.container}>
+              <CardSection>
 
-            <View style={style.buttons}>
-              <TouchableOpacity
-                onPress={() => navigate('LandingPage')}
-                style={style.buttonStyle}
-                >
-                <Text style={style.buttonText}>Guest Log In</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigate('LandingPage')}
-                style={style.facebookStyle}
-                >
-                <Text style={style.facebookText}>Facebook Log In</Text>
-              </TouchableOpacity>
-            </View>
-          </Card>
+
+                <Input
+                  onSubmitEditing={this.handleEditComplete}
+                  placeholder="example@email.com"
+                  label="email"
+                />
+
+              </CardSection>
+              <CardSection>
+                <Input
+                  onSubmitEditing={this.handleEditComplete}
+                  secureTextEntry
+                  placeholder="password"
+                  label="password"
+                />
+              </CardSection>
+
+              <View style={style.buttons}>
+                <TouchableOpacity
+                  onPress={() => navigate('LandingPage')}
+                  style={style.buttonStyle}
+                  >
+                  <Text style={style.buttonText}>Guest Log In</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigate('LandingPage')}
+                  style={style.facebookStyle}
+                  >
+                  <Text style={style.facebookText}>Facebook Log In</Text>
+                </TouchableOpacity>
+              </View>
+            </Card>
+          </ScrollView>
         </View>
       );
     }
