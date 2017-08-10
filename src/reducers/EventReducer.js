@@ -16,8 +16,8 @@ const EventReducer = (state = defaultState, action) => {
   let newState;
   switch(action.type) {
     case RECEIVE_ALL_EVENTS:
-      const events = action.events;
-      return merge({}, state, { entities: events, errors: []});
+      // return action.events;
+      return merge({}, state, { entities: action.events, errors: []});
     case RECEIVE_SINGLE_EVENT:
       const event = action.event;
       newState = merge({}, state);

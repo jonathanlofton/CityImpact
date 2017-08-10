@@ -58,7 +58,7 @@ class SessionForm extends Component {
               </TouchableOpacity>
             </View>
           </Card>
-
+        </ScrollView>
         </View>
       );
     }

@@ -1,4 +1,1 @@
-
-export const HOST_URL = 'http://10.0.0.42:3000';
-
-
+export const HOST_URL = 'http://localhost:3000';
