@@ -9,5 +9,6 @@ export const receiveCurrentUser = currentUser => ({
 
 export const facebookAuth = () => dispatch => (
   SessionApiUtil.loginFacebook().then(
-    user => dispatch(receiveCurrentUser(user))
+    user => dispatch(receiveCurrentUser(user)),
+    err => console.log(err)
 ));
