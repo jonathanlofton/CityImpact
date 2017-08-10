@@ -22,18 +22,6 @@ export const fetchSingleEvent = (id) => {
 };
 
 export const createEvent = (event) => {
-  // return fetch(`${HOST_URL}/api/events`, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Accept': 'application/json'
-  //   },
-  //   body: JSON.stringify({ event })
-  // })
-  //   .then(res => {
-  //     return res.json();
-  //   })
-  //   .catch(error => console.log(error));
   return axios({
     method: 'POST',
     url: `${HOST_URL}/api/events`,
@@ -41,6 +29,4 @@ export const createEvent = (event) => {
   }).then(res => console.log(res), error => {
     console.log(error);
   });
-  // return fetch('http://192.168.0.60:3000/api/events')
-  //   .then( res => console.log(res.json()) );
 };

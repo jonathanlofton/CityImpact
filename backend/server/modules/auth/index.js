@@ -1,5 +1,5 @@
-import { AuthRoutes } from './routes';
-
-export {
-  AuthRoutes
-};
+// import { AuthRoutes } from './routes';
+//
+// export {
+//   AuthRoutes
+// };
