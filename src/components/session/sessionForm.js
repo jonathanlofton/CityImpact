@@ -39,7 +39,7 @@ class SessionForm extends Component {
           </CardSection>
           <CardSection>
             <TouchableOpacity
-              onPress={() => navigate('LandingPage')}
+              onPress={this.props.facebookAuth}
               style={style.buttonStyle}
               >
               <Text style={style.buttonText}>Guest Log In</Text>

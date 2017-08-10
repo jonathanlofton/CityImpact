@@ -1,8 +1,19 @@
-import axios from 'axios';
+import fetchival from 'fetchival';
+import _ from 'lodash';
 
-export const loginFacebook = () => (
-  axios({
-    method: 'get',
-    url: '/auth/facebook'
-  })
-);
+var myHeaders = new Headers();
+
+var myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors',
+               cache: 'default' };
+
+export const loginFacebook = () => {
+  return fetch({
+    method: 'GET',
+    url: 'https://cityimpact.herokuapp.com/api/events',
+    body: null
+  }).then(
+    data => console.log(data)
+  ).catch(err => console.log(err));
+};
