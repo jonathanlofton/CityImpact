@@ -21,14 +21,14 @@ export const requestAllEvents = () => dispatch => (
 
 export const requestSingleEvent = (id) => dispatch => (
   EventApiUtil.fetchSingleEvent(id).then(event => (
-    dispatch(receiveSingleEvent(event))
+    dispatch(receiveSingleEvent(event.data))
   ))
 );
 
 export const createEvent = (event) => dispatch => (
   EventApiUtil.createEvent(event).then(newEvent => {
     return (
-      dispatch(receiveSingleEvent(newEvent))
+      dispatch(receiveSingleEvent(newEvent.data))
     );
   })
 );
