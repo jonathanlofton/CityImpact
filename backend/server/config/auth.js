@@ -4,7 +4,7 @@ const authConfig = {
 	'facebookAuth' : {
 		'clientID': '477930462582336',
 		'clientSecret': '82387ab92926aea4cf0f673775cc4928',
-		'callbackURL': `${HOST_URL}/auth/facebook/callback`
+		'callbackURL': `http://localhost:3000/auth/facebook/callback`
 	},
 
 	'googleAuth' : {
