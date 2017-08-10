@@ -25,8 +25,6 @@ class SessionForm extends Component {
             <Text style={style.appTitle}>CityImpact</Text>
             <Card style={style.container}>
               <CardSection>
-
-
                 <Input
                   onSubmitEditing={this.handleEditComplete}
                   placeholder="example@email.com"
