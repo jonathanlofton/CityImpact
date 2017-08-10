@@ -1,5 +1,3 @@
-import { HOST_URL } from './host_url';
-
 const authConfig = {
 	'facebookAuth' : {
 		'clientID': '477930462582336',
