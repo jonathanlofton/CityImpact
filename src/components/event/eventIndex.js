@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { ListView, ScrollView } from 'react-native';
 import EventIndexItem from './eventIndexItem';
 import { Card } from '../common';
 
@@ -21,7 +21,9 @@ class EventIndex extends React.Component {
 
     return (
       <Card>
-        {allEvents}
+        <ScrollView>
+          {allEvents}
+        </ScrollView>
       </Card>
     );
   }
