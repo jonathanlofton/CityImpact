@@ -3,16 +3,18 @@ import { HOST_URL } from './host_util';
 
 export const fetchAllEvents = () => {
   return axios({
-    method: 'get',
+    method: 'GET',
     url: `${HOST_URL}/api/events`
-  }).then(res => console.log(res), error => {
-    console.log(error);
   });
+
+  // .then(res => console.log(res), error => {
+  //   console.log(error);
+  // });
 };
 
 export const fetchSingleEvent = (id) => {
   return axios({
-    method: 'get',
+    method: 'GET',
     url: `${HOST_URL}/api/event/${id}`
   }).then(res => console.log(res), error => {
     console.log(error);
@@ -21,7 +23,7 @@ export const fetchSingleEvent = (id) => {
 
 export const createEvent = (event) => {
   return axios({
-    method: 'post',
+    method: 'POST',
     url: `${HOST_URL}/api/events`,
     data: event
   }).then(res => console.log(res), error => {
