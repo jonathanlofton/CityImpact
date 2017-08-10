@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
+import { Facebook } from 'expo';
+import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
+import fbConfig from '../../config/fbConfig';
 
 class SessionForm extends Component {
 
@@ -13,7 +15,35 @@ class SessionForm extends Component {
       password: "",
       login: true
     };
+
+    this.handleLogin = this.handleLogin.bind(this);
   }
+
+  handleLogin(name) {
+    if (name === 'facebook') {
+      this.loginWithFacebook();
+    }
+  }
+
+  async loginWithFacebook() {
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbConfig.APP_ID, {
+      permissions: ['public_profile', 'email']
+    });
+    const { navigate } = this.props.navigation;
+
+    if (type === 'success') {
+      const res = await fetch(
+        `https://graph.facebook.com/me?access_token=${token}`
+      ).then(
+        user => this.props.receiveCurrentUser(user),
+        e => console.log(e)
+      );
+
+      navigate('LandingPage');
+    }
+    // Alert.alert(`Logged In! Hi ${(await res.json()).name}`)
+  }
+
 
   render() {
     const { navigate } = this.props.navigation;
@@ -50,7 +80,7 @@ class SessionForm extends Component {
                   <Text style={style.buttonText}>Guest Log In</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigate('LandingPage')}
+                  onPress={() => this.handleLogin('facebook')}
                   style={style.facebookStyle}
                   >
                   <Text style={style.facebookText}>Facebook Log In</Text>

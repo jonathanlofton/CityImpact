@@ -27,6 +27,4 @@ export const createEvent = (event) => {
   }).then(res => console.log(res), error => {
     console.log(error);
   });
-  // return fetch('http://192.168.0.60:3000/api/events')
-  //   .then( res => console.log(res.json()) );
 };

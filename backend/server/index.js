@@ -3,7 +3,7 @@ import dbConfig from './config/db';
 import middlewareConfig from './config/middleware';
 import { EventRoutes } from './modules';
 import passport from 'passport';
-import AuthRoutes from './modules/auth/routes';
+import UserRoutes from './modules/users/routes';
 
 const app = express();
 
@@ -12,7 +12,7 @@ dbConfig();
 middlewareConfig(app);
 
 app.use('/api', [EventRoutes]);
-app.use('/', [AuthRoutes(passport)]);
+app.use('/api', [UserRoutes]);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, err => {

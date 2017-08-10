@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { facebookAuth } from '../../actions/sessionActions';
+import { receiveCurrentUser } from '../../actions/sessionActions';
 import SessionForm from './sessionForm';
 
 const mapStateToProps = (state) => ({
@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  facebookAuth: () => dispatch(facebookAuth())
+  receiveCurrentUser: user => dispatch(receiveCurrentUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionForm);
