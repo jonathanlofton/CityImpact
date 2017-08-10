@@ -11,7 +11,7 @@ class EventIndex extends React.Component {
 
   render() {
     console.log(this.props);
-    if (!this.props.events) {
+    if (this.props.events.length === 0) {
       return null;
     }
     const { events } = this.props;
