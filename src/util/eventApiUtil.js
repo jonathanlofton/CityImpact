@@ -16,18 +16,6 @@ export const fetchSingleEvent = (id) => (
 );
 
 export const createEvent = (event) => {
-  // return fetch(`${HOST_URL}/api/events`, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Accept': 'application/json'
-  //   },
-  //   body: JSON.stringify({ event })
-  // })
-  //   .then(res => {
-  //     return res.json();
-  //   })
-  //   .catch(error => console.log(error));
   return axios({
     method: 'post',
     url: `${HOST_URL}/api/events`,
