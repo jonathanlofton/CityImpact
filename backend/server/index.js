@@ -14,7 +14,7 @@ middlewareConfig(app);
 app.use('/api', [EventRoutes]);
 app.use('/', [AuthRoutes(passport)]);
 
-const PORT = process.env.PORT || 27017;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, err => {
   if (err) {
     console.error(err);

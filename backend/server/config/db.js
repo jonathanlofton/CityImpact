@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { HOST_URL } from './host_url';
 
 export default () => {
   mongoose.Promise = global.Promise;

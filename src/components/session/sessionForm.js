@@ -23,28 +23,15 @@ class SessionForm extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.login) {
       return(
-        <Card>
-          <CardSection>
-            <Input
-              placeholder="example@email.com"
-              label="email"
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              secureTextEntry
-              placeholder="password"
-              label="password"
-            />
-          </CardSection>
-          <CardSection>
-            <TouchableOpacity
-              onPress={this.props.facebookAuth}
-              style={style.buttonStyle}
-              >
-              <Text style={style.buttonText}>Guest Log In</Text>
-            </TouchableOpacity>
 
+        <View style={style.fullPage}>
+          <Text style={style.appTitle}>CityImpact</Text>
+          <Card style={style.container}>
+            <CardSection>
+              <Input
+                placeholder="example@email.com"
+                label="email"
+              />
             </CardSection>
             <CardSection>
               <Input
@@ -62,7 +49,7 @@ class SessionForm extends Component {
                 <Text style={style.buttonText}>Guest Log In</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => navigate('LandingPage')}
+                onPress={() => this.props.facebookAuth()}
                 style={style.facebookStyle}
                 >
                 <Text style={style.facebookText}>Facebook Log In</Text>
