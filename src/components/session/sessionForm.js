@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Facebook } from 'expo';
 import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
@@ -23,23 +24,24 @@ class SessionForm extends Component {
     if (name === 'facebook') {
       this.loginWithFacebook();
     }
+    const { navigate } = this.props.navigation;
+    navigate('LandingPage');
   }
 
   async loginWithFacebook() {
     const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbConfig.APP_ID, {
       permissions: ['public_profile', 'email']
     });
-    const { navigate } = this.props.navigation;
+    console.log(Facebook);
 
     if (type === 'success') {
-      const res = await fetch(
-        `https://graph.facebook.com/me?access_token=${token}`
-      ).then(
-        user => this.props.receiveCurrentUser(user),
-        e => console.log(e)
+      const res = axios({
+        method: 'GET',
+        url: `https://graph.facebook.com/me?access_token=${token}`
+      }).then(
+        user => this.props.receiveCurrentUser(user.data)
       );
 
-      navigate('LandingPage');
     }
     // Alert.alert(`Logged In! Hi ${(await res.json()).name}`)
   }
