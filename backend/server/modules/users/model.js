@@ -13,8 +13,10 @@ const UserSchema = new Schema({
       provider: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
+
+
 	// facebook: {
 	// 	id: String,
 	// 	token: String,
@@ -32,12 +34,14 @@ const UserSchema = new Schema({
 // };
 
 UserSchema.statics.findOrCreate = async function (args) {
+
+  console.log(args);
   try {
     const user = await this.findOne({
       email: args.email,
       fullName: args.fullName,
     });
-
+    console.log(user);
     if (!user) {
       return await this.create(args);
     }
