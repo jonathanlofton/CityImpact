@@ -26,7 +26,9 @@ export const createEvent = (event) => {
     method: 'POST',
     url: `${HOST_URL}/api/events`,
     data: event
-  }).then(res => console.log(res), error => {
-    console.log(error);
   });
+
+  // .then(res => console.log(res), error => {
+  //   console.log(error);
+  // });
 };
