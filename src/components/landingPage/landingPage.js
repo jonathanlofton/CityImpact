@@ -105,7 +105,7 @@ class LandingPage extends React.Component {
 
            <Modal
             animationType={"slide"}
-            transparent={true}
+            transparent={false}
             visible={this.state.modalVisible}
             onRequestClose={() => {this.setState({modalVisible: false})}}
             >
