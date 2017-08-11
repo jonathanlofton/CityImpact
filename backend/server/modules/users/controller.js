@@ -25,13 +25,12 @@ export const getAllUsers = async (req, res) => {
 export const loginWithAuth0 = async function (req, res) {
   const { provider, token } = req.body;
   let userInfo;
-  
+
   try {
     if (provider === 'google') {
       // userInfo = await googleAuth(token);
     } else {
       userInfo = await facebookAuth(token);
-      console.log(userInfo);
     }
 
     const user = await User.findOrCreate(userInfo);

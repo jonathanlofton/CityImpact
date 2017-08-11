@@ -10,8 +10,8 @@ dbConfig();
 
 middlewareConfig(app);
 
-app.use('/api', EventRoutes);
-app.use('/api', UserRoutes);
+app.use('/api', [EventRoutes, UserRoutes]);
+// app.use('/api', UserRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, err => {
