@@ -19,6 +19,8 @@ class EventForm extends React.Component {
 
   }
 
+
+
   onCreateEvent() {
     const { navigate } = this.props.navigation;
     this.props.navigation.state.params.createEvent({
@@ -28,7 +30,7 @@ class EventForm extends React.Component {
       longitude: this.state.longitude,
       date: this.state.date,
       time: this.state.time,
-    }).then(() => navigate('LandingPage'), () => navigate('LandingPage'));
+    }).then((res) => navigate('LandingPage'), (err) => console.log(err));
 
   }
 
