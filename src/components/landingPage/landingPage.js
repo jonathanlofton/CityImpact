@@ -17,9 +17,12 @@ class LandingPage extends React.Component {
       location: null,
       errorMessage: null,
       modalVisible: false,
+      latitude: null,
+      longitude: null
     }
     this.mapPressLong = this.mapPressLong.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.navigateEventForm = this.navigateEventForm.bind(this);
   }
 
   componentWillMount() {
@@ -46,6 +49,7 @@ class LandingPage extends React.Component {
     //nativeEvent.coordinate will obtain coordinates
     const long = e.nativeEvent.coordinate.longitude
     const lat = e.nativeEvent.coordinate.latitude
+    this.setState({latitude: lat, longitude: long })
     this.toggleModal()
   }
 
@@ -61,16 +65,26 @@ class LandingPage extends React.Component {
       <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   )
+  navigateEventForm() {
+    const { navigate } = this.props.navigation
+    navigate('EventForm', {createEvent: this.props.createEvent,
+     latitude: this.state.latitude,
+     longitude: this.state.longitude,
+    });
+    this.toggleModal();
+  }
+  _renderModalContent() {
 
-  _renderModalContent = () => (
-    <View style={styles.modalFullScreen}>
-      <View style={styles.modalContent}>
-        {this._renderTouchableOpacity("Create Event", null, styles.modalButton, styles.modalButtonText)}
-        {this._renderTouchableOpacity("Report Issue", null, styles.modalButton, styles.modalButtonText)}
-        {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton, styles.modalButtonText)}
+    return(
+      <View style={styles.modalFullScreen}>
+        <View style={styles.modalContent}>
+          {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, styles.modalButton, styles.modalButtonText)}
+          {this._renderTouchableOpacity("Report Issue", null, styles.modalButton, styles.modalButtonText)}
+          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton, styles.modalButtonText)}
+        </View>
       </View>
-    </View>
-  )
+    );
+  }
 
   render() {
     const { navigate } = this.props.navigation;
