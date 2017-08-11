@@ -6,10 +6,10 @@ import Expo from 'expo';
 const markers = [];
 
 class LandingPage extends React.Component {
-
-  static navigationOptions = {
-      title: 'Map',
-    };
+  // 
+  // static navigationOptions = {
+  //     title: 'Map'
+  //   };
 
   constructor(props) {
     super(props)
