@@ -9,11 +9,7 @@ const SessionReducer = (state = nullUser, action) => {
   Object.freeze(state);
   switch (action.type) {
   case RECEIVE_CURRENT_USER:
-    console.log("MADE IT IN");
-    return {
-      currentUser: action.currentUser
-    };
-    // return action.currentUser;
+    return {currentUser: action.currentUser};
   default:
     return state;
   }
