@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Facebook } from 'expo';
+import { Facebook, Google } from 'expo';
 import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
-import { fbConfig } from '../../util/host_util';
+import { fbConfig, googleConfig } from '../../util/host_util';
 
 class SessionForm extends Component {
 
@@ -23,6 +23,8 @@ class SessionForm extends Component {
   handleLogin(name) {
     if (name === 'facebook') {
       this.loginWithFacebook();
+    } else {
+      this.loginWithGoogle();
     }
   }
 
@@ -33,10 +35,27 @@ class SessionForm extends Component {
     });
 
     if (type === 'success') {
-      this.props.loginFacebook({type, token});
+      this.props.loginUser({provider: 'facebook', token});
       navigate('LandingPage');
-
     }
+  }
+
+  async loginWithGoogle() {
+    // try {
+      const { navigate } = this.props.navigation;
+      const {type, accessToken} = await Google.logInAsync({
+        iosClientId: googleConfig.CLIENT_ID_IOS,
+        scopes: ['profile', 'email']
+      });
+
+      if (type === 'success') {
+        this.props.loginUser({provider: 'google', token: accessToken});
+        navigate('LandingPage')
+      }
+    //
+    // } catch (e) {
+    //   console.log("ERROR IN GOOGLE LOGIN SESSION FORM");
+    // }
   }
 
 
@@ -67,10 +86,10 @@ class SessionForm extends Component {
 
               <View style={style.buttons}>
                 <TouchableOpacity
-                  onPress={() => navigate('LandingPage')}
+                  onPress={() => this.handleLogin('google')}
                   style={style.buttonStyle}
                   >
-                  <Text style={style.buttonText}>Guest Log In</Text>
+                  <Text style={style.buttonText}>Google Log In</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.handleLogin('facebook')}
