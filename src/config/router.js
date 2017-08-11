@@ -18,6 +18,7 @@ export const Tabs = StackNavigator({
     screen: EventIndexContainer,
   },
   EventForm: {
+    screen: EventForm,
   }
 },
 {

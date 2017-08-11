@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import configureStore from './src/store/store';
 import Root from './src/root';
-import { requestAllEvents, receiveAllEvents, createEvent, requestSingleEvent } from './src/actions/eventActions';
+import { requestAllEvents, receiveAllEvents, requestSingleEvent, createEvent } from './src/actions/eventActions';
 import { fetchAllEvents} from './src/util/eventApiUtil';
 import { receiveCurrentUser } from './src/actions/sessionActions';
 //
