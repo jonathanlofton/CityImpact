@@ -18,7 +18,8 @@ class LandingPage extends React.Component {
       errorMessage: null,
       modalVisible: false,
       latitude: null,
-      longitude: null
+      longitude: null,
+      markers: null,
     }
     this.mapPressLong = this.mapPressLong.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -45,6 +46,7 @@ class LandingPage extends React.Component {
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
   };
+
 
   mapPressLong(e) {
     //nativeEvent.coordinate will obtain coordinates
@@ -88,10 +90,13 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     if (!this.state.location) {
       return null
     }
+
+
+    const { events } = this.props;
+    const { navigate } = this.props.navigation;
 
      const long = this.state.location.coords.longitude;
      const lat = this.state.location.coords.latitude;
@@ -107,13 +112,17 @@ class LandingPage extends React.Component {
              }}
              onLongPress={this.mapPressLong}
            >
-             <MapView.Marker
-               coordinate={{
-                 latitude: lat,
-                 longitude: long,
-               }}
-               title="Current Location"
-              />
+           { events.map(event => (
+               <MapView.Marker
+                 coordinate={{
+                   latitude: event.latitude,
+                   longitude: event.longitude
+                 }}
+                 key={event._id}
+                 title={event.title}
+                 description={event.description}
+               />
+             ))}
            </ MapView>
 
            <CardSection style={styles.bottomNavigation}>
@@ -206,14 +215,3 @@ const styles = StyleSheet.create({
 });
 
 export default LandingPage;
-
-
-// this will take all markers that have been created and
-// place a marker somewhere on the map
-// {this.state.markers.map(marker => (
-//     <MapView.Marker
-//       coordinate={marker.latlng}
-//       title={marker.title}
-//       description={marker.description}
-//     />
-//   ))}
