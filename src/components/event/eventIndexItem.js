@@ -25,16 +25,30 @@ class EventIndexItem extends React.Component {
       />
       <View>
         <View style={modalStyle.dateTitle}>
-          <Text style={modalStyle.date}>August 8th</Text>
           <Text style={modalStyle.showTitle}>{this.props.event.title}</Text>
+          <Text style={modalStyle.date}>August 8th</Text>
         </View>
         <Text style={modalStyle.description}>{this.props.event.description}</Text>
-        <TouchableOpacity
-          style={modalStyle.backButton}
-          onPress={() => {this.toggleModal()}}
-          >
-          <Text style={modalStyle.backButtonText}>Close</Text>
-        </TouchableOpacity>
+
+        <View style={modalStyle.joinedView}>
+          <Text>THIS IS WHERE COMMENTS OR PEOPLE THAT HAVE JOINED WILL BE VIEWED</Text>
+        </View>
+
+
+        <View style={modalStyle.modalButtonContainer}>
+          <TouchableOpacity
+            style={modalStyle.backButton}
+            onPress={() => {this.toggleModal()}}
+            >
+            <Text style={modalStyle.backButtonText}>Close</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={modalStyle.backButton}
+            onPress={() => {this.toggleModal()}}
+            >
+            <Text style={modalStyle.joinButtonText}>Join</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -104,17 +118,9 @@ const styles = StyleSheet.create({
 });
 
 const modalStyle = StyleSheet.create({
-  backButton: {
-    alignSelf: 'flex-end',
-  },
-  backButtonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    justifyContent: 'flex-end',
-  },
+
   dateTitle: {
-    flexDirection: 'row',
+    marginTop: 20,
     alignItems: 'center',
   },
   date: {
@@ -123,7 +129,12 @@ const modalStyle = StyleSheet.create({
   description: {
     marginTop: '10%',
     marginBottom: '10%',
-    width: '60%',
+    width: '70%',
+    alignSelf: 'center',
+  },
+  joinedView: {
+    height: '30%',
+    width: '70%',
     alignSelf: 'center',
   },
   fullScreen: {
@@ -137,7 +148,34 @@ const modalStyle = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'bold',
   },
-  showDescription: {
+  modalButtonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    justifyContent: 'space-between',
 
   },
+  backButton: {
+    alignSelf: 'flex-end',
+    width: '45%',
+  },
+  backButtonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'green',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#d6d7da',
+    padding: 10,
+    textAlign: 'center',
+  },
+  joinButtonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'green',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#d6d7da',
+    padding: 10,
+    textAlign: 'center',
+  }
 });
