@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { getUserInfo } from './userInfo';
 
-export async function facebookAuth(token) {
+export const facebookAuth = async function (token) {
   try {
     const { data } = await axios.get(
       `https://graph.facebook.com/me?fields=email,name,picture&access_token=${token}`,
@@ -11,4 +11,4 @@ export async function facebookAuth(token) {
   } catch (e) {
     return e;
   }
-}
+};

@@ -7,8 +7,8 @@ export const receiveCurrentUser = currentUser => ({
   currentUser
 });
 
-export const loginUser = () => dispatch => (
-  SessionApiUtil.loginFacebook().then(
-    user => dispatch(receiveCurrentUser(user)),
+export const loginFacebook = data => dispatch => (
+  SessionApiUtil.loginFacebook(data).then(
+    res => dispatch(receiveCurrentUser(res.user)),
     err => console.log(err)
 ));

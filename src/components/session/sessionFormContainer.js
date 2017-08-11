@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import { receiveCurrentUser } from '../../actions/sessionActions';
+import { loginFacebook } from '../../actions/sessionActions';
 import SessionForm from './sessionForm';
 
-const mapStateToProps = (state) => ({
-  events: state.events
+const mapStateToProps = ({events}) => ({
+  events
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  receiveCurrentUser: user => dispatch(receiveCurrentUser(user))
+const mapDispatchToProps = dispatch => ({
+  loginFacebook: data => dispatch(loginFacebook(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionForm);

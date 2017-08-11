@@ -33,7 +33,7 @@ const UserSchema = new Schema({
 
 UserSchema.statics.findOrCreate = async function (args) {
   try {
-    const user = await this.findOne({
+    const user = this.findOne({
       email: args.email,
       fullName: args.fullName,
     });
