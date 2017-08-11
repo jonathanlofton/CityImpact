@@ -22,6 +22,9 @@ class LandingPage extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
+  componentWillMount() {
+    this.props.requestAllEvents();
+  }
   componentDidMount(){
     this._getLocationAsync();
   }
