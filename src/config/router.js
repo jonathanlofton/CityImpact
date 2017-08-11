@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation';
 
 import SessionFormContainer from '../components/session/sessionFormContainer';
 import LandingPage from '../components/landingPage/landingPage';
+import LandingPageContainer from '../components/landingPage/landingPageContainer';
 import EventIndexContainer from '../components/event/eventIndexContainer';
 
 export const Tabs = StackNavigator({
@@ -10,7 +11,7 @@ export const Tabs = StackNavigator({
     screen: SessionFormContainer,
   },
   LandingPage: {
-    screen: LandingPage,
+    screen: LandingPageContainer,
   },
   EventIndexContainer: {
     screen: EventIndexContainer,
