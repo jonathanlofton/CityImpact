@@ -11,19 +11,19 @@ const EventSchema = new Schema({
   },
   latitude: {
     type: Number,
-    required: true
+    // required: true
   },
   longitude: {
     type: Number,
-    required: true
+    // required: true
   },
   date: {
     type: String,
-    required: true
+    // required: true
   },
   time: {
     type: String,
-    required: true
+    // required: true
   }
 });
 

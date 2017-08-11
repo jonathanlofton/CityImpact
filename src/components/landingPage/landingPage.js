@@ -29,6 +29,7 @@ class LandingPage extends React.Component {
     this.props.requestAllEvents();
   }
   componentDidMount(){
+    this.props.requestAllEvents();
     this._getLocationAsync();
   }
 
