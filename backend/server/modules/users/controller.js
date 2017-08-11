@@ -15,7 +15,6 @@ export const createUser = async (req, res) => {
 };
 
 export const getAllUsers = async (req, res) => {
-
   try {
     return res.status(200).json({ users: await User.find({})});
   } catch (e) {
@@ -23,10 +22,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-export const loginWithAuth0 = async (req, res) => {
-  console.log('====================================');
-  console.log(req.body);
-  console.log('====================================');
+export const loginWithAuth0 = async function (req, res) {
   const { provider, token } = req.body;
   let userInfo;
 
@@ -39,9 +35,7 @@ export const loginWithAuth0 = async (req, res) => {
 
     const user = await User.findOrCreate(userInfo);
 
-    console.log('====================================');
-    console.log(user);
-    console.log('====================================');
+    console.log(`logged in or created user: ${user}`);
 
     return res.status(200).json({
       success: true,

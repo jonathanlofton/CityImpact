@@ -11,7 +11,7 @@ const jwtOpts = {
 
 const jwtStrategy = new JWTStrategy(jwtOpts, async (payload, done) => {
   try {
-    const user = await User.findById(payload.id);
+    const user = await User.findById({id: payload.id});
 
     if (user) {
       done(null, user);
