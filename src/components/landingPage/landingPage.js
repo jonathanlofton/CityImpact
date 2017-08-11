@@ -81,8 +81,8 @@ class LandingPage extends React.Component {
     return(
       <View style={styles.modalFullScreen}>
         <View style={styles.modalContent}>
-          {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, styles.modalButton, styles.modalButtonText)}
-          {this._renderTouchableOpacity("Report Issue", null, styles.modalButton, styles.modalButtonText)}
+          {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, styles.createButton, styles.createButtonText)}
+          {this._renderTouchableOpacity("Report Issue", null, styles.createButton, styles.createButtonText)}
           {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton, styles.modalButtonText)}
         </View>
       </View>
@@ -132,7 +132,7 @@ class LandingPage extends React.Component {
 
            <Modal
             animationType={"slide"}
-            transparent={false}
+            transparent={true}
             visible={this.state.modalVisible}
             onRequestClose={() => {this.setState({modalVisible: false})}}
             >
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: 'white',
+    borderRadius: 5,
     width: '60%',
     height: '30%',
     justifyContent: 'center',
@@ -182,13 +183,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     borderRadius: 3,
+    borderColor: '#00AB6C',
     alignContent: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: '#00AB6C',
     margin: 10,
     height: 40,
-    width: '70%',
+    width: '100%',
   },
   buttonText: {
     alignSelf: 'center',
@@ -200,7 +201,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   bottomNavigation: {
     position: 'absolute',
@@ -209,8 +209,19 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  modalButtonText: {
-    margin: '10%',
+  createButton: {
+    alignSelf: 'center',
+    borderWidth: 2,
+    borderColor: '#00AB6C',
+    borderRadius: 5,
+    width: '70%',
+    padding: 10,
+    margin: '2%',
+  },
+  createButtonText: {
+    fontSize: 18,
+    alignSelf: 'center',
+    color: '#00AB6C',
   }
 });
 
