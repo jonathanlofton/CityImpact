@@ -48,3 +48,39 @@ export const loginWithAuth0 = async function (req, res) {
     return res.status(400).json({ error: true, errorMessage: e.message });
   }
 };
+
+export const seedEvents = (req, res) => {
+
+  try {
+  // create some events
+  const users = [
+    // { fullName: 'Jimmy Fallon', email: 'Throwing into a basket.' },
+    { fullName: 'DAVadsfID', email: 'EMAsadfIL CZU.', avatar: 'Striasdfng',
+    providerData: {
+      uid: 'asdfasdfasdf',
+      provider: 'Stasdfasdfaasdfsdfring',
+    }, },
+    { fullName: 'Stepheasdfasdfasdfasdfn Colbert', email: 'Michasdfael aaPhasdfasdfelps is the fast fish.', avatar: 'Strasdfiasdfng',
+    providerData: {
+      uid: 'Stasdasdffasfring',
+      provider: 'Stasdasdffasdfring',
+    }, }
+
+    // { fullName: 'David Letterman', email: 'Lifting heavy things up' },
+    // { fullName: 'John Oliver', email: 'Super fast paddles' },
+    // { fullName: 'Esteban Gorchoff', email: 'Fish salad' },
+    // { fullName: 'Dog The Bounty Hunter', email: 'Andy salad' }
+
+  ];
+
+  // use the Event model to insert/save
+  users.forEach( user => {
+    const newUser = new User(user);
+    newUser.save();
+  })} catch (e) {
+    return res.status(400).json({ error: true, errorMessage: e.message });
+  }
+
+  // seeded!
+  res.send('Database seeded!');
+}

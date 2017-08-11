@@ -12,15 +12,18 @@ const UserSchema = new Schema({
       provider: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
+
 UserSchema.statics.findOrCreate = async function (userInfo) {
+
   try {
     const user = await this.findOne({
       email: userInfo.email,
       fullName: userInfo.fullName,
     });
+
     if (!user) {
       return await this.create(userInfo);
     }
