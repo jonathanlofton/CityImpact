@@ -13,7 +13,7 @@ class EventForm extends React.Component {
       time: "",
       date: "",
       longitude: this.props.navigation.state.params.longitude,
-      latitude: this.props.navigation.state.params.longitude
+      latitude: this.props.navigation.state.params.latitude
     };
     this.onCreateEvent = this.onCreateEvent.bind(this);
 

@@ -118,7 +118,6 @@ export default SessionForm;
       fontSize: 40,
       fontWeight: '500',
       textAlign: 'center',
-      fontFamily: 'Helvetica Neue',
       margin: 50,
     },
     buttonStyle: {
