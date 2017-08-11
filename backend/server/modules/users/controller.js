@@ -1,7 +1,7 @@
 import User from './model';
 import { createToken } from '../../config/createToken';
 import { facebookAuth } from '../../config/facebookAuth';
-// import { googleAuth } from './utils/googleAuth';
+import { googleAuth } from '../../config/googleAuth';
 
 export const createUser = async (req, res) => {
   const { username, email, passwordDigest } = req.body;
@@ -23,12 +23,14 @@ export const getAllUsers = async (req, res) => {
 };
 
 export const loginWithAuth0 = async function (req, res) {
+
   const { provider, token } = req.body;
+  console.log(provider);
   let userInfo;
 
   try {
     if (provider === 'google') {
-      // userInfo = await googleAuth(token);
+      userInfo = await googleAuth(token);
     } else {
       userInfo = await facebookAuth(token);
     }

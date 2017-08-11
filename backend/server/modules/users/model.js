@@ -20,8 +20,7 @@ UserSchema.statics.findOrCreate = async function (userInfo) {
 
   try {
     const user = await this.findOne({
-      email: userInfo.email,
-      fullName: userInfo.fullName,
+      email: userInfo.email
     });
 
     if (!user) {

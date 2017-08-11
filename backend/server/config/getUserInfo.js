@@ -1,9 +1,9 @@
 export const getUserInfo = (data, provider) => {
   let fullName;
   let avatar;
-
+  
   if (provider === 'google') {
-    fullName = `${data.give_name} ${data.family_name}`;
+    fullName = `${data.given_name} ${data.family_name}`;
     avatar = data.picture;
   } else {
     fullName = data.name;
