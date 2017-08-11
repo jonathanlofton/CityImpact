@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import EventReducer from './EventReducer';
-import SessionReducer from './session_reducer'
+import SessionReducer from './sessionReducer'
 
 const RootReducer = combineReducers({
   events: EventReducer,
