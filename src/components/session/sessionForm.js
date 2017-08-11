@@ -24,17 +24,18 @@ class SessionForm extends Component {
     if (name === 'facebook') {
       this.loginWithFacebook();
     }
-    const { navigate } = this.props.navigation;
-    navigate('LandingPage');
   }
 
   async loginWithFacebook() {
+    const { navigate } = this.props.navigation;
     const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbConfig.APP_ID, {
       permissions: ['public_profile', 'email']
     });
 
     if (type === 'success') {
       this.props.loginFacebook({type, token});
+      navigate('LandingPage');
+
     }
   }
 

@@ -26,9 +26,8 @@ export const requestSingleEvent = (id) => dispatch => (
 );
 
 export const createEvent = (event) => dispatch => (
-  EventApiUtil.createEvent(event).then(newEvent => {
-    return (
-      dispatch(receiveSingleEvent(newEvent.data))
-    );
-  })
+  EventApiUtil.createEvent(event).then(
+    newEvent => dispatch(receiveSingleEvent(newEvent)),
+    err => console.log(err)
+  )
 );
