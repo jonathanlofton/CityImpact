@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { requestAllEvents, requestSingleEvent } from '../../actions/eventActions';
+import { requestAllEvents, requestSingleEvent, createEvent } from '../../actions/eventActions';
 import { selectAllEvents } from '../../reducers/selectors';
 import LandingPage from './landingPage';
 
