@@ -41,6 +41,7 @@ class SessionForm extends Component {
 
 
   render() {
+    console.log(this.props.navigation);
     const { navigate } = this.props.navigation;
     if (this.state.login) {
       return(
