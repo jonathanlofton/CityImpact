@@ -10,5 +10,5 @@ export const receiveCurrentUser = currentUser => ({
 export const loginFacebook = data => dispatch => (
   SessionApiUtil.loginFacebook(data).then(
     res => dispatch(receiveCurrentUser(res.user)),
-    err => console.log(err)
+    err => console.log(`from sessionAction: ${err}`)
 ));

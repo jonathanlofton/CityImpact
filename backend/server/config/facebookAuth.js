@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-import { getUserInfo } from './userInfo';
+import { getUserInfo } from './getUserInfo';
 
 export const facebookAuth = async function (token) {
   try {

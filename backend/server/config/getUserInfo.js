@@ -17,6 +17,6 @@ export const getUserInfo = (data, provider) => {
     providerData: {
       uid: data.id,
       provider,
-    },
+    }
   };
 }

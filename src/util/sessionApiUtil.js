@@ -5,6 +5,6 @@ export const loginFacebook = data => (
   axios({
     method: 'POST',
     url: `${HOST_URL}/api/users/auth0`,
-    data
+    data: data
   })
 );

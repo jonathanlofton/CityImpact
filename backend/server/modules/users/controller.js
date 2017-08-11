@@ -15,7 +15,6 @@ export const createUser = async (req, res) => {
 };
 
 export const getAllUsers = async (req, res) => {
-
   try {
     return res.status(200).json({ users: await User.find({})});
   } catch (e) {
@@ -23,25 +22,21 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-export const loginWithAuth0 = async (req, res) => {
-  console.log('====================================');
-  console.log("just look down");
-  console.log('====================================');
-  const { provider, token } = req;
+export const loginWithAuth0 = async function (req, res) {
+  const { provider, token } = req.body;
   let userInfo;
-
+  
   try {
     if (provider === 'google') {
       // userInfo = await googleAuth(token);
     } else {
       userInfo = await facebookAuth(token);
+      console.log(userInfo);
     }
 
     const user = await User.findOrCreate(userInfo);
 
-    console.log('====================================');
-    console.log(user);
-    console.log('====================================');
+    console.log(`logged in or created user: ${user}`);
 
     return res.status(200).json({
       success: true,

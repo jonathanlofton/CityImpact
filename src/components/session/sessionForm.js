@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Facebook } from 'expo';
 import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
-import fbConfig from '../../config/fbConfig';
+import { fbConfig } from '../../util/host_util';
 
 class SessionForm extends Component {
 
@@ -35,19 +35,7 @@ class SessionForm extends Component {
 
     if (type === 'success') {
       this.props.loginFacebook({type, token});
-
-
-      // const res = axios({
-      //   method: 'GET',
-      //   url: `https://graph.facebook.com/me?access_token=${token}`
-      // }).then(
-      //   user => {
-      //     this.props.loginUser(data);
-      //   }
-      // );
-
     }
-    // Alert.alert(`Logged In! Hi ${(await res.json()).name}`)
   }
 
 
