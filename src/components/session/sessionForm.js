@@ -87,6 +87,12 @@ class SessionForm extends Component {
 
               <View style={style.buttons}>
                 <TouchableOpacity
+                  onPress={() => navigate('LandingPage')}
+                  style={style.facebookStyle}
+                  >
+                  <Text style={style.facebookText}>Guest Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                   onPress={() => this.handleLogin('google')}
                   style={style.buttonStyle}
                   >
