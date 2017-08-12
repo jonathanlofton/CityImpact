@@ -23,14 +23,16 @@ const styles = {
   inputStyle: {
     borderBottomWidth: 2,
     borderBottomColor: '#00AB6C',
-    padding: 15,
     fontSize: 18,
+    marginRight: 20,
+    paddingLeft: 5,
     lineHeight: 23,
     flex: 2
   },
   labelStyle: {
     fontSize: 18,
     paddingLeft: 20,
+    paddingRight: 5,
     flex: 1
   },
   containerStyle: {
