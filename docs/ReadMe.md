@@ -1,7 +1,7 @@
 # CityImpact
 
 ## Background and Overview
-CityImpact is a mobile application that enables users to share community-based issues and host events to solve these issues, host events for these issues, and host events for community events. Functionality, ease-of-use, and an intuitive user interface will make it easy for users to post issues and come together resolve those issues. If a user sees an issue in their community, he/she can ping the issue on the map for awareness or organize a community service event for the issue.
+CityImpact is a mobile application that enables users to host events to Impact their own communities. Functionality, ease-of-use, and an intuitive user interface will make it easy for users to host events and join events that are going on in their own communities. 
 
 ![landing-page](/docs/wireframes/Issues_map_view.png)
 
