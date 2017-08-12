@@ -17,7 +17,7 @@ class UserShow extends React.Component {
           source={{uri: `${user.avatar}`}}
           />
           <View style={styles.userInfo}>
-            <Text>{user.fullName}</Text>
+            <Text>{user.name}</Text>
             <Text>{user.email}</Text>
           </View>
         </View>
