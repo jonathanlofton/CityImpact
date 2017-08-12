@@ -20,7 +20,9 @@ class UserShow extends React.Component {
             <Text>User email</Text>
           </View>
         </View>
-
+        <View>
+          <Text>Events this user is hosting and events they are planning to attend</Text>
+        </View>
       </View>
     )
   }
