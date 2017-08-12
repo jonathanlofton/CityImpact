@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Modal, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { MapView } from 'expo';
 import { Button, Card, CardSection } from '../common';
 import Expo from 'expo';
@@ -125,6 +125,12 @@ class LandingPage extends React.Component {
              </MapView.Marker>
              ))}
            </ MapView>
+           <View style={styles.photoContainer}>
+             <Image
+             style={styles.userPhoto}
+             source={{uri: 'https://res.cloudinary.com/jlofton/image/upload/v1502515774/catstockphoto_yr81pv.jpg'}}
+             />
+           </View>
 
            <View style={styles.bottomNavigation}>
               {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
@@ -149,6 +155,19 @@ class LandingPage extends React.Component {
 
 
 const styles = StyleSheet.create({
+  userPhoto: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+  },
+  photoContainer: {
+    position: 'absolute',
+    top: '3%',
+    left: '3%',
+    right: 0,
+    bottom: 0,
+    zIndex: 1,
+  },
   container: {
     position: 'absolute',
     top: 0,
