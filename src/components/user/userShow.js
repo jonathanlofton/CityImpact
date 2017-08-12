@@ -4,21 +4,23 @@ import { Text, View, Image, StyleSheet } from 'react-native';
 
 class UserShow extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render(){
-    console.log(this.props)
+
+    const { user } = this.props;
+
     return(
       <View>
         <View style={styles.userInfoPhoto}>
           <Image
           style={styles.userPhoto}
-          source={{uri: 'https://res.cloudinary.com/jlofton/image/upload/v1502515774/catstockphoto_yr81pv.jpg'}}
+          source={{uri: `${user.avatar}`}}
           />
           <View style={styles.userInfo}>
-            <Text>User Name</Text>
-            <Text>User email</Text>
+            <Text>{user.name}</Text>
+            <Text>{user.email}</Text>
           </View>
         </View>
         <View>
