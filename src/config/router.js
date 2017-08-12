@@ -7,6 +7,7 @@ import EventForm from '../components/landingPage/eventForm';
 import LandingPageContainer from '../components/landingPage/landingPageContainer';
 import EventIndexContainer from '../components/event/eventIndexContainer';
 import EventShowPage from '../components/event/eventShowPage';
+import UserShowContainer from '../components/user/userShowContainer';
 
 const LandingNavigator = StackNavigator({
   LandingPage: {
@@ -24,6 +25,9 @@ const LandingNavigator = StackNavigator({
   },
   EventShowPage: {
     screen: EventShowPage,
+  },
+  UserShowContainer: {
+    screen: UserShowContainer,
   }
 },
 {

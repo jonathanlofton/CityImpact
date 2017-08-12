@@ -125,11 +125,17 @@ class LandingPage extends React.Component {
              </MapView.Marker>
              ))}
            </ MapView>
+
+
            <View style={styles.photoContainer}>
-             <Image
-             style={styles.userPhoto}
-             source={{uri: 'https://res.cloudinary.com/jlofton/image/upload/v1502515774/catstockphoto_yr81pv.jpg'}}
-             />
+             <TouchableOpacity
+               onPress={() => navigate('UserShowContainer')}
+               >
+               <Image
+               style={styles.userPhoto}
+               source={{uri: 'https://res.cloudinary.com/jlofton/image/upload/v1502515774/catstockphoto_yr81pv.jpg'}}
+               />
+             </TouchableOpacity>
            </View>
 
            <View style={styles.bottomNavigation}>
@@ -164,8 +170,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '3%',
     left: '3%',
-    right: 0,
-    bottom: 0,
+    right: '85%',
+    bottom: '90%',
     zIndex: 1,
   },
   container: {
