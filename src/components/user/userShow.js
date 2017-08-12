@@ -8,7 +8,9 @@ class UserShow extends React.Component {
   }
 
   render(){
+
     const { user } = this.props;
+
     return(
       <View>
         <View style={styles.userInfoPhoto}>
@@ -45,7 +47,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   userInfo: {
-    fontSize: 18,
-    fontWeight: 'bold',
   }
 })

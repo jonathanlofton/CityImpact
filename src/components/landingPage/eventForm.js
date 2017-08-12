@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { Input, Card, CardSection } from '../common';
 import { NavigationActions } from 'react-navigation';
 
@@ -66,48 +66,54 @@ class EventForm extends React.Component {
 
   render() {
     return(
-      <View>
-      <ScrollView scrollEnabled={false}>
-      <CardSection>
-        <Input
-          placeholder="Name of Event"
-          label = "title"
-          value={this.state.title}
-          onChangeText={title => this.setState({ title })}
-        />
-        </CardSection>
-        <CardSection>
-        <Input
-          placeholder="Add a description!"
-          label = "description"
-          value={this.state.description}
-          onChangeText={description => this.setState({ description })}
-        />
-        </CardSection>
-        <CardSection>
-        <Input
-          placeholder="Date"
-          label = "date"
-          value={this.state.date}
-          onChangeText={date => this.setState({ date })}
-        />
-        </CardSection>
-        <CardSection>
-        <Input
-          placeholder="Time"
-          label = "time"
-          value={this.state.time}
-          onChangeText={time => this.setState({ time })}
-        />
-        </CardSection>
+      <View style={styles.formContainer}>
+        <ScrollView scrollEnabled={false}>
+          <View style={styles.formContent}>
+            <Text style={styles.formTitle}>Create Event</Text>
+            <View style={styles.inputBox}>
+              <Input
+                placeholder="Name of Event"
+                label = "Title"
+                value={this.state.title}
+                onChangeText={title => this.setState({ title })}
+              />
+            </View >
+            <View style={styles.inputBox}>
+              <Input
+                placeholder="Add a description!"
+                label = "Description"
+                value={this.state.description}
+                onChangeText={description => this.setState({ description })}
+              />
+            </View >
+            <View style={styles.inputBox}>
+              <Input
+                placeholder="Date"
+                label = "Date"
+                value={this.state.date}
+                onChangeText={date => this.setState({ date })}
+              />
+            </View >
+            <View style={styles.inputBox}>
+              <Input
+                labelStyle={styles.labelStyle}
+                placeholder="Time"
+                label = "Time"
+                value={this.state.time}
+                onChangeText={time => this.setState({ time })}
+              />
+            </View >
+
+
+          </View>
+          <TouchableOpacity
+            onPress={() => this.onCreateEvent()}
+            >
+            <Text style={styles.submitButton}>Submit</Text>
+          </TouchableOpacity>
         </ScrollView>
 
-        <TouchableOpacity
 
-          onPress={() => this.onCreateEvent()}
-          >
-          <Text>Submit</Text>
-        </TouchableOpacity>
       </View>
     );
 
@@ -117,3 +123,39 @@ class EventForm extends React.Component {
 }
 
 export default EventForm;
+
+
+const styles = StyleSheet.create({
+  submitButton: {
+    color: '#00AB6C',
+    fontSize: 18,
+    textAlign: 'center',
+    alignSelf: 'center',
+    borderWidth: 2,
+    borderColor: '#00AB6C',
+    borderRadius: 5,
+    width: '70%',
+    padding: 10,
+    marginBottom: '10%',
+  },
+  formContainer: {
+    backgroundColor: 'white',
+    height: '100%',
+  },
+  formContent: {
+    width: '95%',
+    height: '100%',
+  },
+  inputBox: {
+    margin: 10,
+  },
+  labelStyle: {
+    paddingRight: 5,
+  },
+  formTitle: {
+    fontSize: 20,
+    fontWeight: '400',
+    textAlign: 'center',
+    margin: '10%',
+  }
+})
