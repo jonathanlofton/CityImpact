@@ -126,10 +126,10 @@ class LandingPage extends React.Component {
              ))}
            </ MapView>
 
-           <CardSection style={styles.bottomNavigation}>
+           <View style={styles.bottomNavigation}>
               {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
               {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
-            </CardSection>
+            </View>
 
            <Modal
             animationType={"slide"}
@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: '10%',
+    bottom: 0,
+    zIndex: -1,
   },
   modalFullScreen: {
     height: '100%',
@@ -184,6 +185,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     borderRadius: 3,
+    backgroundColor: 'white',
     borderColor: '#00AB6C',
     alignContent: 'center',
     justifyContent: 'center',
@@ -205,10 +207,9 @@ const styles = StyleSheet.create({
   },
   bottomNavigation: {
     position: 'absolute',
-    top: '90%',
-    left: 0,
-    right: 0,
-    bottom: 0,
+    zIndex: 1,
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
   },
   createButton: {
     alignSelf: 'center',
