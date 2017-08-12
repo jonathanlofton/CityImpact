@@ -16,13 +16,26 @@ class EventForm extends React.Component {
       latitude: this.props.navigation.state.params.latitude
     };
     this.onCreateEvent = this.onCreateEvent.bind(this);
-
+    this.navigateEventShowPage = this.navigateEventShowPage.bind(this);
   }
 
 
+  navigateEventShowPage(res) {
+    // const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
+    // const { res } = this.props;
+    console.log(res);
+    navigate('EventShowPage', {title: res.event.data.event.title,
+     latitude: res.event.data.event.latitude,
+     longitude: res.event.data.event.longitude,
+     description: res.event.data.event.description,
+     time: res.event.data.event.time,
+     date: res.event.data.event.date
+    });
+
+  }
 
   onCreateEvent() {
-    const { navigate } = this.props.navigation;
     this.props.navigation.state.params.createEvent({
       title: this.state.title,
       description: this.state.description,
@@ -30,12 +43,11 @@ class EventForm extends React.Component {
       longitude: this.state.longitude,
       date: this.state.date,
       time: this.state.time,
-    }).then((res) => navigate('LandingPage'), (err) => console.log(err));
+    }).then((res) => this.navigateEventShowPage(res), (err) => console.log(err));
 
   }
 
   render() {
-    console.log(this.state);
     return(
       <View>
       <ScrollView scrollEnabled={false}>

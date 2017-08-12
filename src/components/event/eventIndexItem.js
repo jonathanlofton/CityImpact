@@ -11,10 +11,25 @@ class EventIndexItem extends React.Component {
       modalVisible: false,
     }
     this.toggleModal = this.toggleModal.bind(this);
+    this.navigateShowPage = this.navigateShowPage.bind(this);
   }
 
   toggleModal() {
     this.setState({modalVisible: !this.state.modalVisible})
+  }
+
+  navigateShowPage() {
+    // const { navigate } = this.props.navigation
+    const { event } = this.props
+    // console.log(event);
+    this.props.navigator.navigate('EventShowPage', {title: event.title,
+     latitude: event.latitude,
+     longitude: event.longitude,
+     description: event.description,
+     time: event.time,
+     date: event.date
+    });
+    this.toggleModal();
   }
 
   _renderModalContent = () => (
@@ -57,7 +72,7 @@ class EventIndexItem extends React.Component {
     const { event } = this.props;
     console.log(event);
     return(
-      <TouchableOpacity onPress={() => {this.toggleModal()}}>
+      <TouchableOpacity onPress={() => {this.navigateShowPage()}}>
         <View style={styles.cardSection}>
           <View style={styles.information}>
             <Text style={styles.title}>{event.title}</Text>
@@ -70,14 +85,6 @@ class EventIndexItem extends React.Component {
             source={{uri: 'http://res.cloudinary.com/jlofton/image/upload/v1502388682/jungle_qlctue.jpg'}}
           />
           </View>
-          <Modal
-           animationType={"slide"}
-           transparent={true}
-           visible={this.state.modalVisible}
-           onRequestClose={() => {this.setState({modalVisible: false})}}
-           >
-           {this._renderModalContent()}
-           </ Modal>
         </View>
       </TouchableOpacity>
 
@@ -87,6 +94,15 @@ class EventIndexItem extends React.Component {
 
 }
 
+
+// <Modal
+//  animationType={"slide"}
+//  transparent={true}
+//  visible={this.state.modalVisible}
+//  onRequestClose={() => {this.setState({modalVisible: false})}}
+//  >
+//  {this._renderModalContent()}
+//  </ Modal>
 export default EventIndexItem;
 
 

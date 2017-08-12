@@ -17,7 +17,7 @@ class EventIndex extends React.Component {
     const { events } = this.props;
 
     const allEvents =
-      events.map((event, id) => (<EventIndexItem key={`event-${id}`} event={event}/>));
+      events.map((event, id) => (<EventIndexItem key={`event-${id}`} navigator={this.props.navigation} event={event}/>));
 
     return (
       <Card>

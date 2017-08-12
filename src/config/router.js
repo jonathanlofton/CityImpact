@@ -6,6 +6,7 @@ import LandingPage from '../components/landingPage/landingPage';
 import EventForm from '../components/landingPage/eventForm';
 import LandingPageContainer from '../components/landingPage/landingPageContainer';
 import EventIndexContainer from '../components/event/eventIndexContainer';
+import EventShowPage from '../components/event/eventShowPage';
 
 const LandingNavigator = StackNavigator({
   LandingPage: {
@@ -20,6 +21,9 @@ const LandingNavigator = StackNavigator({
   },
   EventForm: {
     screen: EventForm,
+  },
+  EventShowPage: {
+    screen: EventShowPage,
   }
 },
 {
