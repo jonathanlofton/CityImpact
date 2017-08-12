@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { Input, Card, CardSection } from '../common';
-// import { SingleDatePicker } from 'react-dates';
+import { NavigationActions } from 'react-navigation';
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -35,6 +35,23 @@ class EventForm extends React.Component {
 
   }
 
+  reset(res){
+    return this.props.navigation.dispatch(NavigationActions.reset(
+      {
+        index: 1,
+        actions: [
+          NavigationActions.navigate({ routeName: 'LandingPage'}),
+          NavigationActions.navigate({ routeName: 'EventShowPage', params: {title: res.event.data.event.title,
+           latitude: res.event.data.event.latitude,
+           longitude: res.event.data.event.longitude,
+           description: res.event.data.event.description,
+           time: res.event.data.event.time,
+           date: res.event.data.event.date
+         }})
+        ]
+      }));
+  }
+
   onCreateEvent() {
     this.props.navigation.state.params.createEvent({
       title: this.state.title,
@@ -43,7 +60,7 @@ class EventForm extends React.Component {
       longitude: this.state.longitude,
       date: this.state.date,
       time: this.state.time,
-    }).then((res) => this.navigateEventShowPage(res), (err) => console.log(err));
+    }).then((res) => this.reset(res), (err) => console.log(err));
 
   }
 

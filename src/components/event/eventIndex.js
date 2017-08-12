@@ -5,6 +5,7 @@ import { Card } from '../common';
 
 class EventIndex extends React.Component {
 
+  
   componentDidMount() {
     this.props.requestAllEvents();
   }
