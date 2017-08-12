@@ -79,22 +79,22 @@ class SessionForm extends Component {
           <ScrollView scrollEnabled={false} >
             <Text style={style.appTitle}>CityImpact</Text>
             <Card style={style.container}>
-              <CardSection>
+              <View>
                 <Input
                   onSubmitEditing={this.handleEditComplete}
                   placeholder="example@email.com"
                   label="email"
                 />
 
-              </CardSection>
-              <CardSection>
+              </View>
+              <View>
                 <Input
                   onSubmitEditing={this.handleEditComplete}
                   secureTextEntry
                   placeholder="password"
                   label="password"
                 />
-              </CardSection>
+              </View>
 
               <View style={style.buttons}>
                 <TouchableOpacity
