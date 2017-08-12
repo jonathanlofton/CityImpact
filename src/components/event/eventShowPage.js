@@ -10,6 +10,7 @@ class EventShowPage extends React.Component {
   render() {
     console.log(this.props);
     const { params } = this.props.navigation.state;
+    const { navigate } = this.props.navigation;
     return(
       <View style={styles.container}>
         <MapView
@@ -47,13 +48,13 @@ class EventShowPage extends React.Component {
           <View style={modalStyle.modalButtonContainer}>
             <TouchableOpacity
               style={modalStyle.backButton}
-              onPress={() => {this.toggleModal()}}
+              onPress={() => {navigate('EventIndexContainer')}}
               >
               <Text style={modalStyle.backButtonText}>Close</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={modalStyle.backButton}
-              onPress={() => {this.toggleModal()}}
+              onPress={() => {navigate('EventIndexContainer')}}
               >
               <Text style={modalStyle.joinButtonText}>Join</Text>
             </TouchableOpacity>
