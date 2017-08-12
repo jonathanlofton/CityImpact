@@ -18,6 +18,7 @@ const LandingNavigator = StackNavigator({
 
   EventIndexContainer: {
     screen: EventIndexContainer,
+
   },
   EventForm: {
     screen: EventForm,
