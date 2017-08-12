@@ -7,10 +7,10 @@ CityImpact is a mobile application that enables users to host events to Impact t
 
 ## Functionality and MVPs
 With this application, users will be able to:
-- Utilize Google Maps API to view all issues and events in your area
-- Be able to ping a spot on the map and report an issue
-- See trending issues based on number of reports on a single issue
-- Have users be able to host events to fix a current issue
+- Utilize Google Maps API to view all events in your area
+- Be able to ping a spot on the map and create or view an event
+- Be able to see all events in your area
+- Have users be able to host events to make an impact or make a community event
 - Have users be able to join these events
 
 In addition, CityImpact will include
