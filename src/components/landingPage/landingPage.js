@@ -6,7 +6,7 @@ import Expo from 'expo';
 const markers = [];
 
 class LandingPage extends React.Component {
-  // 
+  //
   // static navigationOptions = {
   //     title: 'Map'
   //   };
@@ -121,7 +121,8 @@ class LandingPage extends React.Component {
                  key={event._id}
                  title={event.title}
                  description={event.description}
-               />
+               >
+             </MapView.Marker>
              ))}
            </ MapView>
 
