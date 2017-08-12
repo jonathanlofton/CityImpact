@@ -1,4 +1,4 @@
-export const HOST_URL = 'http://192.168.1.200:3000';
+export const HOST_URL = 'http://192.168.1.250:3000';
 
 export const fbConfig  = {
   APP_ID: '324070188040369'
@@ -6,4 +6,4 @@ export const fbConfig  = {
 
 export const googleConfig = {
   CLIENT_ID_IOS: '71042043336-00ritn6l8aan7vcl2u547gt1888iu34b.apps.googleusercontent.com'
-}
+};

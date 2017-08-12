@@ -2,9 +2,24 @@ import React from 'react';
 import { CardSection } from '../common';
 import { Text, View, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { MapView } from 'expo';
+import { NavigationActions } from 'react-navigation';
+
 class EventShowPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.reset = this.reset.bind(this);
+  }
+
+  reset(){
+    return this.props.navigation.dispatch(NavigationActions.reset(
+      {
+        index: 1,
+        actions: [
+          NavigationActions.navigate({ routeName: 'LandingPage'}),
+          NavigationActions.navigate({ routeName: 'EventIndexContainer'})
+        ]
+      }));
   }
 
   render() {
@@ -48,13 +63,13 @@ class EventShowPage extends React.Component {
           <View style={modalStyle.modalButtonContainer}>
             <TouchableOpacity
               style={modalStyle.backButton}
-              onPress={() => {navigate('EventIndexContainer')}}
+              onPress={() => this.reset()}
               >
               <Text style={modalStyle.backButtonText}>Close</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={modalStyle.backButton}
-              onPress={() => {navigate('EventIndexContainer')}}
+              onPress={() => this.reset()}
               >
               <Text style={modalStyle.joinButtonText}>Join</Text>
             </TouchableOpacity>

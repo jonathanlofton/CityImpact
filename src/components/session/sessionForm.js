@@ -4,6 +4,7 @@ import { Facebook, Google } from 'expo';
 import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
 import { fbConfig, googleConfig } from '../../util/host_util';
+import { NavigationActions } from 'react-navigation'
 
 class SessionForm extends Component {
 
@@ -16,7 +17,7 @@ class SessionForm extends Component {
       password: "",
       login: true
     };
-
+    this.reset = this.reset.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -28,6 +29,16 @@ class SessionForm extends Component {
     }
   }
 
+  reset(){
+    return this.props.navigation.dispatch(NavigationActions.reset(
+      {
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'LandingPage'})
+        ]
+      }));
+  }
+
   async loginWithFacebook() {
     const { navigate } = this.props.navigation;
     const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbConfig.APP_ID, {
@@ -36,7 +47,7 @@ class SessionForm extends Component {
 
     if (type === 'success') {
       this.props.loginUser({provider: 'facebook', token});
-      navigate('LandingPage');
+      this.reset();
     }
   }
 
@@ -50,7 +61,7 @@ class SessionForm extends Component {
 
       if (type === 'success') {
         this.props.loginUser({provider: 'google', token: accessToken});
-        navigate('LandingPage')
+        this.reset();
       }
     //
     // } catch (e) {
@@ -87,7 +98,7 @@ class SessionForm extends Component {
 
               <View style={style.buttons}>
                 <TouchableOpacity
-                  onPress={() => navigate('LandingPage')}
+                  onPress={() => this.reset()}
                   style={style.facebookStyle}
                   >
                   <Text style={style.facebookText}>Guest Login</Text>
