@@ -131,6 +131,7 @@ class LandingPage extends React.Component {
                     description: event.description,
                     time: event.time,
                     date: event.date,
+                    address: event.address,
                   })
                 }
 

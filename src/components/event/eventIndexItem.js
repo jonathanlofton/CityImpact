@@ -27,7 +27,8 @@ class EventIndexItem extends React.Component {
      longitude: event.longitude,
      description: event.description,
      time: event.time,
-     date: event.date
+     date: event.date,
+     address: event.address,
     });
     this.toggleModal();
   }
