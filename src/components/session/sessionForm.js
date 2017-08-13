@@ -20,6 +20,7 @@ class SessionForm extends Component {
     };
     this.reset = this.reset.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleDemoLogin = this.handleDemoLogin.bind(this);
   }
 
   handleLogin(name) {
@@ -28,6 +29,17 @@ class SessionForm extends Component {
     } else {
       this.loginWithGoogle();
     }
+  }
+
+  handleDemoLogin() {
+    const {navigate} = this.props.navigation;
+    this.props.receiveCurrentUser({
+      avatar: "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13254315_998838910199317_9012571467113931512_n.jpg?oh=5aa7280a8ca9aa86f084c12cf1974c95&oe=5A31CD74",
+      email: "mbegur@hawk.iit.edu",
+      id: "5990b719ce7c7d0004b57892",
+      name: "Mallik Begur"
+    })
+    this.reset();
   }
 
   reset(){
@@ -93,7 +105,7 @@ class SessionForm extends Component {
               <Text style={style.appTitle}>CityImpact</Text>
               <View style={style.buttons}>
                 <TouchableOpacity
-                  onPress={() => this.reset()}
+                  onPress={() => this.handleDemoLogin()}
                   style={style.guestStyle}
                   >
                   <Text style={style.guestText}>Guest Login</Text>
