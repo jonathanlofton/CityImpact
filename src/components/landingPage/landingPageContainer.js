@@ -3,8 +3,12 @@ import { requestAllEvents, requestSingleEvent, createEvent } from '../../actions
 import { selectAllEvents } from '../../reducers/selectors';
 import LandingPage from './landingPage';
 
-const mapStateToProps = state => ({
-  events: selectAllEvents(state)
+
+
+const mapStateToProps = state => (
+  {
+  events: selectAllEvents(state),
+  currentUser: state.session.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

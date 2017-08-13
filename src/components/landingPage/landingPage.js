@@ -20,6 +20,7 @@ class LandingPage extends React.Component {
       latitude: null,
       longitude: null,
       markers: null,
+      currentUser: null
     }
     this.mapPressLong = this.mapPressLong.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -73,6 +74,7 @@ class LandingPage extends React.Component {
     navigate('EventForm', {createEvent: this.props.createEvent,
      latitude: this.state.latitude,
      longitude: this.state.longitude,
+     currentUser: this.props.currentUser,
     });
     this.toggleModal();
   }

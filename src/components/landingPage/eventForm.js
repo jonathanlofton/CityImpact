@@ -13,7 +13,8 @@ class EventForm extends React.Component {
       time: "",
       date: "",
       longitude: this.props.navigation.state.params.longitude,
-      latitude: this.props.navigation.state.params.latitude
+      latitude: this.props.navigation.state.params.latitude,
+      host: this.props.navigation.state.params.currentUser.id,
     };
     this.onCreateEvent = this.onCreateEvent.bind(this);
     this.navigateEventShowPage = this.navigateEventShowPage.bind(this);
@@ -60,6 +61,7 @@ class EventForm extends React.Component {
       longitude: this.state.longitude,
       date: this.state.date,
       time: this.state.time,
+      host: this.state.host
     }).then((res) => this.reset(res), (err) => console.log(err));
 
   }
