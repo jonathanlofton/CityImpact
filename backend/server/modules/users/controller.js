@@ -55,7 +55,13 @@ export const loginWithAuth0 = async function (req, res) {
       userInfo = await facebookAuth(token);
     }
 
-    const user = await User.findOrCreate(userInfo);
+    const user = await User.findOrCreate(userInfo)
+  //   .populate('events').
+  //     exec(function (err, event) {
+  //   if (err) return handleError(err);
+  //   // console.log('The creator is %s', event.host.fullName);
+  //   // prints "The creator is Aaron"
+  // })
 
     console.log(`logged in or created user: ${user}`);
 

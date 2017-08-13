@@ -20,6 +20,8 @@ class LandingPage extends React.Component {
       latitude: null,
       longitude: null,
       markers: null,
+      currentUser: null,
+      // user: null,
     }
     this.mapPressLong = this.mapPressLong.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -131,6 +133,7 @@ class LandingPage extends React.Component {
                     description: event.description,
                     time: event.time,
                     date: event.date,
+                    address: event.address,
                   })
                 }
 

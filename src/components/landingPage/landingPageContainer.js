@@ -4,9 +4,13 @@ import { selectAllEvents } from '../../reducers/selectors';
 import { receiveCurrentUser, updateUser } from '../../actions/sessionActions';
 import LandingPage from './landingPage';
 
-const mapStateToProps = state => ({
+
+
+const mapStateToProps = state => (
+  {
   events: selectAllEvents(state),
-  user: state.session.currentUser
+  currentUser: state.session.currentUser,
+  user: state.session.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

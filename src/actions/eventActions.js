@@ -14,7 +14,9 @@ export const receiveSingleEvent = (event) => ({
 });
 
 export const requestAllEvents = () => dispatch => (
+
   EventApiUtil.fetchAllEvents().then(events => (
+    console.log(events),
     dispatch(receiveAllEvents(events.data))
   ))
 );

@@ -5,6 +5,7 @@ import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollV
 import { CardSection, Card, Button, Input } from '../common';
 import { fbConfig, googleConfig } from '../../util/host_util';
 import { NavigationActions } from 'react-navigation'
+import { Ionicons } from '@expo/vector-icons';
 
 class SessionForm extends Component {
 
@@ -87,39 +88,21 @@ class SessionForm extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.login) {
       return(
-        <View style={style.fullPage}>
-          <ScrollView scrollEnabled={false} >
-            <Text style={style.appTitle}>CityImpact</Text>
-            <Card style={style.container}>
-              <View>
-                <Input
-                  onSubmitEditing={this.handleEditComplete}
-                  placeholder="example@email.com"
-                  label="email"
-                />
-
-              </View>
-              <View>
-                <Input
-                  onSubmitEditing={this.handleEditComplete}
-                  secureTextEntry
-                  placeholder="password"
-                  label="password"
-                />
-              </View>
-
+        <View style={style.container}>
+            <View style={style.sessionContent}>
+              <Text style={style.appTitle}>CityImpact</Text>
               <View style={style.buttons}>
                 <TouchableOpacity
                   onPress={() => this.reset()}
-                  style={style.facebookStyle}
+                  style={style.guestStyle}
                   >
-                  <Text style={style.facebookText}>Guest Login</Text>
+                  <Text style={style.guestText}>Guest Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.handleLogin('google')}
-                  style={style.buttonStyle}
+                  style={style.googleStyle}
                   >
-                  <Text style={style.buttonText}>Google Log In</Text>
+                  <Text style={style.googleText}>Google Log In</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.handleLogin('facebook')}
@@ -128,8 +111,7 @@ class SessionForm extends Component {
                   <Text style={style.facebookText}>Facebook Log In</Text>
                 </TouchableOpacity>
               </View>
-            </Card>
-          </ScrollView>
+            </View>
         </View>
       );
     }
@@ -139,8 +121,22 @@ class SessionForm extends Component {
 export default SessionForm;
 
   const style = {
-    buttons: {
-      marginTop: 50,
+    guestStyle: {
+      alignSelf: 'center',
+      borderRadius: 3,
+      alignContent: 'center',
+      justifyContent: 'center',
+      borderWidth: 2,
+      borderColor: '#81b71a',
+      margin: 10,
+      height: 60,
+      width: '70%'
+    },
+    guestText: {
+      alignSelf: 'center',
+      color: '#81b71a',
+      fontSize: 20,
+      padding: 15
     },
     facebookStyle: {
       alignSelf: 'center',
@@ -159,43 +155,38 @@ export default SessionForm;
       fontSize: 20,
       padding: 15
     },
-    fullPage: {
-      backgroundColor: 'white',
-      height: "100%",
-    },
-    appTitle: {
-      fontSize: 40,
-      fontWeight: '500',
-      textAlign: 'center',
-      margin: 50,
-    },
-    buttonStyle: {
+    googleStyle: {
       alignSelf: 'center',
       borderRadius: 3,
       alignContent: 'center',
       justifyContent: 'center',
       borderWidth: 2,
-      borderColor: '#00AB6C',
+      borderColor: '#d34836',
       margin: 10,
       height: 60,
       width: '70%'
     },
+    googleText: {
+      alignSelf: 'center',
+      color: '#d34836',
+      fontSize: 20,
+      padding: 15
+    },
+    appTitle: {
+      fontSize: 40,
+      fontWeight: '500',
+      textAlign: 'center',
+      marginBottom: '10%',
+    },
     container: {
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      position: 'absolute',
       top: 0,
       bottom: 0,
       left: 0,
       right: 0,
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: 'white',
-      alignItems: 'center',
     },
-    buttonText: {
-      alignSelf: 'center',
-      color: '#00AB6C',
-      fontSize: 20,
-      padding: 15
-    }
   };
 
   // <TouchableOpacity

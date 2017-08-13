@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { Input, Card, CardSection } from '../common';
 import { NavigationActions } from 'react-navigation';
-// import mongoose from 'mongoose';
-// const ObjectId = mongoose.Schema.Types.ObjectId;
+import Geocoder from 'react-native-geocoding';
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -20,6 +19,26 @@ class EventForm extends React.Component {
     };
     this.onCreateEvent = this.onCreateEvent.bind(this);
     this.navigateEventShowPage = this.navigateEventShowPage.bind(this);
+    this.coordsToAddress = this.coordsToAddress.bind(this);
+  }
+  componentWillMount() {
+    this.coordsToAddress();
+  }
+
+  coordsToAddress() {
+    const { params } = this.props.navigation.state;
+
+    Geocoder.setApiKey('AIzaSyAjlc_-1s0PP53gxwcZHpGtNQryjcKzvZs');
+    Geocoder.getFromLatLng(
+      this.props.navigation.state.params.latitude,
+      this.props.navigation.state.params.longitude
+    ).then(
+      json =>  {
+      this.setState({address: json.results[0].formatted_address});
+    },
+    error => {
+      alert(error);
+    });
   }
 
 
@@ -32,7 +51,8 @@ class EventForm extends React.Component {
      longitude: res.event.data.event.longitude,
      description: res.event.data.event.description,
      time: res.event.data.event.time,
-     date: res.event.data.event.date
+     date: res.event.data.event.date,
+     address: res.event.data.event.address
     });
 
   }
@@ -48,7 +68,9 @@ class EventForm extends React.Component {
            longitude: res.event.data.event.longitude,
            description: res.event.data.event.description,
            time: res.event.data.event.time,
-           date: res.event.data.event.date
+           date: res.event.data.event.date,
+           address: res.event.data.event.address
+
          }})
         ]
       }

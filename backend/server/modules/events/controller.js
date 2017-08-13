@@ -15,7 +15,12 @@ export const createEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    return res.status(200).json(await Event.find({}));
+    return res.status(200).json(await Event.find({}).populate('host').
+      exec(function (err, event) {
+    if (err) return handleError(err);
+    // console.log('The creator is %s', event.host.fullName);
+    // prints "The creator is Aaron"
+  }));
   } catch (e) {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
   }
