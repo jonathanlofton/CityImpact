@@ -11,10 +11,10 @@ const UserSchema = new Schema({
       uid: String,
       provider: String,
     },
-    events: {
+    events: [{
       type: Schema.Types.ObjectId,
        ref: 'Event'
-    }
+    }]
   },
   { timestamps: true }
 );
