@@ -1,13 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { autoRehydrate } from 'redux-persist';
 import RootReducer from '../reducers/RootReducer';
 
 const configureStore = (preloadedState = {}) => {
   return createStore(
     RootReducer,
     preloadedState,
-    applyMiddleware(thunk)
+    compose(applyMiddleware(thunk), autoRehydrate())
   );
 };
 

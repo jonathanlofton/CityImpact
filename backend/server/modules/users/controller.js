@@ -25,7 +25,6 @@ export const getAllUsers = async (req, res) => {
 export const loginWithAuth0 = async function (req, res) {
 
   const { provider, token } = req.body;
-  console.log(provider);
   let userInfo;
 
   try {
