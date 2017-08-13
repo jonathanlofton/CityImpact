@@ -1,18 +1,10 @@
 import Event from './model';
 
 export const createEvent = async (req, res) => {
-  const { title, description, latitude, longitude, time, date, host } = req.body;
-  // console.log(req.user);
-  // console.log(req.currentUser);
-  console.log(title);
-  console.log(description);
-  let hosta = host
-  console.log(hosta);
-  // console.log("wtf",req.headers.Authorization);
-  // console.log("wtf",req._passport.instance.Authenticator._userPropery._strategies);
+  const { title, description, latitude, longitude, time, date, address, host } = req.body;
 
-  // const host = req.user;
-  const newEvent = new Event({ title, description, latitude, longitude, time, date, host });
+
+  const newEvent = new Event({ title, description, latitude, longitude, time, date, address, host });
 
   try {
     return res.status(201).json({ event: await newEvent.save() });

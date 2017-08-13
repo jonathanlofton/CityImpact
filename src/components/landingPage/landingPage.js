@@ -35,6 +35,12 @@ class LandingPage extends React.Component {
     this._getLocationAsync();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user !== nextProps.user) {
+      this.props.receiveCurrentUser(nextProps.user);
+    }
+  }
+
   _getLocationAsync = async () => {
     const { Location, Permissions } = Expo;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -97,7 +103,7 @@ class LandingPage extends React.Component {
     }
 
 
-    const { events } = this.props;
+    const { events, user } = this.props;
     const { navigate } = this.props.navigation;
 
      const long = this.state.location.coords.longitude;
@@ -120,6 +126,17 @@ class LandingPage extends React.Component {
                    latitude: event.latitude,
                    longitude: event.longitude
                  }}
+                 onCalloutPress={() => navigate('EventShowPage', {
+                    title: event.title,
+                    latitude: event.latitude,
+                    longitude: event.longitude,
+                    description: event.description,
+                    time: event.time,
+                    date: event.date,
+                    address: event.address,
+                  })
+                }
+
                  key={event._id}
                  title={event.title}
                  description={event.description}
@@ -135,7 +152,7 @@ class LandingPage extends React.Component {
                >
                <Image
                style={styles.userPhoto}
-               source={{uri: 'https://res.cloudinary.com/jlofton/image/upload/v1502515774/catstockphoto_yr81pv.jpg'}}
+               source={{uri: `${user.avatar}`}}
                />
              </TouchableOpacity>
            </View>
