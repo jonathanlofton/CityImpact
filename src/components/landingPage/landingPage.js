@@ -124,6 +124,16 @@ class LandingPage extends React.Component {
                    latitude: event.latitude,
                    longitude: event.longitude
                  }}
+                 onCalloutPress={() => navigate('EventShowPage', {
+                    title: event.title,
+                    latitude: event.latitude,
+                    longitude: event.longitude,
+                    description: event.description,
+                    time: event.time,
+                    date: event.date,
+                  })
+                }
+
                  key={event._id}
                  title={event.title}
                  description={event.description}
