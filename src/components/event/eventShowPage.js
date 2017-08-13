@@ -23,7 +23,7 @@ class EventShowPage extends React.Component {
       }));
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.coordsToAddress();
   }
 

@@ -22,7 +22,7 @@ class EventForm extends React.Component {
     this.coordsToAddress = this.coordsToAddress.bind(this);
   }
   componentWillMount() {
-    this.coordsToAddress()
+    this.coordsToAddress();
   }
 
   coordsToAddress() {
