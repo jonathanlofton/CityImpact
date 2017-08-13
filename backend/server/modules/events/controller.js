@@ -1,8 +1,10 @@
 import Event from './model';
 
 export const createEvent = async (req, res) => {
-  const { title, description, latitude, longitude, time, date, address } = req.body;
-  const newEvent = new Event({ title, description, latitude, longitude, time, date, address});
+  const { title, description, latitude, longitude, time, date, address, host } = req.body;
+
+
+  const newEvent = new Event({ title, description, latitude, longitude, time, date, address, host });
 
   try {
     return res.status(201).json({ event: await newEvent.save() });
@@ -13,7 +15,12 @@ export const createEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    return res.status(200).json(await Event.find({}));
+    return res.status(200).json(await Event.find({}).populate('host').
+      exec(function (err, event) {
+    if (err) return handleError(err);
+    // console.log('The creator is %s', event.host.fullName);
+    // prints "The creator is Aaron"
+  }));
   } catch (e) {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
   }
