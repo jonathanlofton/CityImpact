@@ -8,3 +8,15 @@ export const loginUser = data => (
     data: data
   })
 );
+
+export const updateUser = data => {
+  const { _id, hostedEvents, joinedEvents } = data;
+  return axios({
+    method: 'POST',
+    url: `${HOST_URL}/api/users/${_id}`,
+    data: {
+      hostedEvents,
+      joinedEvents
+    }
+  })
+};

@@ -22,6 +22,25 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+export const updateUser = async (req, res) => {
+  const { userId } = req.params;
+  const update = req.body;
+  if (!userId) {
+    return res.status(400).json({ error: true, message: 'No User Id' });
+  }
+  const user = await User.findById(userId);
+
+  try {
+    User.update({"_id": userId}, update,
+      (err) => {
+        console.log(err);
+        res.sendStatus(202);
+      });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: 'Cannot update user' });
+  }
+};
+
 export const loginWithAuth0 = async function (req, res) {
 
   const { provider, token } = req.body;
@@ -53,38 +72,38 @@ export const loginWithAuth0 = async function (req, res) {
   }
 };
 
-export const seedEvents = (req, res) => {
-
-  try {
-  // create some events
-  const users = [
-    // { fullName: 'Jimmy Fallon', email: 'Throwing into a basket.' },
-    { fullName: 'DAVadsfID', email: 'EMAsadfIL CZU.', avatar: 'Striasdfng',
-    providerData: {
-      uid: 'asdfasdfasdf',
-      provider: 'Stasdfasdfaasdfsdfring',
-    }, },
-    { fullName: 'Stepheasdfasdfasdfasdfn Colbert', email: 'Michasdfael aaPhasdfasdfelps is the fast fish.', avatar: 'Strasdfiasdfng',
-    providerData: {
-      uid: 'Stasdasdffasfring',
-      provider: 'Stasdasdffasdfring',
-    }, }
-
-    // { fullName: 'David Letterman', email: 'Lifting heavy things up' },
-    // { fullName: 'John Oliver', email: 'Super fast paddles' },
-    // { fullName: 'Esteban Gorchoff', email: 'Fish salad' },
-    // { fullName: 'Dog The Bounty Hunter', email: 'Andy salad' }
-
-  ];
-
-  // use the Event model to insert/save
-  users.forEach( user => {
-    const newUser = new User(user);
-    newUser.save();
-  })} catch (e) {
-    return res.status(400).json({ error: true, errorMessage: e.message });
-  }
-
-  // seeded!
-  res.send('Database seeded!');
-}
+// export const seedEvents = (req, res) => {
+//
+//   try {
+//   // create some events
+//   const users = [
+//     // { fullName: 'Jimmy Fallon', email: 'Throwing into a basket.' },
+//     { fullName: 'DAVadsfID', email: 'EMAsadfIL CZU.', avatar: 'Striasdfng',
+//     providerData: {
+//       uid: 'asdfasdfasdf',
+//       provider: 'Stasdfasdfaasdfsdfring',
+//     }, },
+//     { fullName: 'Stepheasdfasdfasdfasdfn Colbert', email: 'Michasdfael aaPhasdfasdfelps is the fast fish.', avatar: 'Strasdfiasdfng',
+//     providerData: {
+//       uid: 'Stasdasdffasfring',
+//       provider: 'Stasdasdffasdfring',
+//     }, }
+//
+//     // { fullName: 'David Letterman', email: 'Lifting heavy things up' },
+//     // { fullName: 'John Oliver', email: 'Super fast paddles' },
+//     // { fullName: 'Esteban Gorchoff', email: 'Fish salad' },
+//     // { fullName: 'Dog The Bounty Hunter', email: 'Andy salad' }
+//
+//   ];
+//
+//   // use the Event model to insert/save
+//   users.forEach( user => {
+//     const newUser = new User(user);
+//     newUser.save();
+//   })} catch (e) {
+//     return res.status(400).json({ error: true, errorMessage: e.message });
+//   }
+//
+//   // seeded!
+//   res.send('Database seeded!');
+// }

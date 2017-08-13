@@ -1,11 +1,14 @@
 import Event from './model';
 
 export const createEvent = async (req, res) => {
-  const { title, description, latitude, longitude, time, date } = req.body;
-  const newEvent = new Event({ title, description, latitude, longitude, time, date });
-
+  const { title, description, latitude, longitude, time, date, host } = req.body;
+  console.log(`HOSTID: ${host}`);
+  const newEvent = new Event({
+    title, description, latitude, longitude, time, date, host: host._id
+  });
   try {
-    return res.status(201).json({ event: await newEvent.save() });
+    console.log(`NEW EVENT ${newEvent}`);
+    return res.status(201).json({event: await newEvent.save()});
   } catch (e) {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
   }

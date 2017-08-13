@@ -11,6 +11,12 @@ const UserSchema = new Schema({
       uid: String,
       provider: String,
     },
+    hostedEvents : [
+      { type: Schema.Types.ObjectId, ref: 'Event' }
+    ],
+    joinedEvents : [
+      { type: Schema.Types.ObjectId, ref: 'Event' }
+    ]
   },
   { timestamps: true }
 );
@@ -32,5 +38,6 @@ UserSchema.statics.findOrCreate = async function (userInfo) {
     return e;
   }
 };
+
 
 export default mongoose.model('User', UserSchema);

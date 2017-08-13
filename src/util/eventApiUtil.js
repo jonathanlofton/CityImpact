@@ -21,14 +21,10 @@ export const fetchSingleEvent = (id) => {
   });
 };
 
-export const createEvent = (event) => {
+export const createEvent = event => {
   return axios({
     method: 'POST',
     url: `${HOST_URL}/api/events`,
     data: event
   });
-
-  // .then(res => console.log(res), error => {
-  //   console.log(error);
-  // });
 };
