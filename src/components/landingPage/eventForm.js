@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { Input, Card, CardSection } from '../common';
 import { NavigationActions } from 'react-navigation';
+// import mongoose from 'mongoose';
+// const ObjectId = mongoose.Schema.Types.ObjectId;
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -13,7 +15,8 @@ class EventForm extends React.Component {
       time: "",
       date: "",
       longitude: this.props.navigation.state.params.longitude,
-      latitude: this.props.navigation.state.params.latitude
+      latitude: this.props.navigation.state.params.latitude,
+      host: this.props.currentUser
     };
     this.onCreateEvent = this.onCreateEvent.bind(this);
     this.navigateEventShowPage = this.navigateEventShowPage.bind(this);
@@ -24,7 +27,6 @@ class EventForm extends React.Component {
     // const { navigate } = this.props.navigation
     const { navigate } = this.props.navigation;
     // const { res } = this.props;
-    console.log(res);
     navigate('EventShowPage', {title: res.event.data.event.title,
      latitude: res.event.data.event.latitude,
      longitude: res.event.data.event.longitude,
@@ -49,19 +51,32 @@ class EventForm extends React.Component {
            date: res.event.data.event.date
          }})
         ]
-      }));
+      }
+    ));
   }
 
   onCreateEvent() {
-    this.props.navigation.state.params.createEvent({
-      title: this.state.title,
-      description: this.state.description,
-      latitude: this.state.latitude,
-      longitude: this.state.longitude,
-      date: this.state.date,
-      time: this.state.time,
-    }).then((res) => this.reset(res), (err) => console.log(err));
-
+    const { title, description, latitude,
+            longitude, date, time, host } = this.state;
+    this.props.createEvent({
+      title: title,
+      description: description,
+      latitude: latitude,
+      longitude: longitude,
+      date: date,
+      time: time,
+      host: host
+    }).then(
+      res => {
+        this.props.updateUser({
+          id: host.id,
+          hostedEvents: host.hostedEvents.push(res.event.data.event._id),
+          joinedEvents: host.joinedEvents
+        });
+        this.reset(res);
+      },
+      err => console.log(err)
+    );
   }
 
   render() {
@@ -71,38 +86,37 @@ class EventForm extends React.Component {
           <View style={styles.formContent}>
             <Text style={styles.formTitle}>Create Event</Text>
             <View style={styles.inputBox}>
-              <Input
-                placeholder="Name of Event"
-                label = "Title"
+              <Input placeholder="Name of Event"
+                label="Title"
                 value={this.state.title}
                 onChangeText={title => this.setState({ title })}
               />
-            </View >
+            </View>
             <View style={styles.inputBox}>
               <Input
                 placeholder="Add a description!"
-                label = "Description"
+                label="Description"
                 value={this.state.description}
                 onChangeText={description => this.setState({ description })}
               />
-            </View >
+            </View>
             <View style={styles.inputBox}>
               <Input
                 placeholder="Date"
-                label = "Date"
+                label="Date"
                 value={this.state.date}
                 onChangeText={date => this.setState({ date })}
               />
-            </View >
+            </View>
             <View style={styles.inputBox}>
               <Input
                 labelStyle={styles.labelStyle}
                 placeholder="Time"
-                label = "Time"
+                label="Time"
                 value={this.state.time}
                 onChangeText={time => this.setState({ time })}
               />
-            </View >
+            </View>
 
 
           </View>

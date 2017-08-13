@@ -1,7 +1,7 @@
 export const getUserInfo = (data, provider) => {
   let fullName;
   let avatar;
-  
+
   if (provider === 'google') {
     fullName = `${data.given_name} ${data.family_name}`;
     avatar = data.picture;
@@ -17,6 +17,8 @@ export const getUserInfo = (data, provider) => {
     providerData: {
       uid: data.id,
       provider,
-    }
+    },
+    hostedEvents: [],
+    joinedEvents: []
   };
 }

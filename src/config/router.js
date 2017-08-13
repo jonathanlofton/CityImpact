@@ -3,7 +3,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import SessionFormContainer from '../components/session/sessionFormContainer';
 import LandingPage from '../components/landingPage/landingPage';
-import EventForm from '../components/landingPage/eventForm';
+import EventFormContainer from '../components/landingPage/eventFormContainer';
 import LandingPageContainer from '../components/landingPage/landingPageContainer';
 import EventIndexContainer from '../components/event/eventIndexContainer';
 import EventShowPage from '../components/event/eventShowPage';
@@ -21,7 +21,7 @@ const LandingNavigator = StackNavigator({
     screen: EventIndexContainer,
   },
   EventForm: {
-    screen: EventForm,
+    screen: EventFormContainer,
   },
   EventShowPage: {
     screen: EventShowPage,

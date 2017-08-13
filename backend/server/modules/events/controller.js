@@ -2,17 +2,16 @@ import Event from './model';
 
 export const createEvent = async (req, res) => {
   const { title, description, latitude, longitude, time, date, host } = req.body;
-  console.log(`HOSTID: ${host}`);
   const newEvent = new Event({
-    title, description, latitude, longitude, time, date, host: host._id
+    title, description, latitude, longitude, time, date, host: host.id
   });
   try {
-    console.log(`NEW EVENT ${newEvent}`);
     return res.status(201).json({event: await newEvent.save()});
   } catch (e) {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
   }
 };
+
 
 export const getAllEvents = async (req, res) => {
   try {
@@ -21,6 +20,7 @@ export const getAllEvents = async (req, res) => {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
   }
 };
+
 
 export const getAnEvent = async (req, res) => {
   const { eventId } = req.params;

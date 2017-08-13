@@ -56,9 +56,9 @@ class LandingPage extends React.Component {
 
   mapPressLong(e) {
     //nativeEvent.coordinate will obtain coordinates
-    const long = e.nativeEvent.coordinate.longitude
+    const lon = e.nativeEvent.coordinate.longitude
     const lat = e.nativeEvent.coordinate.latitude
-    this.setState({latitude: lat, longitude: long })
+    this.setState({latitude: lat, longitude: lon })
     this.toggleModal()
   }
 
@@ -76,9 +76,9 @@ class LandingPage extends React.Component {
   )
   navigateEventForm() {
     const { navigate } = this.props.navigation
-    navigate('EventForm', {createEvent: this.props.createEvent,
-     latitude: this.state.latitude,
-     longitude: this.state.longitude,
+    navigate('EventForm', {
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
     });
     this.toggleModal();
   }
@@ -140,7 +140,7 @@ class LandingPage extends React.Component {
                >
              </MapView.Marker>
              ))}
-           </ MapView>
+           </MapView>
 
 
            <View style={styles.photoContainer}>
@@ -166,7 +166,7 @@ class LandingPage extends React.Component {
             onRequestClose={() => {this.setState({modalVisible: false})}}
             >
             {this._renderModalContent()}
-            </ Modal>
+            </Modal>
         </View>
 
 

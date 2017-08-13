@@ -3,24 +3,24 @@ import { createToken } from '../../config/createToken';
 import { facebookAuth } from '../../config/facebookAuth';
 import { googleAuth } from '../../config/googleAuth';
 
-export const createUser = async (req, res) => {
-  const { username, email, passwordDigest } = req.body;
-  const newUser = new User({ username, email, passwordDigest });
-
-  try {
-    return res.status(201).json({ user: await newUser.save() });
-  } catch (e) {
-    return res.status(e.status).json({ error: true, message: 'Error with User Sign Up' });
-  }
-};
-
-export const getAllUsers = async (req, res) => {
-  try {
-    return res.status(200).json({ users: await User.find({})});
-  } catch (e) {
-    return res.status(e.status).json({ error: true, message: 'Error with Users Fetch' });
-  }
-};
+// export const createUser = async (req, res) => {
+//   const { username, email, passwordDigest } = req.body;
+//   const newUser = new User({ username, email, passwordDigest });
+//
+//   try {
+//     return res.status(201).json({ user: await newUser.save() });
+//   } catch (e) {
+//     return res.status(e.status).json({ error: true, message: 'Error with User Sign Up' });
+//   }
+// };
+//
+// export const getAllUsers = async (req, res) => {
+//   try {
+//     return res.status(200).json({ users: await User.find({})});
+//   } catch (e) {
+//     return res.status(e.status).json({ error: true, message: 'Error with Users Fetch' });
+//   }
+// };
 
 export const updateUser = async (req, res) => {
   const { userId } = req.params;
@@ -31,7 +31,9 @@ export const updateUser = async (req, res) => {
   const user = await User.findById(userId);
 
   try {
-    User.update({"_id": userId}, update,
+    console.log(`USERID ${userId}`);
+    console.log(`UPDATE ${update.hostedEvents}`);
+    User.update({"id": userId}, update,
       (err) => {
         console.log(err);
         res.sendStatus(202);
@@ -63,7 +65,9 @@ export const loginWithAuth0 = async function (req, res) {
         id: user._id,
         name: user.fullName,
         avatar: user.avatar,
-        email: user.email
+        email: user.email,
+        hostedEvents: user.hostedEvents,
+        joinedEvents: user.joinedEvents
       },
       token: `JWT ${createToken(user)}`,
     });
