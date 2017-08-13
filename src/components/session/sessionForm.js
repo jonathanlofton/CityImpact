@@ -35,27 +35,39 @@ class SessionForm extends Component {
     });
 
     if (type === 'success') {
+      Alert.alert(
+        `Welcome!`, null, null,
+        { cancelable: false }
+      );
       this.props.loginUser({provider: 'facebook', token});
       navigate('LandingPage');
     }
   }
 
   async loginWithGoogle() {
-    // try {
-      const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
+    try {
       const {type, accessToken} = await Google.logInAsync({
         iosClientId: googleConfig.CLIENT_ID_IOS,
         scopes: ['profile', 'email']
       });
 
       if (type === 'success') {
+        Alert.alert(
+          `Welcome!`,
+          null, null,
+          { cancelable: false }
+        );
         this.props.loginUser({provider: 'google', token: accessToken});
-        navigate('LandingPage')
+        navigate('LandingPage');
       }
-    //
-    // } catch (e) {
-    //   console.log("ERROR IN GOOGLE LOGIN SESSION FORM");
-    // }
+    } catch (e) {
+      Alert.alert(
+        `Oops! something went wrong, please try again`,
+        null, null,
+        { cancelable: false }
+      );
+    }
   }
 
 

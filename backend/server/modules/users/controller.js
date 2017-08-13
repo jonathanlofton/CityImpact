@@ -25,7 +25,6 @@ export const getAllUsers = async (req, res) => {
 export const loginWithAuth0 = async function (req, res) {
 
   const { provider, token } = req.body;
-  console.log(provider);
   let userInfo;
 
   try {
@@ -42,7 +41,7 @@ export const loginWithAuth0 = async function (req, res) {
     return res.status(200).json({
       success: true,
       user: {
-        id: user._id,
+        id: user._id
       },
       token: `JWT ${createToken(user)}`,
     });
