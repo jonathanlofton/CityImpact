@@ -10,6 +10,7 @@ const mapStateToProps = state => (
   {
   events: selectAllEvents(state),
   currentUser: state.session.currentUser,
+  user: state.session.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
