@@ -19,6 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/vector-icons": "^5.1.0",
     "axios": "^0.16.2",
     "cross-env": "^5.0.4",
     "expo": "^19.0.0",
