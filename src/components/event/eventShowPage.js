@@ -3,11 +3,12 @@ import { CardSection } from '../common';
 import { Text, View, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { MapView } from 'expo';
 import { NavigationActions } from 'react-navigation';
+import Geocoder from 'react-native-geocoding';
 
 class EventShowPage extends React.Component {
   constructor(props) {
     super(props);
-
+    this.coordsToAddress = this.coordsToAddress.bind(this);
     this.reset = this.reset.bind(this);
   }
 
@@ -20,6 +21,24 @@ class EventShowPage extends React.Component {
           NavigationActions.navigate({ routeName: 'EventIndexContainer'})
         ]
       }));
+  }
+
+  componentDidMount() {
+    this.coordsToAddress();
+  }
+
+  coordsToAddress() {
+    const { params } = this.props.navigation.state;
+
+    Geocoder.setApiKey('AIzaSyAjlc_-1s0PP53gxwcZHpGtNQryjcKzvZs');
+    Geocoder.getFromLatLng(params.latitude, params.longitude)
+    .then(json =>  {
+      const add = json.results[0].formatted_address;
+      return add;
+    },
+    error => {
+      alert(error);
+    });
   }
 
   render() {
@@ -52,6 +71,7 @@ class EventShowPage extends React.Component {
             <Text style={modalStyle.showTitle}>{params.title}</Text>
             <Text style={modalStyle.date}>{params.date}</Text>
             <Text style={modalStyle.date}>{params.time}</Text>
+            <Text>{params.address}</Text>
           </View>
           <Text style={modalStyle.description}>{params.description}</Text>
 
@@ -77,6 +97,8 @@ class EventShowPage extends React.Component {
         </View>
       </View>
     );
+
+
   }
 }
 

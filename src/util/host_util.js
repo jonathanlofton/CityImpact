@@ -1,5 +1,5 @@
 
-export const HOST_URL = 'http://192.168.1.200:3000';
+export const HOST_URL = 'http://localhost:3000';
 
 
 export const fbConfig  = {
