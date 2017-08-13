@@ -66,32 +66,32 @@ class EventShowPage extends React.Component {
            description={params.description}
          />
        </MapView>
-        <View>
-          <View style={modalStyle.dateTitle}>
-            <Text style={modalStyle.showTitle}>{params.title}</Text>
-            <Text style={modalStyle.date}>{params.date}</Text>
-            <Text style={modalStyle.date}>{params.time}</Text>
-            <Text>{params.address}</Text>
+        <View style={showInfo.showInfo}>
+          <View style={showInfo.dateTitle}>
+            <Text style={showInfo.showTitle}>{params.title}</Text>
+            <Text style={showInfo.showDate}>{params.date}</Text>
+            <Text style={showInfo.showDate}>{params.time}</Text>
+            <Text style={showInfo.showDate}>{params.address}</Text>
           </View>
-          <Text style={modalStyle.description}>{params.description}</Text>
+          <Text style={showInfo.showDescription}>{params.description}</Text>
 
-          <View style={modalStyle.joinedView}>
+          <View style={showInfo.joinedView}>
             <Text>THIS IS WHERE COMMENTS OR PEOPLE THAT HAVE JOINED WILL BE VIEWED</Text>
           </View>
 
 
-          <View style={modalStyle.modalButtonContainer}>
+          <View style={showInfo.modalButtonContainer}>
             <TouchableOpacity
-              style={modalStyle.backButton}
+              style={showInfo.backButton}
               onPress={() => this.reset()}
               >
-              <Text style={modalStyle.backButtonText}>Close</Text>
+              <Text style={showInfo.backButtonText}>Close</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={modalStyle.backButton}
+              style={showInfo.backButton}
               onPress={() => this.reset()}
               >
-              <Text style={modalStyle.joinButtonText}>Join</Text>
+              <Text style={showInfo.joinButtonText}>Join</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -123,15 +123,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const modalStyle = StyleSheet.create({
+const showInfo = StyleSheet.create({
+  showInfo: {
+    position: 'absolute',
+    top: '30%',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   dateTitle: {
-    marginTop: 20,
+    marginTop: '5%',
     alignItems: 'center',
   },
-  date: {
-    marginRight: 10,
+  showTitle: {
+    fontSize: 35,
+    fontWeight: 'bold',
   },
-  description: {
+  showDate: {
+
+  },
+  showDescription: {
     marginTop: '10%',
     marginBottom: '10%',
     width: '70%',
@@ -142,22 +153,10 @@ const modalStyle = StyleSheet.create({
     width: '70%',
     alignSelf: 'center',
   },
-  fullScreen: {
-    marginTop: 30,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'white',
-    alignItems: 'center',
-  },
-  showTitle: {
-    fontSize: 35,
-    fontWeight: 'bold',
-  },
   modalButtonContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
     justifyContent: 'space-between',
-
   },
   backButton: {
     alignSelf: 'flex-end',
