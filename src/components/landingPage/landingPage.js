@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Modal, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { MapView } from 'expo';
 import { Button, Card, CardSection } from '../common';
 import Expo from 'expo';
 const markers = [];
 
 class LandingPage extends React.Component {
-  // 
+  //
   // static navigationOptions = {
   //     title: 'Map'
   //   };
@@ -32,6 +32,12 @@ class LandingPage extends React.Component {
   componentDidMount(){
     this.props.requestAllEvents();
     this._getLocationAsync();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user !== nextProps.user) {
+      this.props.receiveCurrentUser(nextProps.user);
+    }
   }
 
   _getLocationAsync = async () => {
@@ -95,7 +101,7 @@ class LandingPage extends React.Component {
     }
 
 
-    const { events } = this.props;
+    const { events, user } = this.props;
     const { navigate } = this.props.navigation;
 
      const long = this.state.location.coords.longitude;
@@ -118,17 +124,40 @@ class LandingPage extends React.Component {
                    latitude: event.latitude,
                    longitude: event.longitude
                  }}
+                 onCalloutPress={() => navigate('EventShowPage', {
+                    title: event.title,
+                    latitude: event.latitude,
+                    longitude: event.longitude,
+                    description: event.description,
+                    time: event.time,
+                    date: event.date,
+                  })
+                }
+
                  key={event._id}
                  title={event.title}
                  description={event.description}
-               />
+               >
+             </MapView.Marker>
              ))}
            </ MapView>
 
-           <CardSection style={styles.bottomNavigation}>
+
+           <View style={styles.photoContainer}>
+             <TouchableOpacity
+               onPress={() => navigate('UserShowContainer')}
+               >
+               <Image
+               style={styles.userPhoto}
+               source={{uri: `${user.avatar}`}}
+               />
+             </TouchableOpacity>
+           </View>
+
+           <View style={styles.bottomNavigation}>
               {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
               {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
-            </CardSection>
+            </View>
 
            <Modal
             animationType={"slide"}
@@ -148,6 +177,19 @@ class LandingPage extends React.Component {
 
 
 const styles = StyleSheet.create({
+  userPhoto: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+  },
+  photoContainer: {
+    position: 'absolute',
+    top: '3%',
+    left: '3%',
+    right: '85%',
+    bottom: '90%',
+    zIndex: 1,
+  },
   container: {
     position: 'absolute',
     top: 0,
@@ -162,7 +204,8 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: '10%',
+    bottom: 0,
+    zIndex: -1,
   },
   modalFullScreen: {
     height: '100%',
@@ -183,6 +226,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     borderRadius: 3,
+    backgroundColor: 'white',
     borderColor: '#00AB6C',
     alignContent: 'center',
     justifyContent: 'center',
@@ -204,10 +248,9 @@ const styles = StyleSheet.create({
   },
   bottomNavigation: {
     position: 'absolute',
-    top: '90%',
-    left: 0,
-    right: 0,
-    bottom: 0,
+    zIndex: 1,
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
   },
   createButton: {
     alignSelf: 'center',

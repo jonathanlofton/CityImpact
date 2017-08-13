@@ -4,6 +4,7 @@ import { Facebook, Google } from 'expo';
 import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
 import { fbConfig, googleConfig } from '../../util/host_util';
+import { NavigationActions } from 'react-navigation'
 
 class SessionForm extends Component {
 
@@ -16,7 +17,7 @@ class SessionForm extends Component {
       password: "",
       login: true
     };
-
+    this.reset = this.reset.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -26,6 +27,16 @@ class SessionForm extends Component {
     } else {
       this.loginWithGoogle();
     }
+  }
+
+  reset(){
+    return this.props.navigation.dispatch(NavigationActions.reset(
+      {
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'LandingPage'})
+        ]
+      }));
   }
 
   async loginWithFacebook() {
@@ -40,7 +51,7 @@ class SessionForm extends Component {
         { cancelable: false }
       );
       this.props.loginUser({provider: 'facebook', token});
-      navigate('LandingPage');
+      this.reset();
     }
   }
 
@@ -59,7 +70,7 @@ class SessionForm extends Component {
           { cancelable: false }
         );
         this.props.loginUser({provider: 'google', token: accessToken});
-        navigate('LandingPage');
+        this.reset();
       }
     } catch (e) {
       Alert.alert(
@@ -80,24 +91,30 @@ class SessionForm extends Component {
           <ScrollView scrollEnabled={false} >
             <Text style={style.appTitle}>CityImpact</Text>
             <Card style={style.container}>
-              <CardSection>
+              <View>
                 <Input
                   onSubmitEditing={this.handleEditComplete}
                   placeholder="example@email.com"
                   label="email"
                 />
 
-              </CardSection>
-              <CardSection>
+              </View>
+              <View>
                 <Input
                   onSubmitEditing={this.handleEditComplete}
                   secureTextEntry
                   placeholder="password"
                   label="password"
                 />
-              </CardSection>
+              </View>
 
               <View style={style.buttons}>
+                <TouchableOpacity
+                  onPress={() => this.reset()}
+                  style={style.facebookStyle}
+                  >
+                  <Text style={style.facebookText}>Guest Login</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.handleLogin('google')}
                   style={style.buttonStyle}

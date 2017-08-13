@@ -6,4 +6,4 @@ export const fbConfig  = {
 
 export const googleConfig = {
   CLIENT_ID_IOS: '71042043336-00ritn6l8aan7vcl2u547gt1888iu34b.apps.googleusercontent.com'
-}
+};

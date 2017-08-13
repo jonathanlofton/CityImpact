@@ -41,7 +41,10 @@ export const loginWithAuth0 = async function (req, res) {
     return res.status(200).json({
       success: true,
       user: {
-        id: user._id
+        id: user._id,
+        name: user.fullName,
+        avatar: user.avatar,
+        email: user.email
       },
       token: `JWT ${createToken(user)}`,
     });
