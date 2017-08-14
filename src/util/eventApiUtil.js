@@ -30,7 +30,7 @@ export const createEvent = event => {
 export const updateEvent = data => {
   const { _id, attendees } = data;
   return axios({
-    method: 'PATCH',
+    method: 'PUT',
     url: `${HOST_URL}/api/events/${_id}`,
     data: {
       attendees

@@ -97,6 +97,8 @@ export const updateEvent = async (req, res) => {
   const { eventId } = req.params;
   const { attendees } = req.body;
 
+  console.log(`eventId ${eventId}`);
+
   if (!eventId) {
     return res.status(400).json({ error: true, message: 'No Event Id' });
   }
@@ -106,13 +108,13 @@ export const updateEvent = async (req, res) => {
 
     const event = await Event.findById(eventId);
 
-    event.update({ hostedEvents, joinedEvents })
-      .populate('attendees')
-      .exec(err => {
-        if (err) {
-          return handleError(err);
-        }
-      });
+    event.update({ attendees });
+      // .populate('attendees')
+      // .exec(err => {
+      //   if (err) {
+      //     return handleError(err);
+      //   }
+      // });
     return res.status(200).json({event});
   } catch (e) {
     return res.status(404).json({ error: true, message: 'Cannot update event' });

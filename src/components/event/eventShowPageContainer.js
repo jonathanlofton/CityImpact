@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import EventShowPage from './eventShowPage';
-import updateUser from '../../actions/sessionActions';
-import updateEvent from '../../actions/eventActions';
+import { updateUser } from '../../actions/sessionActions';
+import { updateEvent } from '../../actions/eventActions';
 
 const mapStateToProps = ({events, session}) => ({
   currentUser: session.currentUser,
   currentEvent: events.currentEvent
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateUser: user => dispatch(updateUser(user)),
   updateEvent: event => dispatch(updateEvent(event))
 });
