@@ -31,22 +31,23 @@ export const updateUser = async (req, res) => {
   }
 
   try {
-    console.log(`USERID ${userId}`);
+    console.log(`HOSTED ${hostedEvents}`);
 
     const user = User.findById(userId)
+
+    user.update({ hostedEvents, joinedEvents },
+      err => {
+        console.log(`IN HERE ${err}`);
+      })
       .populate('hostedEvents')
       .populate('joinedEvents')
       .exec(err => {
-      if (err) {
-        return handleError(err);
-      }
-    });
-    user.update(
-      {"_id": userId},
-      { hostedEvents, joinedEvents },
-      err => {
-        console.log(`IN HERE ${err}`);
+        if (err) {
+          return handleError(err);
+        }
       });
+      console.log(user);
+
 
 
     // const user = await User.update(
@@ -64,7 +65,7 @@ export const updateUser = async (req, res) => {
     //   });
     return res.status(200).json({user});
   } catch (e) {
-    return res.status(400).json({ error: true, message: 'Cannot update user' });
+    return res.status(404).json({ error: true, message: 'Cannot update user' });
   }
 };
 
@@ -81,13 +82,13 @@ export const loginWithAuth0 = async function (req, res) {
     }
 
     const user = await User.findOrCreate(userInfo)
-      .populate('hostedEvents')
-      .populate('joinedEvents')
-      .exec(err => {
-        if (err) {
-          return handleError(err);
-        }
-      });
+      // .populate('hostedEvents')
+      // .populate('joinedEvents')
+      // .exec(err => {
+      //   if (err) {
+      //     return handleError(err);
+      //   }
+      // });
 
     console.log(`logged in or created user: ${user}`);
 

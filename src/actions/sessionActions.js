@@ -15,6 +15,9 @@ export const loginUser = userData => dispatch => (
 
 export const updateUser = userData => dispatch => (
   SessionApiUtil.updateUser(userData).then(
-    data => dispatch(receiveCurrentUser(data.user)),
+    data => {
+      console.log(`DATA ${data}`);
+      dispatch(receiveCurrentUser(data.user));
+    },
     err => console.log(`from sessionAction: ${err}`)
 ));

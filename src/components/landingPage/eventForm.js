@@ -94,7 +94,7 @@ class EventForm extends React.Component {
       date: date,
       time: time,
       host: host
-    }).then((res) => {
+    }).then(res => {
         this.props.updateUser({
           id: host.id,
           hostedEvents: host.hostedEvents.concat([this.props.currentEvent._id]),
