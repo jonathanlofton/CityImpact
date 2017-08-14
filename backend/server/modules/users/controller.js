@@ -25,28 +25,43 @@ import { googleAuth } from '../../config/googleAuth';
 export const updateUser = async (req, res) => {
   const { userId } = req.params;
   const { hostedEvents, joinedEvents } = req.body;
-  console.log(req.body);
+
   if (!userId) {
     return res.status(400).json({ error: true, message: 'No User Id' });
   }
-  debugger;
+
   try {
     console.log(`USERID ${userId}`);
-    console.log(`UPDATE ${update.hostedEvents}`);
-    const user = await User.update(
-      {"id": userId},
-      { hostedEvents, joinedEvents },
-      err => {
-        console.log(err);
-        res.sendStatus(202);
-      })
+
+    const user = User.findById(userId)
       .populate('hostedEvents')
       .populate('joinedEvents')
       .exec(err => {
-        if (err) {
-          return handleError(err);
-        }
+      if (err) {
+        return handleError(err);
+      }
+    });
+    user.update(
+      {"_id": userId},
+      { hostedEvents, joinedEvents },
+      err => {
+        console.log(`IN HERE ${err}`);
       });
+
+
+    // const user = await User.update(
+    //   {"_id": userId},
+    //   { hostedEvents, joinedEvents },
+    //   err => {
+    //     console.log(`IN HERE ${err}`);
+    //   })
+    //   .populate('hostedEvents')
+    //   .populate('joinedEvents')
+    //   .exec(err => {
+    //     if (err) {
+    //       return handleError(err);
+    //     }
+    //   });
     return res.status(200).json({user});
   } catch (e) {
     return res.status(400).json({ error: true, message: 'Cannot update user' });

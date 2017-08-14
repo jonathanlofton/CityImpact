@@ -12,7 +12,7 @@ export const loginUser = data => (
 export const updateUser = data => {
   const { id, hostedEvents, joinedEvents } = data;
   return axios({
-    method: 'PATCH',
+    method: 'PUT',
     url: `${HOST_URL}/api/users/${id}`,
     data: {
       hostedEvents,
