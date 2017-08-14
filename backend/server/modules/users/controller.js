@@ -14,33 +14,20 @@ export const updateUser = async (req, res) => {
   try {
     console.log(`HOSTED ${hostedEvents}`);
 
-    const user = User.findById(userId)
+    const user = await User.findById(userId);
 
     user.update({ hostedEvents, joinedEvents },
       err => {
         console.log(`IN HERE ${err}`);
-      })
-      .populate('hostedEvents')
-      .populate('joinedEvents')
-      .exec(err => {
-        if (err) {
-          return handleError(err);
-        }
-      });
-
-    // const user = await User.update(
-    //   {"_id": userId},
-    //   { hostedEvents, joinedEvents },
-    //   err => {
-    //     console.log(`IN HERE ${err}`);
-    //   })
-    //   .populate('hostedEvents')
-    //   .populate('joinedEvents')
-    //   .exec(err => {
-    //     if (err) {
-    //       return handleError(err);
-    //     }
-    //   });
+      }
+    );
+      // .populate('hostedEvents')
+      // .populate('joinedEvents')
+      // .exec(err => {
+      //   if (err) {
+      //     return handleError(err);
+      //   }
+      // });
     return res.status(200).json({user});
   } catch (e) {
     return res.status(404).json({ error: true, message: 'Cannot update user' });

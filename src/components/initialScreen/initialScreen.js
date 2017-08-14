@@ -20,7 +20,7 @@ class InitialScreen extends Component {
         {
           index: 0,
           actions: [
-            NavigationActions.navigate({ routeName: 'LandingPage'})
+            NavigationActions.navigate({ routeName: 'SessionForm'})
           ]
         }));
     }
