@@ -29,6 +29,7 @@ class EventIndexItem extends React.Component {
      time: event.time,
      date: event.date,
      address: event.address,
+     hostName: event.host.fullName
     });
     this.toggleModal();
   }
@@ -78,7 +79,6 @@ class EventIndexItem extends React.Component {
           <View style={styles.information}>
             <Text style={styles.title}>{event.title}</Text>
             <Text>Description: {event.description}</Text>
-            <Text>Location: Your moms house</Text>
           </View>
           <View style={styles.photo}>
             <Image

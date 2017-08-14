@@ -81,6 +81,9 @@ class EventShowPage extends React.Component {
               {params.address}
             </Text>
             <Text style={{textAlign: 'center', margin: '5%'}}>
+              Host: {params.hostName}
+            </Text>
+            <Text style={{textAlign: 'center', margin: '5%'}}>
               {params.description}
             </Text>
 

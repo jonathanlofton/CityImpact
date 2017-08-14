@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Text, AsyncStorage, UIManager  } from 'react-native';
-import { persistStore } from 'redux-persist'
+import { persistStore } from 'redux-persist';
 import configureStore from './src/store/store';
 import Root from './src/root';
 import { requestAllEvents, receiveAllEvents, requestSingleEvent, createEvent } from './src/actions/eventActions';
@@ -32,7 +32,7 @@ export default class Entry extends Component {
     super(props);
     this.state = {
       ready: false
-    }
+    };
   }
 
   componentDidMount() {

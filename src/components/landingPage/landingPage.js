@@ -188,6 +188,7 @@ class LandingPage extends React.Component {
                     time: event.time,
                     date: event.date,
                     address: event.address,
+                    hostName: event.host.fullName
                   })
                 }
 
