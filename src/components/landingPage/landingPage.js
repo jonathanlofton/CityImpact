@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Modal, Image, TouchableOpacity, TouchableHighlight, Picker } from 'react-native';
 import { MapView } from 'expo';
 import { Button, Card, CardSection } from '../common';
+import { NavigationActions } from 'react-navigation';
 import Expo from 'expo';
+
 const markers = [];
 
 class LandingPage extends React.Component {
@@ -17,6 +19,7 @@ class LandingPage extends React.Component {
       location: null,
       errorMessage: null,
       modalVisible: false,
+      userModalVisible: false,
       latitude: null,
       longitude: null,
       markers: null,
@@ -25,7 +28,11 @@ class LandingPage extends React.Component {
     }
     this.mapPressLong = this.mapPressLong.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleUserModal = this.toggleUserModal.bind(this);
     this.navigateEventForm = this.navigateEventForm.bind(this);
+    this.navigateUserPage = this.navigateUserPage.bind(this);
+    this.navigateLogout = this.navigateLogout.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   componentWillMount() {
@@ -68,6 +75,10 @@ class LandingPage extends React.Component {
     this.setState({modalVisible: !this.state.modalVisible})
   }
 
+  toggleUserModal() {
+    this.setState({userModalVisible: !this.state.userModalVisible})
+  }
+
   _renderTouchableOpacity = (text, onPress = null, buttonStyle = null, textStyle = null) => (
     <TouchableOpacity
       style={buttonStyle}
@@ -76,6 +87,7 @@ class LandingPage extends React.Component {
       <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   )
+
   navigateEventForm() {
     const { navigate } = this.props.navigation
     navigate('EventForm', {
@@ -84,14 +96,52 @@ class LandingPage extends React.Component {
     });
     this.toggleModal();
   }
+
+  navigateUserPage() {
+    const { navigate } = this.props.navigation
+    navigate('UserShowContainer')
+    this.toggleUserModal();
+  }
+
+  navigateLogout() {
+    const { navigate } = this.props.navigation
+    this.reset();
+
+    this.props.logoutUser();
+    this.toggleUserModal();
+  }
+
+  reset(){
+    return this.props.navigation.dispatch(NavigationActions.reset(
+      {
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'SessionForm'})
+        ]
+      }));
+  }
   _renderModalContent() {
 
     return(
-      <View style={styles.modalFullScreen}>
-        <View style={styles.modalContent}>
-          {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, styles.createButton, styles.createButtonText)}
-          {this._renderTouchableOpacity("Report Issue", null, styles.createButton, styles.createButtonText)}
-          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton, styles.modalButtonText)}
+      <View style={eventModal.container}>
+        <View style={eventModal.content}>
+          {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, eventModal.button, button.text)}
+          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton)}
+        </View>
+      </View>
+    );
+  }
+
+  _renderUserModalContent() {
+
+    return(
+      <View style={userModal.container}>
+        <View style={userModal.content}>
+          <View style={{ marginLeft: '10%', flexDirection: 'row'}}>
+            {this._renderTouchableOpacity("Profile", () => {this.navigateUserPage()}, userModal.userButton, userModal.userButtonText)}
+            {this._renderTouchableOpacity("Logout", () => {this.navigateLogout()}, userModal.userButton, userModal.userButtonText)}
+            {this._renderTouchableOpacity("X", () => {this.toggleUserModal()}, userModal.userButton, userModal.userCloseText)}
+          </View>
         </View>
       </View>
     );
@@ -100,6 +150,10 @@ class LandingPage extends React.Component {
   render() {
     if (!this.state.location) {
       return null
+    }
+
+    if(!this.props.currentUser) {
+      return null;
     }
 
 
@@ -148,7 +202,7 @@ class LandingPage extends React.Component {
 
            <View style={styles.photoContainer}>
              <TouchableOpacity
-               onPress={() => navigate('UserShowContainer')}
+               onPress={() => this.toggleUserModal()}
                >
                <Image
                style={styles.userPhoto}
@@ -157,18 +211,26 @@ class LandingPage extends React.Component {
              </TouchableOpacity>
            </View>
 
-           <View style={styles.bottomNavigation}>
-              {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
-              {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
-            </View>
+          <View style={styles.bottomNavigation}>
+            {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), button.style, button.text)}
+            {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'), button.style, button.text)}
+          </View>
 
            <Modal
-            animationType={"slide"}
+            animationType={"fade"}
             transparent={true}
             visible={this.state.modalVisible}
             onRequestClose={() => {this.setState({modalVisible: false})}}
             >
             {this._renderModalContent()}
+            </Modal>
+           <Modal
+            animationType={"fade"}
+            transparent={true}
+            visible={this.state.userModalVisible}
+            onRequestClose={() => {this.setState({userModalVisible: false})}}
+            >
+            {this._renderUserModalContent()}
             </Modal>
         </View>
 
@@ -177,21 +239,17 @@ class LandingPage extends React.Component {
   }
 }
 
-
-
-const styles = StyleSheet.create({
-  userPhoto: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+const userModal = StyleSheet.create({
+  userCloseText: {
+    color: 'white',
+    marginTop: 10,
+    marginLeft: 30,
+    fontSize: 18,
   },
-  photoContainer: {
-    position: 'absolute',
-    top: '3%',
-    left: '3%',
-    right: '85%',
-    bottom: '90%',
-    zIndex: 1,
+  userButtonText: {
+    color: 'white',
+    margin: 10,
+    fontSize: 16,
   },
   container: {
     position: 'absolute',
@@ -199,33 +257,52 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
   },
-  map: {
+  content: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
-  },
-  modalFullScreen: {
+    backgroundColor: 'rgba(30,30,30,0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    marginLeft: 10,
+    borderRadius: 30,
+    width: '75%',
+    height: 60,
+  }
+});
+
+const eventModal = StyleSheet.create({
+  container: {
     height: '100%',
     width: '100%',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalContent: {
+  content: {
     backgroundColor: 'white',
-    borderRadius: 5,
+    borderRadius: 10,
     width: '60%',
-    height: '30%',
+    height: '20%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonStyle: {
+  button: {
+    alignSelf: 'center',
+    borderRadius: 3,
+    backgroundColor: 'white',
+    borderColor: '#00AB6C',
+    alignContent: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    height: 40,
+    width: '80%',
+    marginBottom: '10%',
+  },
+});
+
+const button = StyleSheet.create({
+  style: {
     flex: 1,
     alignSelf: 'center',
     borderRadius: 3,
@@ -238,37 +315,51 @@ const styles = StyleSheet.create({
     height: 40,
     width: '100%',
   },
-  buttonText: {
-    alignSelf: 'center',
+  text: {
     color: '#00AB6C',
-    fontSize: 16,
-    padding: 5
+    textAlign: 'center',
+    fontSize: 18,
+  }
+});
+
+const styles = StyleSheet.create({
+  userPhoto: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginBottom: '90%',
   },
-  cardSection: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  photoContainer: {
+    position: 'relative',
+    marginTop: 20,
+    marginLeft: 10,
+    width: 60,
+    height: 60,
+  },
+  container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   bottomNavigation: {
-    position: 'absolute',
-    zIndex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
+    position: 'absolute',
+    top: '90%',
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
-  createButton: {
-    alignSelf: 'center',
-    borderWidth: 2,
-    borderColor: '#00AB6C',
-    borderRadius: 5,
-    width: '70%',
-    padding: 10,
-    margin: '2%',
-  },
-  createButtonText: {
-    fontSize: 18,
-    alignSelf: 'center',
-    color: '#00AB6C',
-  }
 });
 
 export default LandingPage;

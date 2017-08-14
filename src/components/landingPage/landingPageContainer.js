@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { requestAllEvents, requestSingleEvent, createEvent } from '../../actions/eventActions';
 import { selectAllEvents } from '../../reducers/selectors';
-import { receiveCurrentUser, updateUser } from '../../actions/sessionActions';
+import { receiveCurrentUser, logoutUser } from '../../actions/sessionActions';
 import LandingPage from './landingPage';
 
 
@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   requestSingleEvent: event => dispatch(requestSingleEvent({ event })),
   createEvent: event => dispatch(createEvent(event)),
   receiveCurrentUser: user => dispatch(receiveCurrentUser(user)),
-  updateUser: user => dispatch(updateUser(user)),
+  logoutUser: () => dispatch(logoutUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

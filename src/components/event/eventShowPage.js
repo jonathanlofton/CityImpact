@@ -65,32 +65,42 @@ class EventShowPage extends React.Component {
            description={params.description}
          />
        </MapView>
-        <View>
-          <View style={modalStyle.dateTitle}>
-            <Text style={modalStyle.showTitle}>{params.title}</Text>
-            <Text style={modalStyle.date}>{params.date}</Text>
-            <Text style={modalStyle.date}>{params.time}</Text>
-            <Text>{params.address}</Text>
+        <View style={showInfo.container}>
+
+            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+              <View style={showInfo.dateTime}>
+                <Text style={[showInfo.showDetails, showInfo.date]}>{params.date}</Text>
+                <Text style={showInfo.showDetails}>{params.time}</Text>
+              </View>
+
+              <Text style={showInfo.title}>{params.title}</Text>
+
+            </View>
+
+            <Text style={[showInfo.showDetails, showInfo.address]}>
+              {params.address}
+            </Text>
+            <Text style={{textAlign: 'center', margin: '5%'}}>
+              {params.description}
+            </Text>
+
+
+          <View style={showInfo.joinedView}>
           </View>
-          <Text style={modalStyle.description}>{params.description}</Text>
-
-          <View style={modalStyle.joinedView}>
-            <Text>THIS IS WHERE COMMENTS OR PEOPLE THAT HAVE JOINED WILL BE VIEWED</Text>
-          </View>
 
 
-          <View style={modalStyle.modalButtonContainer}>
+          <View style={button.modalButtonContainer}>
             <TouchableOpacity
-              style={modalStyle.backButton}
+              style={[button.button]}
               onPress={() => this.reset()}
               >
-              <Text style={modalStyle.backButtonText}>Close</Text>
+              <Text style={button.buttonText}>Close</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={modalStyle.backButton}
+              style={button.button}
               onPress={() => this.reset()}
               >
-              <Text style={modalStyle.joinButtonText}>Join</Text>
+              <Text style={button.buttonText}>Join</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -122,47 +132,60 @@ const styles = StyleSheet.create({
   },
 });
 
-const modalStyle = StyleSheet.create({
-  dateTitle: {
-    marginTop: 20,
+const showInfo = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    top: '30%',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  dateTime: {
+    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '3%',
+    marginLeft: '3%',
+    marginRight: '3%',
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    marginTop: '2%',
+  },
+  showDetails: {
+    textAlign: 'center',
+  },
+  address: {
+    width: '60%',
+    alignSelf: 'center',
+    color: 'grey',
   },
   date: {
-    marginRight: 10,
+    fontWeight: '600',
   },
-  description: {
+  showDescription: {
     marginTop: '10%',
     marginBottom: '10%',
     width: '70%',
     alignSelf: 'center',
   },
   joinedView: {
-    height: '30%',
+    height: '50%',
     width: '70%',
     alignSelf: 'center',
   },
-  fullScreen: {
-    marginTop: 30,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'white',
-    alignItems: 'center',
-  },
-  showTitle: {
-    fontSize: 35,
-    fontWeight: 'bold',
-  },
+});
+
+const button = StyleSheet.create({
   modalButtonContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent: 'space-between',
-
   },
-  backButton: {
-    alignSelf: 'flex-end',
+  button: {
     width: '45%',
   },
-  backButtonText: {
+  buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'green',
@@ -172,14 +195,4 @@ const modalStyle = StyleSheet.create({
     padding: 10,
     textAlign: 'center',
   },
-  joinButtonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'green',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#d6d7da',
-    padding: 10,
-    textAlign: 'center',
-  }
 });
