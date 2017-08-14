@@ -1,9 +1,9 @@
 import Event from './model';
 
 export const createEvent = async (req, res) => {
-  const { title, description, latitude, longitude, time, date, host } = req.body;
+  const { title, description, latitude, longitude, time, date, host, address } = req.body;
   const newEvent = new Event({
-    title, description, latitude, longitude, time, date, host: host.id
+    title, description, latitude, longitude, time, date, address, host: host.id
   });
   console.log(`NEW EVENT ${newEvent}`);
   try {

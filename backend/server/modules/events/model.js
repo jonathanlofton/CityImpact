@@ -17,6 +17,9 @@ const EventSchema = new Schema({
     type: Number,
     // required: true
   },
+  address: {
+    type: String,
+  },
   date: {
     type: String,
     // required: true
