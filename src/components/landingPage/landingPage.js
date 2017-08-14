@@ -124,10 +124,10 @@ class LandingPage extends React.Component {
   _renderModalContent() {
 
     return(
-      <View style={styles.modalFullScreen}>
-        <View style={styles.modalContent}>
-          {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, styles.createButton, styles.createButtonText)}
-          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton, styles.modalButtonText)}
+      <View style={eventModal.container}>
+        <View style={eventModal.content}>
+          {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, eventModal.button, button.text)}
+          {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton)}
         </View>
       </View>
     );
@@ -136,11 +136,13 @@ class LandingPage extends React.Component {
   _renderUserModalContent() {
 
     return(
-      <View style={userModal.modalFullScreen}>
-        <View style={userModal.modalContent}>
-          {this._renderTouchableOpacity("Your Profile", () => {this.navigateUserPage()}, userModal.userButton, userModal.userButtonText)}
-          {this._renderTouchableOpacity("Logout", () => {this.navigateLogout()}, userModal.userButton, userModal.userButtonText)}
-          {this._renderTouchableOpacity("Close Modal", () => {this.toggleUserModal()}, styles.modalButton, styles.modalButtonText)}
+      <View style={userModal.container}>
+        <View style={userModal.content}>
+          <View style={{ marginLeft: '10%', flexDirection: 'row'}}>
+            {this._renderTouchableOpacity("Profile", () => {this.navigateUserPage()}, userModal.userButton, userModal.userButtonText)}
+            {this._renderTouchableOpacity("Logout", () => {this.navigateLogout()}, userModal.userButton, userModal.userButtonText)}
+            {this._renderTouchableOpacity("X", () => {this.toggleUserModal()}, userModal.userButton, userModal.userCloseText)}
+          </View>
         </View>
       </View>
     );
@@ -210,10 +212,10 @@ class LandingPage extends React.Component {
              </TouchableOpacity>
            </View>
 
-           <View style={styles.bottomNavigation}>
-              {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
-              {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'), styles.buttonStyle, styles.buttonText)}
-            </View>
+          <View style={styles.bottomNavigation}>
+            {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), button.style, button.text)}
+            {this._renderTouchableOpacity("Issues Index", () => navigate('EventIndexContainer'), button.style, button.text)}
+          </View>
 
            <Modal
             animationType={"fade"}
@@ -239,44 +241,103 @@ class LandingPage extends React.Component {
 }
 
 const userModal = StyleSheet.create({
-  userButton: {
-
+  userCloseText: {
+    color: 'white',
+    marginTop: 10,
+    marginLeft: 30,
+    fontSize: 18,
   },
   userButtonText: {
-
+    color: 'white',
+    margin: 10,
+    fontSize: 16,
   },
-  modalFullScreen: {
-    // backgroundColor: 'white',
-    flex: 1,
-    flexDirection: 'row',
+  container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -3
+  },
+  content: {
+    backgroundColor: 'rgba(3,3,3,0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    marginLeft: 10,
+    borderRadius: 30,
+    width: '75%',
+    height: 60,
+  }
+});
+
+const eventModal = StyleSheet.create({
+  container: {
     height: '100%',
     width: '100%',
-  },
-  modalContent: {
     flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 40,
+    alignItems: 'center',
+  },
+  content: {
+    backgroundColor: 'white',
+    borderRadius: 10,
     width: '60%',
-    height: '30%',
-    // alignItems: 'center',
+    height: '20%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    alignSelf: 'center',
+    borderRadius: 3,
+    backgroundColor: 'white',
+    borderColor: '#00AB6C',
+    alignContent: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    height: 40,
+    width: '80%',
+    marginBottom: '10%',
+  },
+});
+
+const button = StyleSheet.create({
+  style: {
+    flex: 1,
+    alignSelf: 'center',
+    borderRadius: 3,
+    backgroundColor: 'white',
+    borderColor: '#00AB6C',
+    alignContent: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    margin: 10,
+    height: 40,
+    width: '100%',
+  },
+  text: {
+    color: '#00AB6C',
+    textAlign: 'center',
+    fontSize: 18,
   }
-
-})
-
+});
 
 const styles = StyleSheet.create({
   userPhoto: {
     width: 60,
     height: 60,
     borderRadius: 30,
+    zIndex: 1,
   },
   photoContainer: {
     position: 'absolute',
-    top: '3%',
-    left: '3%',
+    top: 0,
+    left: 0,
     right: '85%',
     bottom: '90%',
+    marginTop: 20,
+    marginLeft: 10,
     zIndex: 1,
   },
   container: {
@@ -296,37 +357,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: -1,
   },
-  modalFullScreen: {
-    height: '100%',
-    width: '100%',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    width: '60%',
-    height: '30%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonStyle: {
-    flex: 1,
-    alignSelf: 'center',
-    borderRadius: 3,
-    backgroundColor: 'white',
-    borderColor: '#00AB6C',
-    alignContent: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    margin: 10,
-    height: 40,
-    width: '100%',
-  },
-  modalButton: {
 
-  },
+
   modalButtonText: {
     position: 'absolute',
     marginTop: '10%',
