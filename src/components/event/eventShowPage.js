@@ -66,14 +66,24 @@ class EventShowPage extends React.Component {
            description={params.description}
          />
        </MapView>
-        <View style={showInfo.showInfo}>
-          <View style={showInfo.dateTitle}>
-            <Text style={showInfo.showTitle}>{params.title}</Text>
-            <Text style={[showInfo.showDetails, showInfo.address]}>{params.address}</Text>
-            <Text style={[showInfo.showDetails, showInfo.date]}>{params.date}</Text>
-            <Text style={showInfo.showDetails}>{params.time}</Text>
-            <Text style={showInfo.showDescription}>{params.description}</Text>
-          </View>
+        <View style={showInfo.container}>
+
+            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+              <View style={showInfo.dateTime}>
+                <Text style={[showInfo.showDetails, showInfo.date]}>{params.date}</Text>
+                <Text style={showInfo.showDetails}>{params.time}</Text>
+              </View>
+
+              <Text style={showInfo.title}>{params.title}</Text>
+
+            </View>
+
+            <Text style={[showInfo.showDetails, showInfo.address]}>
+              {params.address}
+            </Text>
+            <Text style={{textAlign: 'center', margin: '5%'}}>
+              {params.description}
+            </Text>
 
 
           <View style={showInfo.joinedView}>
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
 });
 
 const showInfo = StyleSheet.create({
-  showInfo: {
+  container: {
     position: 'absolute',
     backgroundColor: 'white',
     top: '30%',
@@ -132,14 +142,15 @@ const showInfo = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  dateTitle: {
-    alignSelf: 'center',
-    width: '80%',
-    marginTop: '5%',
+  dateTime: {
+    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '3%',
+    marginLeft: '3%',
+    marginRight: '3%',
   },
-  showTitle: {
-    fontSize: 35,
+  title: {
+    fontSize: 40,
     fontWeight: 'bold',
     marginTop: '2%',
   },
@@ -147,7 +158,9 @@ const showInfo = StyleSheet.create({
     textAlign: 'center',
   },
   address: {
-    margin: '2%',
+    width: '60%',
+    alignSelf: 'center',
+    color: 'grey',
   },
   date: {
     fontWeight: '600',
@@ -159,7 +172,7 @@ const showInfo = StyleSheet.create({
     alignSelf: 'center',
   },
   joinedView: {
-    height: '30%',
+    height: '50%',
     width: '70%',
     alignSelf: 'center',
   },
