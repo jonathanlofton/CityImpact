@@ -3,25 +3,6 @@ import { createToken } from '../../config/createToken';
 import { facebookAuth } from '../../config/facebookAuth';
 import { googleAuth } from '../../config/googleAuth';
 
-// export const createUser = async (req, res) => {
-//   const { username, email, passwordDigest } = req.body;
-//   const newUser = new User({ username, email, passwordDigest });
-//
-//   try {
-//     return res.status(201).json({ user: await newUser.save() });
-//   } catch (e) {
-//     return res.status(e.status).json({ error: true, message: 'Error with User Sign Up' });
-//   }
-// };
-//
-// export const getAllUsers = async (req, res) => {
-//   try {
-//     return res.status(200).json({ users: await User.find({})});
-//   } catch (e) {
-//     return res.status(e.status).json({ error: true, message: 'Error with Users Fetch' });
-//   }
-// };
-
 export const updateUser = async (req, res) => {
   const { userId } = req.params;
   const { hostedEvents, joinedEvents } = req.body;
@@ -46,9 +27,6 @@ export const updateUser = async (req, res) => {
           return handleError(err);
         }
       });
-      console.log(user);
-
-
 
     // const user = await User.update(
     //   {"_id": userId},
@@ -82,13 +60,6 @@ export const loginWithAuth0 = async function (req, res) {
     }
 
     const user = await User.findOrCreate(userInfo)
-      // .populate('hostedEvents')
-      // .populate('joinedEvents')
-      // .exec(err => {
-      //   if (err) {
-      //     return handleError(err);
-      //   }
-      // });
 
     console.log(`logged in or created user: ${user}`);
 

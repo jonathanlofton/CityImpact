@@ -14,13 +14,7 @@ export const receiveSingleEvent = event => ({
   event
 });
 
-// export const receiveHostedEvent = eventPromise => ({
-//   type: RECEIVE_HOSTED_EVENT,
-//   eventPromise
-// })
-
 export const requestAllEvents = () => dispatch => (
-
   EventApiUtil.fetchAllEvents().then(
     ({data}) => dispatch(receiveAllEvents(data)),
     err => console.log(`from eventAction ${err}`)

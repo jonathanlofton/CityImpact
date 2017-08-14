@@ -11,13 +11,12 @@ export const loginUser = userData => dispatch => (
   SessionApiUtil.loginUser(userData).then(
     ({data}) => dispatch(receiveCurrentUser(data.user)),
     err => console.log(`from sessionAction: ${err}`)
+  )
 ));
 
 export const updateUser = userData => dispatch => (
   SessionApiUtil.updateUser(userData).then(
-    data => {
-      console.log(`DATA ${data}`);
-      dispatch(receiveCurrentUser(data.user));
-    },
+    data => dispatch(receiveCurrentUser(data.user)),
     err => console.log(`from sessionAction: ${err}`)
+  )
 ));

@@ -25,11 +25,6 @@ const EventReducer = (state = defaultState, action) => {
       newState.entities[event._id] = event;
       newState.currentEvent = event;
       return newState;
-    // case RECEIVE_HOSTED_EVENT:
-    //   const event = action.event;
-    //   newState = merge({}, state);
-    //   newState.entities[event._id] = event;
-    //   return newState;
     default:
       return state;
   }
