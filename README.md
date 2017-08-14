@@ -21,7 +21,10 @@ The mission is to make it effortless for someone to get involved with their resp
   Third Party APIS involved:
 
    + [React Native Geocoding](https://developers.google.com/maps/documentation/javascript/geocoding)
-      - An event is made with latitude longitutde, this allows for events to have an address associated with them as well.
+      - An event is made with latitude longitude, this allows for events to have an address associated with them as well.
+
+    ![alt text](./docs/Mapview.png)
+
 
 ## Features
   ### OAuth integration
@@ -71,8 +74,7 @@ The mission is to make it effortless for someone to get involved with their resp
   }
 ```
 
-  ### Join Events
-   +
+  ![alt text](./docs/Eventshow.png)
 
  <p align="center">
  <img src = "image/path/example">
