@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Facebook, Google } from 'expo';
-import { Text, Alert, View, TextInput, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
+import { Text, Alert, View, TextInput, Image, TouchableOpacity, StackNavigator, ScrollView } from 'react-native';
 import { CardSection, Card, Button, Input } from '../common';
 import { fbConfig, googleConfig } from '../../util/host_util';
 import { NavigationActions } from 'react-navigation'
@@ -100,31 +100,34 @@ class SessionForm extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.login) {
       return(
-        <View style={style.container}>
+          <Image
+            source={{uri: 'http://res.cloudinary.com/jlofton/image/upload/v1502687383/backgroundCity_fgcr8y.jpg'}}
+            style={style.background}
+            >
             <View style={style.sessionContent}>
               <Text style={style.appTitle}>CityImpact</Text>
               <View style={style.buttons}>
                 <TouchableOpacity
                   onPress={() => this.handleDemoLogin()}
-                  style={style.guestStyle}
+                  style={[style.buttonStyle, style.guestStyle]}
                   >
-                  <Text style={style.guestText}>Guest Login</Text>
+                  <Text style={[style.buttonText, style.guestText]}>Guest Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.handleLogin('google')}
-                  style={style.googleStyle}
+                  style={[style.buttonStyle, style.googleStyle]}
                   >
-                  <Text style={style.googleText}>Google Log In</Text>
+                  <Text style={[style.buttonText, style.googleText]}>Google Log In</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.handleLogin('facebook')}
-                  style={style.facebookStyle}
+                  style={[style.buttonStyle, style.facebookStyle]}
                   >
-                  <Text style={style.facebookText}>Facebook Log In</Text>
+                  <Text style={[style.buttonText, style.facebookText]}>Facebook Log In</Text>
                 </TouchableOpacity>
               </View>
             </View>
-        </View>
+          </Image>
       );
     }
   }
@@ -133,71 +136,49 @@ class SessionForm extends Component {
 export default SessionForm;
 
   const style = {
-    guestStyle: {
+    background: {
+      flex: 1,
+      width: null,
+      height: null,
+    },
+    sessionContent: {
+      marginTop: '50%',
+    },
+    buttonStyle: {
       alignSelf: 'center',
       borderRadius: 3,
       alignContent: 'center',
       justifyContent: 'center',
       borderWidth: 2,
-      borderColor: '#81b71a',
       margin: 10,
       height: 60,
       width: '70%'
     },
-    guestText: {
+    buttonText: {
       alignSelf: 'center',
-      color: '#81b71a',
       fontSize: 20,
-      padding: 15
+      padding: 15,
+      color: 'white'
+    },
+    guestStyle: {
+      backgroundColor: '#81b71a',
+      borderColor: '#81b71a',
     },
     facebookStyle: {
-      alignSelf: 'center',
-      borderRadius: 3,
-      alignContent: 'center',
-      justifyContent: 'center',
-      borderWidth: 2,
+      backgroundColor: '#3b5998',
       borderColor: '#3b5998',
-      margin: 10,
-      height: 60,
-      width: '70%'
-    },
-    facebookText: {
-      alignSelf: 'center',
-      color: '#3b5998',
-      fontSize: 20,
-      padding: 15
     },
     googleStyle: {
-      alignSelf: 'center',
-      borderRadius: 3,
-      alignContent: 'center',
-      justifyContent: 'center',
-      borderWidth: 2,
+      backgroundColor: '#d34836',
       borderColor: '#d34836',
-      margin: 10,
-      height: 60,
-      width: '70%'
-    },
-    googleText: {
-      alignSelf: 'center',
-      color: '#d34836',
-      fontSize: 20,
-      padding: 15
     },
     appTitle: {
+      backgroundColor: 'transparent',
       fontSize: 40,
-      fontWeight: '500',
+      color: 'white',
+      fontWeight: '900',
       textAlign: 'center',
       marginBottom: '10%',
-    },
-    container: {
-      backgroundColor: 'white',
-      justifyContent: 'center',
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
     },
   };
 
