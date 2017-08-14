@@ -26,3 +26,14 @@ export const createEvent = event => {
     data: event
   });
 };
+
+export const updateEvent = data => {
+  const { _id, attendees } = data;
+  return axios({
+    method: 'PATCH',
+    url: `${HOST_URL}/api/events/${_id}`,
+    data: {
+      attendees
+    }
+  });
+};

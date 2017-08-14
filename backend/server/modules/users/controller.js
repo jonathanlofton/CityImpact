@@ -16,11 +16,7 @@ export const updateUser = async (req, res) => {
 
     const user = await User.findById(userId);
 
-    user.update({ hostedEvents, joinedEvents },
-      err => {
-        console.log(`IN HERE ${err}`);
-      }
-    );
+    user.update({ hostedEvents, joinedEvents });
       // .populate('hostedEvents')
       // .populate('joinedEvents')
       // .exec(err => {

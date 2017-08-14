@@ -6,7 +6,7 @@ import LandingPage from '../components/landingPage/landingPage';
 import EventFormContainer from '../components/landingPage/eventFormContainer';
 import LandingPageContainer from '../components/landingPage/landingPageContainer';
 import EventIndexContainer from '../components/event/eventIndexContainer';
-import EventShowPage from '../components/event/eventShowPage';
+import EventShowPageContainer from '../components/event/eventShowPageContainer';
 import UserShowContainer from '../components/user/userShowContainer';
 import InitialScreenContainer from '../components/initialScreen/initialScreenContainer';
 
@@ -25,7 +25,7 @@ const LandingNavigator = StackNavigator({
     screen: EventFormContainer,
   },
   EventShowPage: {
-    screen: EventShowPage,
+    screen: EventShowPageContainer,
   },
   UserShowContainer: {
     screen: UserShowContainer,

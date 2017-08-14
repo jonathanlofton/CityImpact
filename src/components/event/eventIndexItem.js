@@ -19,16 +19,18 @@ class EventIndexItem extends React.Component {
   }
 
   navigateShowPage() {
-    // const { navigate } = this.props.navigation
     const { event } = this.props
-    // console.log(event);
-    this.props.navigator.navigate('EventShowPage', {title: event.title,
-     latitude: event.latitude,
-     longitude: event.longitude,
-     description: event.description,
-     time: event.time,
-     date: event.date,
-     address: event.address,
+    this.props.navigator.navigate('EventShowPage', {
+      _id: event._id,
+      title: event.title,
+      latitude: event.latitude,
+      longitude: event.longitude,
+      description: event.description,
+      time: event.time,
+      date: event.date,
+      address: event.address,
+      host: event.host,
+      attendees: event.attendees
     });
     this.toggleModal();
   }
