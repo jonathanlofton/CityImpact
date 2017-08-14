@@ -9,6 +9,6 @@ routes.post('/users/auth0', UserController.loginWithAuth0);
 // routes.get('/users/seed', UserController.seedEvents);
 
 // routes.get('/users/:userId', UserController.getUser);
-routes.put('/users/:userId', UserController.updateUser);
+routes.patch('/users/:userId', UserController.updateUser);
 
 export default routes;
