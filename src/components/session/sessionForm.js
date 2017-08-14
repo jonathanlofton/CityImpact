@@ -23,6 +23,10 @@ class SessionForm extends Component {
     this.handleDemoLogin = this.handleDemoLogin.bind(this);
   }
 
+  componentDidMount() {
+    this.props.requestAllEvents;
+  }
+
   handleLogin(name) {
     if (name === 'facebook') {
       this.loginWithFacebook();
@@ -96,8 +100,25 @@ class SessionForm extends Component {
 
 
   render() {
-    console.log(this.props.navigation);
+
+    console.log(this.props);
     const { navigate } = this.props.navigation;
+    if (this.props.currentUser) {
+      return (
+        <View style={style.container}>
+          <View style={style.sessionContent}>
+            <Text style={style.appTitle}>CityImpact</Text>
+            <Text style={{alignSelf: 'center'}}>You're already logged in, go:</Text>
+          <TouchableOpacity
+            onPress={() => this.reset()}
+            style={style.guestStyle}
+            >
+            <Text style={style.guestText}>Back to App</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
+      )
+    }
     if (this.state.login) {
       return(
         <View style={style.container}>
