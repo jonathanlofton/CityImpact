@@ -3,6 +3,7 @@ import { createToken } from '../../config/createToken';
 import { facebookAuth } from '../../config/facebookAuth';
 import { googleAuth } from '../../config/googleAuth';
 
+
 export const updateUser = async (req, res) => {
   const { userId } = req.params;
   const { hostedEvents, joinedEvents } = req.body;
@@ -14,20 +15,20 @@ export const updateUser = async (req, res) => {
   try {
     console.log(`HOSTED ${hostedEvents}`);
 
-    const user = User.findById(userId)
+    const user = await User.findById(userId)
 
     user.update({ hostedEvents, joinedEvents },
       err => {
         console.log(`IN HERE ${err}`);
       })
-      .populate('hostedEvents')
-      .populate('joinedEvents')
+      .populate('hostedEvents', 'joinedEvents')
+      // .populate('joinedEvents')
       .exec(err => {
         if (err) {
           return handleError(err);
         }
       });
-
+      console.log(user);
     // const user = await User.update(
     //   {"_id": userId},
     //   { hostedEvents, joinedEvents },
@@ -60,6 +61,8 @@ export const loginWithAuth0 = async function (req, res) {
     }
 
     const user = await User.findOrCreate(userInfo)
+
+
 
     console.log(`logged in or created user: ${user}`);
 

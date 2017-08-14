@@ -22,6 +22,7 @@ export const getAllEvents = async (req, res) => {
           return handleError(err);
         }
       });
+      // console.log(events);
     return res.status(200).json(events)
   } catch (e) {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
