@@ -12,15 +12,14 @@ class EventShowPage extends React.Component {
     this.reset = this.reset.bind(this);
   }
 
-  reset(){
-    return this.props.navigation.dispatch(NavigationActions.reset(
-      {
-        index: 1,
-        actions: [
-          NavigationActions.navigate({ routeName: 'LandingPage'}),
-          NavigationActions.navigate({ routeName: 'EventIndexContainer'})
-        ]
-      }));
+  reset() {
+    return this.props.navigation.dispatch(NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'LandingPage'}),
+        NavigationActions.navigate({ routeName: 'EventIndexContainer'})
+      ]
+    }));
   }
 
   componentWillMount() {

@@ -13,7 +13,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch"
+    "test": "node node_modules/jest/bin/jest.js --watch",
+    "react-devtools": "react-devtools"
   },
   "jest": {
     "preset": "jest-expo"
@@ -25,6 +26,7 @@
     "expo": "^19.0.0",
     "from": "^0.1.7",
     "react": "16.0.0-alpha.12",
+    "react-devtools": "^2.5.0",
     "react-native": "^0.46.1",
     "react-native-geocoding": "^0.2.0",
     "react-native-maps": "^0.15.3",

@@ -39,13 +39,13 @@ class LandingPage extends React.Component {
     this.props.requestAllEvents();
   }
   componentDidMount(){
-    this.props.requestAllEvents();
+    // this.props.requestAllEvents();
     this._getLocationAsync();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.user !== nextProps.user) {
-      this.props.receiveCurrentUser(nextProps.user);
+    if (this.props.currentUser !== nextProps.currentUser) {
+      this.props.receiveCurrentUser(nextProps.currentUser);
     }
   }
 
@@ -65,9 +65,9 @@ class LandingPage extends React.Component {
 
   mapPressLong(e) {
     //nativeEvent.coordinate will obtain coordinates
-    const long = e.nativeEvent.coordinate.longitude
+    const lon = e.nativeEvent.coordinate.longitude
     const lat = e.nativeEvent.coordinate.latitude
-    this.setState({latitude: lat, longitude: long })
+    this.setState({latitude: lat, longitude: lon })
     this.toggleModal()
   }
 
@@ -90,10 +90,9 @@ class LandingPage extends React.Component {
 
   navigateEventForm() {
     const { navigate } = this.props.navigation
-    navigate('EventForm', {createEvent: this.props.createEvent,
-     latitude: this.state.latitude,
-     longitude: this.state.longitude,
-     currentUser: this.props.currentUser,
+    navigate('EventForm', {
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
     });
     this.toggleModal();
   }
@@ -158,7 +157,7 @@ class LandingPage extends React.Component {
     }
 
 
-    const { events, user } = this.props;
+    const { events, currentUser } = this.props;
     const { navigate } = this.props.navigation;
 
      const long = this.state.location.coords.longitude;
@@ -192,13 +191,13 @@ class LandingPage extends React.Component {
                   })
                 }
 
-                 key={event._id}
+                 key={`event-${event._id}`}
                  title={event.title}
                  description={event.description}
                >
              </MapView.Marker>
              ))}
-           </ MapView>
+           </MapView>
 
 
            <View style={styles.photoContainer}>
@@ -207,7 +206,7 @@ class LandingPage extends React.Component {
                >
                <Image
                style={styles.userPhoto}
-               source={{uri: `${user.avatar}`}}
+               source={{uri: `${currentUser.avatar}`}}
                />
              </TouchableOpacity>
            </View>
@@ -224,7 +223,7 @@ class LandingPage extends React.Component {
             onRequestClose={() => {this.setState({modalVisible: false})}}
             >
             {this._renderModalContent()}
-            </ Modal>
+            </Modal>
            <Modal
             animationType={"fade"}
             transparent={true}
@@ -232,7 +231,7 @@ class LandingPage extends React.Component {
             onRequestClose={() => {this.setState({userModalVisible: false})}}
             >
             {this._renderUserModalContent()}
-            </ Modal>
+            </Modal>
         </View>
 
 

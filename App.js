@@ -5,7 +5,7 @@ import { persistStore } from 'redux-persist'
 import configureStore from './src/store/store';
 import Root from './src/root';
 import { requestAllEvents, receiveAllEvents, requestSingleEvent, createEvent } from './src/actions/eventActions';
-import { fetchAllEvents} from './src/util/eventApiUtil';
+import { fetchAllEvents, fetchSingleEvent } from './src/util/eventApiUtil';
 import { receiveCurrentUser } from './src/actions/sessionActions';
 import { Spinner } from './src/components/common/Spinner';
 
@@ -21,6 +21,7 @@ window.requestAllEvents = requestAllEvents;
 window.receiveAllEvents = receiveAllEvents;
 window.requestSingleEvent = requestSingleEvent;
 window.fetchAllEvents = fetchAllEvents;
+window.fetchSingleEvent = fetchSingleEvent;
 window.receiveCurrentUser = receiveCurrentUser;
 window.createEvent = createEvent;
 window.getState = store.getState;

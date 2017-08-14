@@ -16,19 +16,13 @@ export const fetchSingleEvent = (id) => {
   return axios({
     method: 'GET',
     url: `${HOST_URL}/api/event/${id}`
-  }).then(res => console.log(res), error => {
-    console.log(error);
   });
 };
 
-export const createEvent = (event) => {
+export const createEvent = event => {
   return axios({
     method: 'POST',
     url: `${HOST_URL}/api/events`,
     data: event
   });
-
-  // .then(res => console.log(res), error => {
-  //   console.log(error);
-  // });
 };

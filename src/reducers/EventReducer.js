@@ -2,7 +2,8 @@ import merge from 'lodash/merge';
 
 import {
   RECEIVE_ALL_EVENTS,
-  RECEIVE_SINGLE_EVENT
+  RECEIVE_SINGLE_EVENT,
+  // RECEIVE_HOSTED_EVENT
 } from '../actions/eventActions';
 
 const defaultState = Object.freeze({
@@ -22,6 +23,7 @@ const EventReducer = (state = defaultState, action) => {
       const event = action.event;
       newState = merge({}, state);
       newState.entities[event._id] = event;
+      newState.currentEvent = event;
       return newState;
     default:
       return state;

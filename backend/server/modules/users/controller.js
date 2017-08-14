@@ -3,22 +3,47 @@ import { createToken } from '../../config/createToken';
 import { facebookAuth } from '../../config/facebookAuth';
 import { googleAuth } from '../../config/googleAuth';
 
-export const createUser = async (req, res) => {
-  const { username, email, passwordDigest } = req.body;
-  const newUser = new User({ username, email, passwordDigest });
+export const updateUser = async (req, res) => {
+  const { userId } = req.params;
+  const { hostedEvents, joinedEvents } = req.body;
 
-  try {
-    return res.status(201).json({ user: await newUser.save() });
-  } catch (e) {
-    return res.status(e.status).json({ error: true, message: 'Error with User Sign Up' });
+  if (!userId) {
+    return res.status(400).json({ error: true, message: 'No User Id' });
   }
-};
 
-export const getAllUsers = async (req, res) => {
   try {
-    return res.status(200).json({ users: await User.find({})});
+    console.log(`HOSTED ${hostedEvents}`);
+
+    const user = User.findById(userId)
+
+    user.update({ hostedEvents, joinedEvents },
+      err => {
+        console.log(`IN HERE ${err}`);
+      })
+      .populate('hostedEvents')
+      .populate('joinedEvents')
+      .exec(err => {
+        if (err) {
+          return handleError(err);
+        }
+      });
+
+    // const user = await User.update(
+    //   {"_id": userId},
+    //   { hostedEvents, joinedEvents },
+    //   err => {
+    //     console.log(`IN HERE ${err}`);
+    //   })
+    //   .populate('hostedEvents')
+    //   .populate('joinedEvents')
+    //   .exec(err => {
+    //     if (err) {
+    //       return handleError(err);
+    //     }
+    //   });
+    return res.status(200).json({user});
   } catch (e) {
-    return res.status(e.status).json({ error: true, message: 'Error with Users Fetch' });
+    return res.status(404).json({ error: true, message: 'Cannot update user' });
   }
 };
 
@@ -35,12 +60,6 @@ export const loginWithAuth0 = async function (req, res) {
     }
 
     const user = await User.findOrCreate(userInfo)
-  //   .populate('events').
-  //     exec(function (err, event) {
-  //   if (err) return handleError(err);
-  //   // console.log('The creator is %s', event.host.fullName);
-  //   // prints "The creator is Aaron"
-  // })
 
     console.log(`logged in or created user: ${user}`);
 
@@ -50,7 +69,9 @@ export const loginWithAuth0 = async function (req, res) {
         id: user._id,
         name: user.fullName,
         avatar: user.avatar,
-        email: user.email
+        email: user.email,
+        hostedEvents: user.hostedEvents,
+        joinedEvents: user.joinedEvents
       },
       token: `JWT ${createToken(user)}`,
     });
@@ -59,38 +80,38 @@ export const loginWithAuth0 = async function (req, res) {
   }
 };
 
-export const seedEvents = (req, res) => {
-
-  try {
-  // create some events
-  const users = [
-    // { fullName: 'Jimmy Fallon', email: 'Throwing into a basket.' },
-    { fullName: 'DAVadsfID', email: 'EMAsadfIL CZU.', avatar: 'Striasdfng',
-    providerData: {
-      uid: 'asdfasdfasdf',
-      provider: 'Stasdfasdfaasdfsdfring',
-    }, },
-    { fullName: 'Stepheasdfasdfasdfasdfn Colbert', email: 'Michasdfael aaPhasdfasdfelps is the fast fish.', avatar: 'Strasdfiasdfng',
-    providerData: {
-      uid: 'Stasdasdffasfring',
-      provider: 'Stasdasdffasdfring',
-    }, }
-
-    // { fullName: 'David Letterman', email: 'Lifting heavy things up' },
-    // { fullName: 'John Oliver', email: 'Super fast paddles' },
-    // { fullName: 'Esteban Gorchoff', email: 'Fish salad' },
-    // { fullName: 'Dog The Bounty Hunter', email: 'Andy salad' }
-
-  ];
-
-  // use the Event model to insert/save
-  users.forEach( user => {
-    const newUser = new User(user);
-    newUser.save();
-  })} catch (e) {
-    return res.status(400).json({ error: true, errorMessage: e.message });
-  }
-
-  // seeded!
-  res.send('Database seeded!');
-}
+// export const seedEvents = (req, res) => {
+//
+//   try {
+//   // create some events
+//   const users = [
+//     // { fullName: 'Jimmy Fallon', email: 'Throwing into a basket.' },
+//     { fullName: 'DAVadsfID', email: 'EMAsadfIL CZU.', avatar: 'Striasdfng',
+//     providerData: {
+//       uid: 'asdfasdfasdf',
+//       provider: 'Stasdfasdfaasdfsdfring',
+//     }, },
+//     { fullName: 'Stepheasdfasdfasdfasdfn Colbert', email: 'Michasdfael aaPhasdfasdfelps is the fast fish.', avatar: 'Strasdfiasdfng',
+//     providerData: {
+//       uid: 'Stasdasdffasfring',
+//       provider: 'Stasdasdffasdfring',
+//     }, }
+//
+//     // { fullName: 'David Letterman', email: 'Lifting heavy things up' },
+//     // { fullName: 'John Oliver', email: 'Super fast paddles' },
+//     // { fullName: 'Esteban Gorchoff', email: 'Fish salad' },
+//     // { fullName: 'Dog The Bounty Hunter', email: 'Andy salad' }
+//
+//   ];
+//
+//   // use the Event model to insert/save
+//   users.forEach( user => {
+//     const newUser = new User(user);
+//     newUser.save();
+//   })} catch (e) {
+//     return res.status(400).json({ error: true, errorMessage: e.message });
+//   }
+//
+//   // seeded!
+//   res.send('Database seeded!');
+// }
