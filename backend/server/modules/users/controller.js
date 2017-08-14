@@ -3,6 +3,7 @@ import { createToken } from '../../config/createToken';
 import { facebookAuth } from '../../config/facebookAuth';
 import { googleAuth } from '../../config/googleAuth';
 
+
 export const updateUser = async (req, res) => {
   const { userId } = req.params;
   const { hostedEvents, joinedEvents } = req.body;
@@ -14,20 +15,36 @@ export const updateUser = async (req, res) => {
   try {
     console.log(`HOSTED ${hostedEvents}`);
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId)
+
 
     user.update({ hostedEvents, joinedEvents },
       err => {
         console.log(`IN HERE ${err}`);
-      }
-    );
-      // .populate('hostedEvents')
+
+      })
+      .populate('hostedEvents', 'joinedEvents')
       // .populate('joinedEvents')
-      // .exec(err => {
-      //   if (err) {
-      //     return handleError(err);
-      //   }
-      // });
+      .exec(err => {
+        if (err) {
+          return handleError(err);
+        }
+      });
+      console.log(user);
+    // const user = await User.update(
+    //   {"_id": userId},
+    //   { hostedEvents, joinedEvents },
+    //   err => {
+    //     console.log(`IN HERE ${err}`);
+    //   })
+    //   .populate('hostedEvents')
+    //   .populate('joinedEvents')
+    //   .exec(err => {
+    //     if (err) {
+    //       return handleError(err);
+    //     }
+    //   });
+
     return res.status(200).json({user});
   } catch (e) {
     return res.status(404).json({ error: true, message: 'Cannot update user' });
@@ -47,6 +64,8 @@ export const loginWithAuth0 = async function (req, res) {
     }
 
     const user = await User.findOrCreate(userInfo)
+
+
 
     console.log(`logged in or created user: ${user}`);
 

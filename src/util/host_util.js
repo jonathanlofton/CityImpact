@@ -1,5 +1,5 @@
-// export const HOST_URL = 'https://morning-mesa-19279.herokuapp.com';
-export const HOST_URL = 'http://192.168.3.206:3000';
+export const HOST_URL = 'https://morning-mesa-19279.herokuapp.com';
+// export const HOST_URL = 'http://192.168.0.60:3000';
 
 export const fbConfig  = {
   APP_ID: '324070188040369'
