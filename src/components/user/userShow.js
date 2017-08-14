@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { Text, View, Image, StyleSheet, ScrollView } from 'react-native';
+import EventIndexItem from '../event/eventIndexItem';
 
 
 class UserShow extends React.Component {
@@ -9,7 +10,9 @@ class UserShow extends React.Component {
 
   render(){
 
-    const { currentUser } = this.props;
+    const { currentUser, hostedEvents } = this.props;
+    const allEvents =
+      hostedEvents.map((event, id) => (<EventIndexItem key={`event-${id}`} navigator={this.props.navigation} event={event}/>));
 
     return(
       <View style={styles.container}>
@@ -23,11 +26,15 @@ class UserShow extends React.Component {
           <Text style={styles.name}>{currentUser.name}</Text>
           <Text style={styles.email}>{currentUser.email}</Text>
         </View>
+        <Text style={{textAlign: 'center', fontSize: '18', fontWeight: '20', marginTop: 10}}>Events Your Hosting</Text>
         <View style={styles.events}>
-          <Text style={{textAlign: 'center'}}>Events this user is hosting and events they are planning to attend</Text>
+          <ScrollView>
+            {allEvents}
+          </ScrollView>
+
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -58,8 +65,12 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   events: {
-    width: '80%',
     justifyContent: 'center',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: '60%',
   },
   userPhoto: {
     width: 150,

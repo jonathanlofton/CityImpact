@@ -77,7 +77,8 @@ class EventForm extends React.Component {
            time: res.event.time,
            date: res.event.date,
            address: res.event.address,
-           host: res.event.host
+           host: res.event.host,
+           hostName: res.event.host.fullName
          }})
         ]
       }
@@ -96,16 +97,17 @@ class EventForm extends React.Component {
       time: time,
       host: host,
       address: address
-    }).then(res => {
-        this.props.updateUser({
-          id: host.id,
-          hostedEvents: host.hostedEvents.concat([this.props.currentEvent._id]),
-          joinedEvents: host.joinedEvents
-        });
-        this.reset(res);
-      },
-      err => console.log(err)
-    );
+    }).then(res => this.reset(res), err => console.log(err));
+    // .then(res => {
+    //     this.props.updateUser({
+    //       id: host.id,
+    //       hostedEvents: host.hostedEvents.concat([this.props.currentEvent._id]),
+    //       joinedEvents: host.joinedEvents
+    //     });
+    //     this.reset(res);
+    //   },
+    //   err => console.log(err)
+    // );
   }
 
   render() {
