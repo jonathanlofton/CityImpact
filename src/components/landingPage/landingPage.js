@@ -91,7 +91,6 @@ class LandingPage extends React.Component {
       <View style={styles.modalFullScreen}>
         <View style={styles.modalContent}>
           {this._renderTouchableOpacity("Create Event", () => {this.navigateEventForm()}, styles.createButton, styles.createButtonText)}
-          {this._renderTouchableOpacity("Report Issue", null, styles.createButton, styles.createButtonText)}
           {this._renderTouchableOpacity("Close Modal", () => {this.toggleModal()}, styles.modalButton, styles.modalButtonText)}
         </View>
       </View>
@@ -220,7 +219,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: 'white',
-    borderRadius: 5,
+    borderRadius: 10,
     width: '60%',
     height: '30%',
     justifyContent: 'center',
@@ -239,11 +238,14 @@ const styles = StyleSheet.create({
     height: 40,
     width: '100%',
   },
-  buttonText: {
+  modalButton: {
+
+  },
+  modalButtonText: {
+    position: 'absolute',
+    marginTop: '10%',
     alignSelf: 'center',
-    color: '#00AB6C',
     fontSize: 16,
-    padding: 5
   },
   cardSection: {
     flex: 1,

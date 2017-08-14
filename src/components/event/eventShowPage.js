@@ -66,32 +66,42 @@ class EventShowPage extends React.Component {
            description={params.description}
          />
        </MapView>
-        <View style={showInfo.showInfo}>
-          <View style={showInfo.dateTitle}>
-            <Text style={showInfo.showTitle}>{params.title}</Text>
-            <Text style={showInfo.showDate}>{params.date}</Text>
-            <Text style={showInfo.showDate}>{params.time}</Text>
-            <Text style={showInfo.showDate}>{params.address}</Text>
-          </View>
-          <Text style={showInfo.showDescription}>{params.description}</Text>
+        <View style={showInfo.container}>
+
+            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+              <View style={showInfo.dateTime}>
+                <Text style={[showInfo.showDetails, showInfo.date]}>{params.date}</Text>
+                <Text style={showInfo.showDetails}>{params.time}</Text>
+              </View>
+
+              <Text style={showInfo.title}>{params.title}</Text>
+
+            </View>
+
+            <Text style={[showInfo.showDetails, showInfo.address]}>
+              {params.address}
+            </Text>
+            <Text style={{textAlign: 'center', margin: '5%'}}>
+              {params.description}
+            </Text>
+
 
           <View style={showInfo.joinedView}>
-            <Text>THIS IS WHERE COMMENTS OR PEOPLE THAT HAVE JOINED WILL BE VIEWED</Text>
           </View>
 
 
-          <View style={showInfo.modalButtonContainer}>
+          <View style={button.modalButtonContainer}>
             <TouchableOpacity
-              style={showInfo.backButton}
+              style={[button.button]}
               onPress={() => this.reset()}
               >
-              <Text style={showInfo.backButtonText}>Close</Text>
+              <Text style={button.buttonText}>Close</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={showInfo.backButton}
+              style={button.button}
               onPress={() => this.reset()}
               >
-              <Text style={showInfo.joinButtonText}>Join</Text>
+              <Text style={button.buttonText}>Join</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -124,23 +134,36 @@ const styles = StyleSheet.create({
 });
 
 const showInfo = StyleSheet.create({
-  showInfo: {
+  container: {
     position: 'absolute',
+    backgroundColor: 'white',
     top: '30%',
     left: 0,
     right: 0,
     bottom: 0,
   },
-  dateTitle: {
-    marginTop: '5%',
+  dateTime: {
+    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '3%',
+    marginLeft: '3%',
+    marginRight: '3%',
   },
-  showTitle: {
-    fontSize: 35,
+  title: {
+    fontSize: 40,
     fontWeight: 'bold',
+    marginTop: '2%',
   },
-  showDate: {
-
+  showDetails: {
+    textAlign: 'center',
+  },
+  address: {
+    width: '60%',
+    alignSelf: 'center',
+    color: 'grey',
+  },
+  date: {
+    fontWeight: '600',
   },
   showDescription: {
     marginTop: '10%',
@@ -149,20 +172,21 @@ const showInfo = StyleSheet.create({
     alignSelf: 'center',
   },
   joinedView: {
-    height: '30%',
+    height: '50%',
     width: '70%',
     alignSelf: 'center',
   },
+});
+
+const button = StyleSheet.create({
   modalButtonContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent: 'space-between',
   },
-  backButton: {
-    alignSelf: 'flex-end',
+  button: {
     width: '45%',
   },
-  backButtonText: {
+  buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'green',
@@ -172,14 +196,4 @@ const showInfo = StyleSheet.create({
     padding: 10,
     textAlign: 'center',
   },
-  joinButtonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'green',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#d6d7da',
-    padding: 10,
-    textAlign: 'center',
-  }
 });
