@@ -23,8 +23,13 @@ class SessionForm extends Component {
     this.handleDemoLogin = this.handleDemoLogin.bind(this);
   }
 
-  componentDidMount() {
-    this.props.requestAllEvents;
+
+  componentWillMount() {
+    const { navigate } = this.props.navigation;
+
+    if (this.props.currentUser) {
+      navigate('LandingPage')
+    }
   }
 
   handleLogin(name) {

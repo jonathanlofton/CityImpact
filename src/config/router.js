@@ -8,6 +8,7 @@ import LandingPageContainer from '../components/landingPage/landingPageContainer
 import EventIndexContainer from '../components/event/eventIndexContainer';
 import EventShowPage from '../components/event/eventShowPage';
 import UserShowContainer from '../components/user/userShowContainer';
+import InitialScreenContainer from '../components/initialScreen/initialScreenContainer';
 
 const LandingNavigator = StackNavigator({
   LandingPage: {
@@ -31,6 +32,9 @@ const LandingNavigator = StackNavigator({
   },
   SessionForm: {
     screen: SessionFormContainer,
+    navigationOptions: {
+      header: null
+    }
   },
 },
 {
@@ -41,14 +45,19 @@ const LandingNavigator = StackNavigator({
 export const SessionNavigator = StackNavigator({
   SessionForm: {
     screen: SessionFormContainer,
+
   },
 
   LandingPage: {
     screen: LandingNavigator,
   },
+
+  InitialScreen: {
+    screen: InitialScreenContainer
+  }
 },
 {
-  initialRouteName: 'SessionForm',
+  initialRouteName: 'InitialScreen',
   headerMode: 'none'
 }
 );
