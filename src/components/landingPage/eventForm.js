@@ -16,21 +16,17 @@ class EventForm extends React.Component {
       longitude: this.props.navigation.state.params.longitude,
       latitude: this.props.navigation.state.params.latitude,
       host: this.props.currentUser,
+      attendees: [],
       address: ""
     };
     this.onCreateEvent = this.onCreateEvent.bind(this);
-    this.navigateEventShowPage = this.navigateEventShowPage.bind(this);
+    // this.navigateEventShowPage = this.navigateEventShowPage.bind(this);
     this.coordsToAddress = this.coordsToAddress.bind(this);
   }
+
   componentWillMount() {
     this.coordsToAddress();
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.currentUser !== nextProps.currentUser) {
-  //     this.props.receiveCurrentUser(nextProps.currentUser);
-  //   }
-  // }
 
   coordsToAddress() {
     const { params } = this.props.navigation.state;
@@ -49,20 +45,20 @@ class EventForm extends React.Component {
   }
 
 
-  navigateEventShowPage(res) {
-    // const { navigate } = this.props.navigation
-    const { navigate } = this.props.navigation;
-    // const { res } = this.props;
-    navigate('EventShowPage', {title: res.event.data.event.title,
-     latitude: res.event.data.event.latitude,
-     longitude: res.event.data.event.longitude,
-     description: res.event.data.event.description,
-     time: res.event.data.event.time,
-     date: res.event.data.event.date,
-     address: res.event.data.event.address
-    });
-
-  }
+  // navigateEventShowPage(res) {
+  //   // const { navigate } = this.props.navigation
+  //   const { navigate } = this.props.navigation;
+  //   // const { res } = this.props;
+  //   navigate('EventShowPage', {title: res.event.data.event.title,
+  //    latitude: res.event.data.event.latitude,
+  //    longitude: res.event.data.event.longitude,
+  //    description: res.event.data.event.description,
+  //    time: res.event.data.event.time,
+  //    date: res.event.data.event.date,
+  //    address: res.event.data.event.address
+  //   });
+  //
+  // }
 
   reset(res){
     return this.props.navigation.dispatch(NavigationActions.reset(
@@ -70,15 +66,16 @@ class EventForm extends React.Component {
         index: 1,
         actions: [
           NavigationActions.navigate({ routeName: 'LandingPage'}),
-          NavigationActions.navigate({ routeName: 'EventShowPage', params: {title: res.event.title,
-           latitude: res.event.latitude,
-           longitude: res.event.longitude,
-           description: res.event.description,
-           time: res.event.time,
-           date: res.event.date,
-           address: res.event.address,
-           host: res.event.host,
-           hostName: res.event.host.fullName
+          NavigationActions.navigate({ routeName: 'EventShowPage', params: {
+            title: res.event.title,
+            latitude: res.event.latitude,
+            longitude: res.event.longitude,
+            description: res.event.description,
+            time: res.event.time,
+            date: res.event.date,
+            address: res.event.address,
+            host: res.event.host,
+            attendees: res.event.attendees
          }})
         ]
       }

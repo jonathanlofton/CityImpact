@@ -34,3 +34,10 @@ export const createEvent = event => dispatch => (
     err => console.log(`from eventAction ${err}`)
   )
 );
+
+export const updateEvent = eventData => dispatch => (
+  EventApiUtil.updateEvent(eventData).then(
+    data => dispatch(receiveSingleEvent(data.event)),
+    err => console.log(`from eventAction: ${err}`)
+  )
+);

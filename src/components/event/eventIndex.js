@@ -5,7 +5,7 @@ import { Card } from '../common';
 
 class EventIndex extends React.Component {
 
-  
+
   componentDidMount() {
     this.props.requestAllEvents();
   }
@@ -18,7 +18,11 @@ class EventIndex extends React.Component {
     const { events } = this.props;
 
     const allEvents =
-      events.map((event, id) => (<EventIndexItem key={`event-${id}`} navigator={this.props.navigation} event={event}/>));
+      events.map((event, id) => (
+        <EventIndexItem key={`event-${id}`}
+          navigator={this.props.navigation}
+          event={event}/>
+      ));
 
     return (
       <Card>
