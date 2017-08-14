@@ -258,10 +258,10 @@ const userModal = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: -3
   },
   content: {
-    backgroundColor: 'rgba(3,3,3,0.4)',
+    position: 'absolute',
+    backgroundColor: 'rgba(30,30,30,0.8)',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
@@ -325,20 +325,18 @@ const button = StyleSheet.create({
 
 const styles = StyleSheet.create({
   userPhoto: {
+    position: 'absolute',
     width: 60,
     height: 60,
     borderRadius: 30,
-    zIndex: 1,
+    marginBottom: '90%',
   },
   photoContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: '85%',
-    bottom: '90%',
+    position: 'relative',
     marginTop: 20,
     marginLeft: 10,
-    zIndex: 1,
+    width: 60,
+    height: 60,
   },
   container: {
     position: 'absolute',
@@ -346,8 +344,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
   },
   map: {
     position: 'absolute',
@@ -355,41 +351,16 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: -1,
-  },
-
-
-  modalButtonText: {
-    position: 'absolute',
-    marginTop: '10%',
-    alignSelf: 'center',
-    fontSize: 16,
-  },
-  cardSection: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   bottomNavigation: {
-    position: 'absolute',
-    zIndex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
+    position: 'absolute',
+    top: '90%',
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
-  createButton: {
-    alignSelf: 'center',
-    borderWidth: 2,
-    borderColor: '#00AB6C',
-    borderRadius: 5,
-    width: '70%',
-    padding: 10,
-    margin: '2%',
-  },
-  createButtonText: {
-    fontSize: 18,
-    alignSelf: 'center',
-    color: '#00AB6C',
-  }
 });
 
 export default LandingPage;
