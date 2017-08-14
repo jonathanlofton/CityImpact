@@ -23,8 +23,9 @@ The mission is to make it effortless for someone to get involved with their resp
    + [React Native Geocoding](https://developers.google.com/maps/documentation/javascript/geocoding)
       - An event is made with latitude longitude, this allows for events to have an address associated with them as well.
 
-    ![alt text](./docs/Mapview.png)
-
+    <p align="center">
+    <img src="./docs/Mapview.png">
+    </p>
 
 ## Features
   ### OAuth integration
@@ -74,10 +75,8 @@ The mission is to make it effortless for someone to get involved with their resp
   }
 ```
 
-  ![alt text](./docs/Eventshow.png)
-
  <p align="center">
- <img src = "image/path/example">
+ <img src="./docs/Eventshow.png">
  </p>
 
 ## Future Features
