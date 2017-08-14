@@ -9,8 +9,7 @@ import LandingPage from './landingPage';
 const mapStateToProps = state => (
   {
   events: selectAllEvents(state),
-  currentUser: state.session.currentUser,
-  user: state.session.currentUser,
+  currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({

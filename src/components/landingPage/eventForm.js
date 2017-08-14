@@ -25,6 +25,12 @@ class EventForm extends React.Component {
     this.coordsToAddress();
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.currentUser !== nextProps.currentUser) {
+  //     this.props.receiveCurrentUser(nextProps.currentUser);
+  //   }
+  // }
+
   coordsToAddress() {
     const { params } = this.props.navigation.state;
 
@@ -63,14 +69,14 @@ class EventForm extends React.Component {
         index: 1,
         actions: [
           NavigationActions.navigate({ routeName: 'LandingPage'}),
-          NavigationActions.navigate({ routeName: 'EventShowPage', params: {title: res.event.data.event.title,
-           latitude: res.event.data.event.latitude,
-           longitude: res.event.data.event.longitude,
-           description: res.event.data.event.description,
-           time: res.event.data.event.time,
-           date: res.event.data.event.date,
-           address: res.event.data.event.address
-
+          NavigationActions.navigate({ routeName: 'EventShowPage', params: {title: res.event.title,
+           latitude: res.event.latitude,
+           longitude: res.event.longitude,
+           description: res.event.description,
+           time: res.event.time,
+           date: res.event.date,
+           address: res.event.address,
+           host: res.event.host
          }})
         ]
       }
@@ -88,11 +94,10 @@ class EventForm extends React.Component {
       date: date,
       time: time,
       host: host
-    }).then(
-      res => {
+    }).then((res) => {
         this.props.updateUser({
           id: host.id,
-          hostedEvents: host.hostedEvents.push(res.event.data.event._id),
+          hostedEvents: host.hostedEvents.concat([this.props.currentEvent._id]),
           joinedEvents: host.joinedEvents
         });
         this.reset(res);

@@ -5,6 +5,7 @@ import { updateUser } from '../../actions/sessionActions';
 
 const mapStateToProps = ({events, session}) => ({
   currentUser: session.currentUser,
+  currentEvent: events.currentEvent,
   events: events
 });
 

@@ -9,18 +9,18 @@ class UserShow extends React.Component {
 
   render(){
 
-    const { user } = this.props;
+    const { currentUser } = this.props;
 
     return(
       <View>
         <View style={styles.userInfoPhoto}>
           <Image
           style={styles.userPhoto}
-          source={{uri: `${user.avatar}`}}
+          source={{uri: `${currentUser.avatar}`}}
           />
           <View style={styles.userInfo}>
-            <Text>{user.name}</Text>
-            <Text>{user.email}</Text>
+            <Text>{currentUser.name}</Text>
+            <Text>{currentUser.email}</Text>
           </View>
         </View>
         <View>

@@ -2,34 +2,41 @@ import * as EventApiUtil from '../util/eventApiUtil';
 
 export const RECEIVE_ALL_EVENTS = 'RECEIVE_ALL_EVENTS';
 export const RECEIVE_SINGLE_EVENT = 'RECEIVE_SINGLE_EVENT';
+export const RECEIVE_HOSTED_EVENT = 'RECEIVE_HOSTED_EVENT';
 
-export const receiveAllEvents = (events) => ({
+export const receiveAllEvents = events => ({
   type: RECEIVE_ALL_EVENTS,
   events
 });
 
-export const receiveSingleEvent = (event) => ({
+export const receiveSingleEvent = event => ({
   type: RECEIVE_SINGLE_EVENT,
   event
 });
 
+// export const receiveHostedEvent = eventPromise => ({
+//   type: RECEIVE_HOSTED_EVENT,
+//   eventPromise
+// })
+
 export const requestAllEvents = () => dispatch => (
 
-  EventApiUtil.fetchAllEvents().then(events => (
-    console.log(events),
-    dispatch(receiveAllEvents(events.data))
-  ))
+  EventApiUtil.fetchAllEvents().then(
+    ({data}) => dispatch(receiveAllEvents(data)),
+    err => console.log(`from eventAction ${err}`)
+  )
 );
 
-export const requestSingleEvent = (id) => dispatch => (
-  EventApiUtil.fetchSingleEvent(id).then(event => (
-    dispatch(receiveSingleEvent(event.data))
-  ))
+export const requestSingleEvent = id => dispatch => (
+  EventApiUtil.fetchSingleEvent(id).then(
+    ({data}) => dispatch(receiveSingleEvent(data)),
+    err => console.log(`from eventAction ${err}`)
+  )
 );
 
 export const createEvent = event => dispatch => (
   EventApiUtil.createEvent(event).then(
-    newEvent => dispatch(receiveSingleEvent(newEvent)),
-    err => console.log(err)
+    ({data}) => dispatch(receiveSingleEvent(data)),
+    err => console.log(`from eventAction ${err}`)
   )
 );

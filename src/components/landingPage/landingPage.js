@@ -32,13 +32,13 @@ class LandingPage extends React.Component {
     this.props.requestAllEvents();
   }
   componentDidMount(){
-    this.props.requestAllEvents();
+    // this.props.requestAllEvents();
     this._getLocationAsync();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.user !== nextProps.user) {
-      this.props.receiveCurrentUser(nextProps.user);
+    if (this.props.currentUser !== nextProps.currentUser) {
+      this.props.receiveCurrentUser(nextProps.currentUser);
     }
   }
 
@@ -103,7 +103,7 @@ class LandingPage extends React.Component {
     }
 
 
-    const { events, user } = this.props;
+    const { events, currentUser } = this.props;
     const { navigate } = this.props.navigation;
 
      const long = this.state.location.coords.longitude;
@@ -137,7 +137,7 @@ class LandingPage extends React.Component {
                   })
                 }
 
-                 key={event._id}
+                 key={`event-${event._id}`}
                  title={event.title}
                  description={event.description}
                >
@@ -152,7 +152,7 @@ class LandingPage extends React.Component {
                >
                <Image
                style={styles.userPhoto}
-               source={{uri: `${user.avatar}`}}
+               source={{uri: `${currentUser.avatar}`}}
                />
              </TouchableOpacity>
            </View>

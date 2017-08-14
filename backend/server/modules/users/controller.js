@@ -24,20 +24,30 @@ import { googleAuth } from '../../config/googleAuth';
 
 export const updateUser = async (req, res) => {
   const { userId } = req.params;
-  const update = req.body;
+  const { hostedEvents, joinedEvents } = req.body;
+  console.log(req.body);
   if (!userId) {
     return res.status(400).json({ error: true, message: 'No User Id' });
   }
-  const user = await User.findById(userId);
-
+  debugger;
   try {
     console.log(`USERID ${userId}`);
     console.log(`UPDATE ${update.hostedEvents}`);
-    User.update({"id": userId}, update,
-      (err) => {
+    const user = await User.update(
+      {"id": userId},
+      { hostedEvents, joinedEvents },
+      err => {
         console.log(err);
         res.sendStatus(202);
+      })
+      .populate('hostedEvents')
+      .populate('joinedEvents')
+      .exec(err => {
+        if (err) {
+          return handleError(err);
+        }
       });
+    return res.status(200).json({user});
   } catch (e) {
     return res.status(400).json({ error: true, message: 'Cannot update user' });
   }
@@ -56,12 +66,13 @@ export const loginWithAuth0 = async function (req, res) {
     }
 
     const user = await User.findOrCreate(userInfo)
-  //   .populate('events').
-  //     exec(function (err, event) {
-  //   if (err) return handleError(err);
-  //   // console.log('The creator is %s', event.host.fullName);
-  //   // prints "The creator is Aaron"
-  // })
+      .populate('hostedEvents')
+      .populate('joinedEvents')
+      .exec(err => {
+        if (err) {
+          return handleError(err);
+        }
+      });
 
     console.log(`logged in or created user: ${user}`);
 

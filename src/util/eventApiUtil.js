@@ -16,8 +16,6 @@ export const fetchSingleEvent = (id) => {
   return axios({
     method: 'GET',
     url: `${HOST_URL}/api/event/${id}`
-  }).then(res => console.log(res), error => {
-    console.log(error);
   });
 };
 

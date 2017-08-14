@@ -6,7 +6,7 @@ export const createEvent = async (req, res) => {
     title, description, latitude, longitude, time, date, host: host.id
   });
   try {
-    return res.status(201).json({event: await newEvent.save()});
+    return res.status(201).json(await newEvent.save());
   } catch (e) {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
   }
@@ -15,12 +15,12 @@ export const createEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    return res.status(200).json(await Event.find({}).populate('host').
-      exec(function (err, event) {
-    if (err) return handleError(err);
-    // console.log('The creator is %s', event.host.fullName);
-    // prints "The creator is Aaron"
-  }));
+    return res.status(200).json(await Event.find({}).populate('host')
+      .exec((err, event) => {
+        if (err) return handleError(err);
+        // console.log('The creator is %s', event.host.fullName);
+        // prints "The creator is Aaron"
+      }));
   } catch (e) {
     return res.status(e.status).json({ error: true, message: 'Error with Event' });
   }
@@ -36,7 +36,6 @@ export const getAnEvent = async (req, res) => {
 
   // Search for see if group exist
   // const event = await Event.findById(eventId);
-
 
   try {
     return res.status(200).json({

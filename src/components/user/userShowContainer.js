@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import UserShow from './userShow';
 
 const mapStateToProps = ({session}) => ({
-  user: session.currentUser
+  currentUser: session.currentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
