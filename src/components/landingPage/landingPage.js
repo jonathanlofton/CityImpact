@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Modal, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Modal, Image, TouchableOpacity, TouchableHighlight, Picker } from 'react-native';
 import { MapView } from 'expo';
 import { Button, Card, CardSection } from '../common';
+import { NavigationActions } from 'react-navigation';
 import Expo from 'expo';
+
 const markers = [];
 
 class LandingPage extends React.Component {
@@ -17,6 +19,7 @@ class LandingPage extends React.Component {
       location: null,
       errorMessage: null,
       modalVisible: false,
+      userModalVisible: false,
       latitude: null,
       longitude: null,
       markers: null,
@@ -25,7 +28,11 @@ class LandingPage extends React.Component {
     }
     this.mapPressLong = this.mapPressLong.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleUserModal = this.toggleUserModal.bind(this);
     this.navigateEventForm = this.navigateEventForm.bind(this);
+    this.navigateUserPage = this.navigateUserPage.bind(this);
+    this.navigateLogout = this.navigateLogout.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   componentWillMount() {
@@ -68,6 +75,10 @@ class LandingPage extends React.Component {
     this.setState({modalVisible: !this.state.modalVisible})
   }
 
+  toggleUserModal() {
+    this.setState({userModalVisible: !this.state.userModalVisible})
+  }
+
   _renderTouchableOpacity = (text, onPress = null, buttonStyle = null, textStyle = null) => (
     <TouchableOpacity
       style={buttonStyle}
@@ -76,6 +87,7 @@ class LandingPage extends React.Component {
       <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   )
+
   navigateEventForm() {
     const { navigate } = this.props.navigation
     navigate('EventForm', {createEvent: this.props.createEvent,
@@ -84,6 +96,30 @@ class LandingPage extends React.Component {
      currentUser: this.props.currentUser,
     });
     this.toggleModal();
+  }
+
+  navigateUserPage() {
+    const { navigate } = this.props.navigation
+    navigate('UserShowContainer')
+    this.toggleUserModal();
+  }
+
+  navigateLogout() {
+    const { navigate } = this.props.navigation
+    this.reset();
+
+    this.props.logoutUser();
+    this.toggleUserModal();
+  }
+
+  reset(){
+    return this.props.navigation.dispatch(NavigationActions.reset(
+      {
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'SessionForm'})
+        ]
+      }));
   }
   _renderModalContent() {
 
@@ -97,9 +133,26 @@ class LandingPage extends React.Component {
     );
   }
 
+  _renderUserModalContent() {
+
+    return(
+      <View style={userModal.modalFullScreen}>
+        <View style={userModal.modalContent}>
+          {this._renderTouchableOpacity("Your Profile", () => {this.navigateUserPage()}, userModal.userButton, userModal.userButtonText)}
+          {this._renderTouchableOpacity("Logout", () => {this.navigateLogout()}, userModal.userButton, userModal.userButtonText)}
+          {this._renderTouchableOpacity("Close Modal", () => {this.toggleUserModal()}, styles.modalButton, styles.modalButtonText)}
+        </View>
+      </View>
+    );
+  }
+
   render() {
     if (!this.state.location) {
       return null
+    }
+
+    if(!this.props.currentUser) {
+      return null;
     }
 
 
@@ -148,7 +201,7 @@ class LandingPage extends React.Component {
 
            <View style={styles.photoContainer}>
              <TouchableOpacity
-               onPress={() => navigate('UserShowContainer')}
+               onPress={() => this.toggleUserModal()}
                >
                <Image
                style={styles.userPhoto}
@@ -163,12 +216,20 @@ class LandingPage extends React.Component {
             </View>
 
            <Modal
-            animationType={"slide"}
+            animationType={"fade"}
             transparent={true}
             visible={this.state.modalVisible}
             onRequestClose={() => {this.setState({modalVisible: false})}}
             >
             {this._renderModalContent()}
+            </ Modal>
+           <Modal
+            animationType={"fade"}
+            transparent={true}
+            visible={this.state.userModalVisible}
+            onRequestClose={() => {this.setState({userModalVisible: false})}}
+            >
+            {this._renderUserModalContent()}
             </ Modal>
         </View>
 
@@ -177,6 +238,31 @@ class LandingPage extends React.Component {
   }
 }
 
+const userModal = StyleSheet.create({
+  userButton: {
+
+  },
+  userButtonText: {
+
+  },
+  modalFullScreen: {
+    // backgroundColor: 'white',
+    flex: 1,
+    flexDirection: 'row',
+    height: '100%',
+    width: '100%',
+  },
+  modalContent: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 40,
+    width: '60%',
+    height: '30%',
+    // alignItems: 'center',
+  }
+
+})
 
 
 const styles = StyleSheet.create({

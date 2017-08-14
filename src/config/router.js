@@ -28,7 +28,10 @@ const LandingNavigator = StackNavigator({
   },
   UserShowContainer: {
     screen: UserShowContainer,
-  }
+  },
+  SessionForm: {
+    screen: SessionFormContainer,
+  },
 },
 {
   initialRouteName: 'LandingPage',
