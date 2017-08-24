@@ -6,7 +6,7 @@ import configureStore from './src/store/store';
 import Root from './src/root';
 import { requestAllEvents, receiveAllEvents, requestSingleEvent, createEvent } from './src/actions/eventActions';
 import { fetchAllEvents, fetchSingleEvent } from './src/util/eventApiUtil';
-import { receiveCurrentUser } from './src/actions/sessionActions';
+import { receiveCurrentUser, logoutUser } from './src/actions/sessionActions';
 import { Spinner } from './src/components/common/Spinner';
 
 const store = configureStore();
@@ -26,6 +26,7 @@ window.receiveCurrentUser = receiveCurrentUser;
 window.createEvent = createEvent;
 window.getState = store.getState;
 window.dispatch = store.dispatch;
+window.logoutUser = logoutUser;
 
 export default class Entry extends Component {
   constructor(props) {

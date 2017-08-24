@@ -13,20 +13,32 @@ export const updateUser = async (req, res) => {
   }
 
   try {
-    console.log(`HOSTED ${hostedEvents}`);
+    console.log(`HOSTED ${[...hostedEvents]}`);
 
-    const user = await User.findById(userId)
+    const updatedUser = await User.findById(userId, (err, user) => {
+      if (err) {console.log(err);}
 
-
-    user.update({ hostedEvents, joinedEvents });
-      // .populate('hostedEvents')
-      // .populate('joinedEvents')
+      user.hostedEvents = [...hostedEvents];
+      user.joinedEvents = [...joinedEvents];
+      user.save();
+    }).populate('hostedEvents')
+      .populate('joinedEvents')
       .exec(err => {
         if (err) {
-          return handleError(err);
+          return err;
         }
       });
-      console.log(user);
+
+
+
+    // user.update({ hostedEvents, joinedEvents });
+
+
+
+    // await user.update({ hostedEvents, joinedEvents });
+
+      // });
+      console.log(updatedUser);
     // const user = await User.update(
     //   {"_id": userId},
     //   { hostedEvents, joinedEvents },
@@ -41,7 +53,7 @@ export const updateUser = async (req, res) => {
     //     }
     //   });
 
-    return res.status(200).json({user});
+    return res.status(200).json({user: updatedUser});
   } catch (e) {
     return res.status(404).json({ error: true, message: 'Cannot update user' });
   }
@@ -69,7 +81,7 @@ export const loginWithAuth0 = async function (req, res) {
       success: true,
       user: {
         id: user._id,
-        name: user.fullName,
+        fullName: user.fullName,
         avatar: user.avatar,
         email: user.email,
         hostedEvents: user.hostedEvents,

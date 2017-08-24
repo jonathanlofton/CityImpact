@@ -22,7 +22,7 @@ const EventReducer = (state = defaultState, action) => {
     case RECEIVE_SINGLE_EVENT:
       const event = action.event;
       newState = merge({}, state);
-      newState.entities[event._id] = event;
+      // newState.entities[event._id] = event;
       newState.currentEvent = event;
       return newState;
     default:
