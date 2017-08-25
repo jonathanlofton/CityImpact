@@ -89,7 +89,7 @@ class LandingPage extends React.Component {
   )
 
   navigateEventForm() {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
     navigate('EventForm', {
       latitude: this.state.latitude,
       longitude: this.state.longitude,
@@ -98,13 +98,13 @@ class LandingPage extends React.Component {
   }
 
   navigateUserPage() {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
     navigate('UserShowContainer')
     this.toggleUserModal();
   }
 
   navigateLogout() {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
     this.reset();
 
     this.props.logoutUser();
@@ -112,16 +112,15 @@ class LandingPage extends React.Component {
   }
 
   reset(){
-    return this.props.navigation.dispatch(NavigationActions.reset(
-      {
-        index: 0,
-        actions: [
-          NavigationActions.navigate({ routeName: 'SessionForm'})
-        ]
-      }));
+    return this.props.navigation.dispatch(NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'SessionForm'})
+      ]
+    }));
   }
-  _renderModalContent() {
 
+  _renderModalContent() {
     return(
       <View style={eventModal.container}>
         <View style={eventModal.content}>
@@ -133,7 +132,6 @@ class LandingPage extends React.Component {
   }
 
   _renderUserModalContent() {
-
     return(
       <View style={userModal.container}>
         <View style={userModal.content}>

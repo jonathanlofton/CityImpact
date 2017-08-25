@@ -12,11 +12,8 @@ export const updateUser = async (req, res) => {
   }
 
   try {
-    console.log(`HOSTED ${hostedEvents}`);
-
     const user = await User.findById(userId);
-
-    user.update({ hostedEvents, joinedEvents });
+    await user.update({ hostedEvents, joinedEvents });
       // .populate('hostedEvents')
       // .populate('joinedEvents')
       // .exec(err => {
@@ -24,7 +21,7 @@ export const updateUser = async (req, res) => {
       //     return handleError(err);
       //   }
       // });
-    return res.status(200).json({user});
+    return res.status(200).json({ user });
   } catch (e) {
     return res.status(404).json({ error: true, message: 'Cannot update user' });
   }

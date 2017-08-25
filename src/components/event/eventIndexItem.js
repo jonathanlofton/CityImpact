@@ -19,7 +19,8 @@ class EventIndexItem extends React.Component {
   }
 
   navigateShowPage() {
-    const { event } = this.props
+    const { event } = this.props;
+    console.log(`ID from indexItem: ${event._id}`);
     this.props.navigator.navigate('EventShowPage', {
       _id: event._id,
       title: event.title,
@@ -73,9 +74,8 @@ class EventIndexItem extends React.Component {
 
   render() {
     const { event } = this.props;
-    console.log(event);
     return(
-      <TouchableOpacity onPress={() => {this.navigateShowPage()}}>
+      <TouchableOpacity onPress={this.navigateShowPage}>
         <View style={styles.cardSection}>
           <View style={styles.information}>
             <Text style={styles.title}>{event.title}</Text>

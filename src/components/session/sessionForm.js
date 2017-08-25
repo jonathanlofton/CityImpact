@@ -105,8 +105,6 @@ class SessionForm extends Component {
 
 
   render() {
-
-    console.log(this.props);
     const { navigate } = this.props.navigation;
     if (this.props.currentUser) {
       return (
