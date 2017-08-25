@@ -7,7 +7,6 @@ import Geocoder from 'react-native-geocoding';
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       title: "",
       description: "",

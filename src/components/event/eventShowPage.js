@@ -41,24 +41,21 @@ class EventShowPage extends React.Component {
   }
 
   onJoinEvent() {
-    const { _id, host, address, attendees } = this.props.navigation.state.params;
+    const { _id, address, attendees } = this.props.navigation.state.params;
+    const { currentUser } = this.props;
     this.props.updateEvent({
       _id,
       attendees: attendees.concat([this.props.currentUser.id])
-    }).then(res => {
-        this.props.updateUser({
-          id: host.id,
-          hostedEvents: host.hostedEvents,
-          joinedEvents: host.joinedEvents.concat([_id])
-        });
-        this.reset();
-      },
-      err => console.log(err)
-    );
+    });
+    this.props.updateUser({
+      id: currentUser.id,
+      hostedEvents: currentUser.hostedEvents,
+      joinedEvents: currentUser.joinedEvents.concat([_id])
+    });
+    this.reset();
   }
 
   render() {
-    console.log(this.props);
     const { params } = this.props.navigation.state;
     const { navigate } = this.props.navigation;
     return(

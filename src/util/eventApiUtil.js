@@ -31,9 +31,7 @@ export const updateEvent = data => {
   const { _id, attendees } = data;
   return axios({
     method: 'PUT',
-    url: `${HOST_URL}/api/events/${_id}`,
-    data: {
-      attendees
-    }
+    url: `${HOST_URL}/api/event/${_id}`,
+    data: { attendees }
   });
 };

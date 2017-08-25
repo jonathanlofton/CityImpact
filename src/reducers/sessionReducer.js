@@ -12,8 +12,6 @@ const SessionReducer = (state = nullUser, action) => {
   case RECEIVE_CURRENT_USER:
   console.log(`USER RECEIVED ${action.currentUser}`);
     return {currentUser: action.currentUser};
-  case REMOVE_CURRENT_USER:
-    return {currentUser: null};
   default:
     return state;
   }
