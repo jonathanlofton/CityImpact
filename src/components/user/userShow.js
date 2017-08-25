@@ -23,7 +23,7 @@ class UserShow extends React.Component {
           />
         </View>
         <View style={styles.userInfo}>
-          <Text style={styles.name}>{currentUser.name}</Text>
+          <Text style={styles.name}>{currentUser.fullName}</Text>
           <Text style={styles.email}>{currentUser.email}</Text>
         </View>
         <Text style={{textAlign: 'center', fontSize: '18', fontWeight: '20', marginTop: 10}}>Events Your Hosting</Text>

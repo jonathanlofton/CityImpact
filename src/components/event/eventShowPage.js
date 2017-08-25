@@ -40,8 +40,22 @@ class EventShowPage extends React.Component {
     });
   }
 
+  onJoinEvent() {
+    const { _id, address, attendees } = this.props.navigation.state.params;
+    const { currentUser } = this.props;
+    this.props.updateEvent({
+      _id,
+      attendees: attendees.concat([this.props.currentUser.id])
+    });
+    this.props.updateUser({
+      id: currentUser.id,
+      hostedEvents: currentUser.hostedEvents,
+      joinedEvents: currentUser.joinedEvents.concat([_id])
+    });
+    this.reset();
+  }
+
   render() {
-    console.log(this.props);
     const { params } = this.props.navigation.state;
     const { navigate } = this.props.navigation;
     return(
@@ -101,7 +115,7 @@ class EventShowPage extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={button.button}
-              onPress={() => this.reset()}
+              onPress={() => this.onJoinEvent()}
               >
               <Text style={button.buttonText}>Join</Text>
             </TouchableOpacity>

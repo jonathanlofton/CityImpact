@@ -1,15 +1,10 @@
 import * as SessionApiUtil from '../util/sessionApiUtil';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
-export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
 
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
   currentUser
-});
-
-export const logoutUser = () => ({
-  type: RECEIVE_CURRENT_USER,
 });
 
 export const loginUser = userData => dispatch => (
@@ -21,7 +16,12 @@ export const loginUser = userData => dispatch => (
 
 export const updateUser = userData => dispatch => (
   SessionApiUtil.updateUser(userData).then(
-    data => dispatch(receiveCurrentUser(data.user)),
+    ({data}) => dispatch(receiveCurrentUser(data.user)),
     err => console.log(`from sessionAction: ${err}`)
   )
 );
+
+export const logoutUser = () => ({
+  type: RECEIVE_CURRENT_USER,
+  currentUser: null
+});

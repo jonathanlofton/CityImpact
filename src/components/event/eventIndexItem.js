@@ -19,17 +19,19 @@ class EventIndexItem extends React.Component {
   }
 
   navigateShowPage() {
-    // const { navigate } = this.props.navigation
-    const { event } = this.props
-    // console.log(event);
-    this.props.navigator.navigate('EventShowPage', {title: event.title,
-     latitude: event.latitude,
-     longitude: event.longitude,
-     description: event.description,
-     time: event.time,
-     date: event.date,
-     address: event.address,
-     hostName: event.host.fullName
+    const { event } = this.props;
+    console.log(`ID from indexItem: ${event._id}`);
+    this.props.navigator.navigate('EventShowPage', {
+      _id: event._id,
+      title: event.title,
+      latitude: event.latitude,
+      longitude: event.longitude,
+      description: event.description,
+      time: event.time,
+      date: event.date,
+      address: event.address,
+      host: event.host,
+      attendees: event.attendees
     });
     this.toggleModal();
   }
@@ -72,9 +74,8 @@ class EventIndexItem extends React.Component {
 
   render() {
     const { event } = this.props;
-    console.log(event);
     return(
-      <TouchableOpacity onPress={() => {this.navigateShowPage()}}>
+      <TouchableOpacity onPress={this.navigateShowPage}>
         <View style={styles.cardSection}>
           <View style={styles.information}>
             <Text style={styles.title}>{event.title}</Text>

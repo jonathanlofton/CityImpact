@@ -50,8 +50,6 @@ export const getAnEvent = async (req, res) => {
 export const deleteAnEvent = async (req, res) => {
   const { eventId } = req.params;
 
-  console.log(eventId);
-
   if (!eventId) {
     return res.status(400).json({ error: true, message: 'No Event Id' });
   }
@@ -61,8 +59,7 @@ export const deleteAnEvent = async (req, res) => {
 
 
   try {
-     Event.remove({'_id': eventId}, (result) => {
-      console.log(eventId);
+    Event.remove({'_id': eventId}, (result) => {
     return res.send(result);
   });
   } catch (e) {
@@ -93,3 +90,26 @@ export const deleteAnEvent = async (req, res) => {
 //     return res.status(400).json({ error: true, message: 'Cannot fetch/delete event' });
 //   }
 // };
+
+export const updateEvent = async (req, res) => {
+  const { eventId } = req.params;
+  const { attendees } = req.body;
+
+  if (!eventId) {
+    return res.status(400).json({ error: true, message: 'No Event Id' });
+  }
+
+  try {
+    const event = await Event.findById(eventId);
+    await event.update({ attendees });
+      // .populate('attendees')
+      // .exec(err => {
+      //   if (err) {
+      //     return handleError(err);
+      //   }
+      // });
+    return res.status(200).json({ event });
+  } catch (e) {
+    return res.status(404).json({ error: true, message: 'Cannot update event' });
+  }
+};
