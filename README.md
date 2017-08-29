@@ -22,7 +22,6 @@ The mission is to make it effortless for someone to get involved with their resp
 
    + [React Native Geocoding](https://developers.google.com/maps/documentation/javascript/geocoding)
       - An event is made with latitude longitude, this allows for events to have an address associated with them as well.
-
     <p align="center">
     <img src="./docs/Mapview.png">
     </p>
