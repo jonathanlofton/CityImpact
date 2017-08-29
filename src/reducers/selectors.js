@@ -10,7 +10,7 @@ export const selectHostedEvents = (state) => {
   let currentUser = state.session.currentUser;
   let hostedEvents = [];
   events.forEach( (el, idx) => {
-    if (el.host && el.host._id === currentUser.id) {
+    if (el.host && el.host._id === currentUser._id) {
       hostedEvents.push(el);
     }
   });

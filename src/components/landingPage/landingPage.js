@@ -179,6 +179,7 @@ class LandingPage extends React.Component {
                    longitude: event.longitude
                  }}
                  onCalloutPress={() => navigate('EventShowPage', {
+                    _id: event._id,
                     title: event.title,
                     latitude: event.latitude,
                     longitude: event.longitude,
