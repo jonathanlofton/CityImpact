@@ -74,7 +74,8 @@ class EventForm extends React.Component {
             date: res.event.date,
             address: res.event.address,
             host: res.event.host,
-            attendees: res.event.attendees
+            attendees: res.event.attendees,
+            currentUser: this.props.currentUser
          }})
         ]
       }
@@ -84,6 +85,7 @@ class EventForm extends React.Component {
   onCreateEvent() {
     const { title, description, latitude,
             longitude, date, time, host, address } = this.state;
+    const { currentUser, currentEvent } = this.props;
     this.props.createEvent({
       title: title,
       description: description,
@@ -91,13 +93,13 @@ class EventForm extends React.Component {
       longitude: longitude,
       date: date,
       time: time,
-      host: host,
+      host: currentUser,
       address: address
     }).then(res => {
         this.props.updateUser({
-          id: host.id,
-          hostedEvents: host.hostedEvents.concat([this.props.currentEvent._id]),
-          joinedEvents: host.joinedEvents
+          _id: currentUser._id,
+          hostedEvents: currentUser.hostedEvents.concat([currentEvent._id]),
+          joinedEvents: currentUser.joinedEvents
         }).then(
           () => this.reset(res)
         );

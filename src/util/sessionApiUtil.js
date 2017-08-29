@@ -10,10 +10,10 @@ export const loginUser = data => (
 );
 
 export const updateUser = data => {
-  const { id, hostedEvents, joinedEvents } = data;
+  const { _id, hostedEvents, joinedEvents } = data;
   return axios({
     method: 'PUT',
-    url: `${HOST_URL}/api/users/${id}`,
+    url: `${HOST_URL}/api/users/${_id}`,
     data: {
       hostedEvents,
       joinedEvents

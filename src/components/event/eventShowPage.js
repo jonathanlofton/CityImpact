@@ -9,6 +9,7 @@ class EventShowPage extends React.Component {
   constructor(props) {
     super(props);
     this.coordsToAddress = this.coordsToAddress.bind(this);
+    this.onJoinEvent = this.onJoinEvent.bind(this);
     this.reset = this.reset.bind(this);
   }
 
@@ -41,14 +42,15 @@ class EventShowPage extends React.Component {
   }
 
   onJoinEvent() {
+    console.log(`ADKHFG ${this.props.navigation.state.params}`);
     const { _id, address, attendees } = this.props.navigation.state.params;
     const { currentUser } = this.props;
     this.props.updateEvent({
       _id,
-      attendees: attendees.concat([this.props.currentUser.id])
+      attendees: attendees.concat([currentUser._id])
     });
     this.props.updateUser({
-      id: currentUser.id,
+      _id: currentUser._id,
       hostedEvents: currentUser.hostedEvents,
       joinedEvents: currentUser.joinedEvents.concat([_id])
     });
@@ -95,20 +97,15 @@ class EventShowPage extends React.Component {
               {params.address}
             </Text>
             <Text style={{textAlign: 'center', margin: '5%'}}>
-              Host: {params.hostName}
+              Host: {params.host.fullName}
             </Text>
             <Text style={{textAlign: 'center', margin: '5%'}}>
               {params.description}
             </Text>
 
-
-          <View style={showInfo.joinedView}>
-          </View>
-
-
           <View style={button.modalButtonContainer}>
             <TouchableOpacity
-              style={[button.button]}
+              style={button.button}
               onPress={() => this.reset()}
               >
               <Text style={button.buttonText}>Close</Text>

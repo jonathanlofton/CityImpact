@@ -47,7 +47,7 @@ export const loginWithAuth0 = async function (req, res) {
     return res.status(200).json({
       success: true,
       user: {
-        id: user._id,
+        _id: user._id,
         fullName: user.fullName,
         avatar: user.avatar,
         email: user.email,
