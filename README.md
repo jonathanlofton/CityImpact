@@ -1,5 +1,5 @@
 # CityImpact
-[Demo Page](https://jonathanlofton.github.io/CityImpactDemo/)
+[City Impact](https://jonathanlofton.github.io/CityImpactDemo/) is a mobile application geared towards connecting people with their local communities.
 
 ## Overview
 
