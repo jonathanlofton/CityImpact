@@ -7,6 +7,11 @@ export const receiveCurrentUser = currentUser => ({
   currentUser
 });
 
+export const logoutUser = () => ({
+  type: RECEIVE_CURRENT_USER,
+  currentUser: null
+});
+
 export const loginUser = userData => dispatch => (
   SessionApiUtil.loginUser(userData).then(
     ({data}) => dispatch(receiveCurrentUser(data.user)),
@@ -20,8 +25,3 @@ export const updateUser = userData => dispatch => (
     err => console.log(`from sessionAction: ${err}`)
   )
 );
-
-export const logoutUser = () => ({
-  type: RECEIVE_CURRENT_USER,
-  currentUser: null
-});

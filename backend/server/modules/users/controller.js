@@ -14,14 +14,19 @@ export const updateUser = async (req, res) => {
 
   try {
     const user = await User.findById(userId);
-    await user.update({ hostedEvents, joinedEvents });
-      // .populate('hostedEvents')
-      // .populate('joinedEvents')
-      // .exec(err => {
-      //   if (err) {
-      //     return handleError(err);
-      //   }
-      // });
+    if (hostedEvents) {
+      await user.update({ hostedEvents });
+    } else if (joinedEvents) {
+      await user.update({ joinedEvents });
+    }
+
+    // await user.populate('hostedEvents')
+    //   .populate('joinedEvents')
+    //   .exec(err => {
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //   });
     return res.status(200).json({ user });
   } catch (e) {
     return res.status(404).json({ error: true, message: 'Cannot update user' });

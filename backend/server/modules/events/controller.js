@@ -3,7 +3,7 @@ import Event from './model';
 export const createEvent = async (req, res) => {
   const { title, description, latitude, longitude, time, date, host, address } = req.body;
   const newEvent = new Event({
-    title, description, latitude, longitude, time, date, address, host: host._id
+    title, description, latitude, longitude, time, date, address, host
   });
   console.log(`NEW EVENT ${newEvent}`);
   try {
@@ -16,12 +16,13 @@ export const createEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find({}).populate('host')
-      .exec((err, events) => {
-        if (err) {
-          return handleError(err);
-        }
-      });
+    const events = await Event.find({});
+    // .populate('host')
+    //   .exec((err, events) => {
+    //     if (err) {
+    //       return handleError(err);
+    //     }
+    //   });
       // console.log(events);
     return res.status(200).json(events)
   } catch (e) {

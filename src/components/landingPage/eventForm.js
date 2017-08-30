@@ -19,7 +19,6 @@ class EventForm extends React.Component {
       address: ""
     };
     this.onCreateEvent = this.onCreateEvent.bind(this);
-    // this.navigateEventShowPage = this.navigateEventShowPage.bind(this);
     this.coordsToAddress = this.coordsToAddress.bind(this);
   }
 
@@ -35,48 +34,24 @@ class EventForm extends React.Component {
       this.props.navigation.state.params.latitude,
       this.props.navigation.state.params.longitude
     ).then(
-      json =>  {
-      this.setState({address: json.results[0].formatted_address});
-    },
-    error => {
-      alert(error);
-    });
+      json => this.setState({
+        address: json.results[0].formatted_address
+      }),
+      error => alert(error)
+    );
   }
 
-
-  // navigateEventShowPage(res) {
-  //   // const { navigate } = this.props.navigation
-  //   const { navigate } = this.props.navigation;
-  //   // const { res } = this.props;
-  //   navigate('EventShowPage', {title: res.event.data.event.title,
-  //    latitude: res.event.data.event.latitude,
-  //    longitude: res.event.data.event.longitude,
-  //    description: res.event.data.event.description,
-  //    time: res.event.data.event.time,
-  //    date: res.event.data.event.date,
-  //    address: res.event.data.event.address
-  //   });
-  //
-  // }
-
-  reset(res){
+  reset() {
+    const { currentEvent } = this.props;
     return this.props.navigation.dispatch(NavigationActions.reset(
       {
         index: 1,
         actions: [
           NavigationActions.navigate({ routeName: 'LandingPage'}),
-          NavigationActions.navigate({ routeName: 'EventShowPage', params: {
-            title: res.event.title,
-            latitude: res.event.latitude,
-            longitude: res.event.longitude,
-            description: res.event.description,
-            time: res.event.time,
-            date: res.event.date,
-            address: res.event.address,
-            host: res.event.host,
-            attendees: res.event.attendees,
-            currentUser: this.props.currentUser
-         }})
+          NavigationActions.navigate({
+            routeName: 'EventShowPage',
+            params: { _id: currentEvent._id }
+         })
         ]
       }
     ));
@@ -95,18 +70,14 @@ class EventForm extends React.Component {
       time: time,
       host: currentUser,
       address: address
-    }).then(res => {
-        this.props.updateUser({
-          _id: currentUser._id,
-          hostedEvents: currentUser.hostedEvents.concat([currentEvent._id]),
-          joinedEvents: currentUser.joinedEvents
-        }).then(
-          () => this.reset(res)
-        );
-      },
-      err => console.log(err)
+    })
+    .then(res => this.props.updateUser({
+      _id: currentUser._id,
+      hostedEvents: currentUser.hostedEvents.concat([res.event._id])
+    }))
+    .then(
+      () => this.reset()
     );
-    // .then(res => this.reset(res), err => console.log(err));
   }
 
   render() {
@@ -160,10 +131,7 @@ class EventForm extends React.Component {
 
       </View>
     );
-
   }
-
-
 }
 
 export default EventForm;
