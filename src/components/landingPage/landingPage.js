@@ -163,54 +163,44 @@ class LandingPage extends React.Component {
       return (
         <View style={styles.container} >
           <MapView
-             style={styles.map}
-             initialRegion={{
-               latitude: lat,
-               longitude: long,
-               latitudeDelta: 0.0922,
-               longitudeDelta: 0.0421,
-             }}
-             onLongPress={this.mapPressLong}
-           >
-           { events.map(event => (
-               <MapView.Marker
-                 coordinate={{
-                   latitude: event.latitude,
-                   longitude: event.longitude
-                 }}
-                 onCalloutPress={() => navigate('EventShowPage', {
-                    _id: event._id,
-                    title: event.title,
-                    latitude: event.latitude,
-                    longitude: event.longitude,
-                    description: event.description,
-                    time: event.time,
-                    date: event.date,
-                    address: event.address,
-                    attendees: event.attendees,
-                    host: event.host
-                  })
-                }
-
-                 key={`event-${event._id}`}
-                 title={event.title}
-                 description={event.description}
-               >
-             </MapView.Marker>
-             ))}
-           </MapView>
+            style={styles.map}
+            initialRegion={{
+              latitude: lat,
+              longitude: long,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            onLongPress={this.mapPressLong}
+          >
+          { events.map(event => (
+            <MapView.Marker
+              coordinate={{
+                latitude: event.latitude,
+                longitude: event.longitude
+              }}
+              onCalloutPress={() => navigate(
+                'EventShowPage',
+                { _id: event._id }
+              )}
+              key={`event-${event._id}`}
+              title={event.title}
+              description={event.description}
+            >
+            </MapView.Marker>
+          ))}
+          </MapView>
 
 
-           <View style={styles.photoContainer}>
-             <TouchableOpacity
-               onPress={() => this.toggleUserModal()}
-               >
-               <Image
-               style={styles.userPhoto}
-               source={{uri: `${currentUser.avatar}`}}
-               />
-             </TouchableOpacity>
-           </View>
+          <View style={styles.photoContainer}>
+            <TouchableOpacity
+              onPress={() => this.toggleUserModal()}
+            >
+            <Image
+              style={styles.userPhoto}
+              source={{uri: `${currentUser.avatar}`}}
+            />
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.bottomNavigation}>
             {this._renderTouchableOpacity("Events Index", () => navigate('EventIndexContainer'), button.style, button.text)}

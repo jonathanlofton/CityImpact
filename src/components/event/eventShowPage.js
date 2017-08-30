@@ -24,14 +24,16 @@ class EventShowPage extends React.Component {
   }
 
   componentWillMount() {
-    this.coordsToAddress();
+    const { _id } = this.props.navigation.state.params;
+    this.props.requestSingleEvent(_id).then(
+      () => this.coordsToAddress()
+    );
   }
 
   coordsToAddress() {
-    const { params } = this.props.navigation.state;
-
+    const { currentEvent } = this.props;
     Geocoder.setApiKey('AIzaSyAjlc_-1s0PP53gxwcZHpGtNQryjcKzvZs');
-    Geocoder.getFromLatLng(params.latitude, params.longitude)
+    Geocoder.getFromLatLng(currentEvent.latitude, currentEvent.longitude)
     .then(json =>  {
       const add = json.results[0].formatted_address;
       return add;
@@ -42,66 +44,69 @@ class EventShowPage extends React.Component {
   }
 
   onJoinEvent() {
-    console.log(`ADKHFG ${this.props.navigation.state.params}`);
-    const { _id, address, attendees } = this.props.navigation.state.params;
+    const { _id, address, attendees } = this.props.currentEvent;
     const { currentUser } = this.props;
     this.props.updateEvent({
       _id,
       attendees: attendees.concat([currentUser._id])
-    });
-    this.props.updateUser({
-      _id: currentUser._id,
-      hostedEvents: currentUser.hostedEvents,
-      joinedEvents: currentUser.joinedEvents.concat([_id])
-    });
-    this.reset();
+    })
+    .then(() => this.props.updateUser({
+        _id: currentUser._id,
+        joinedEvents: currentUser.joinedEvents.concat([_id])
+      }))
+    .then(
+      () => this.reset()
+    );
   }
 
   render() {
-    const { params } = this.props.navigation.state;
+    const { currentEvent } = this.props;
+    if (!currentEvent) {
+      return null
+    }
     const { navigate } = this.props.navigation;
     return(
       <View style={styles.container}>
         <MapView
-           style={styles.map}
-           initialRegion={{
-             latitude: params.latitude,
-             longitude: params.longitude,
-             latitudeDelta: 0.0422,
-             longitudeDelta: 0.0121,
-           }}
-           onLongPress={this.mapPressLong}
-         >
-         <MapView.Marker
-           coordinate={{
-             latitude: params.latitude,
-             longitude: params.longitude
-           }}
-           title={params.title}
-           description={params.description}
-         />
-       </MapView>
+          style={styles.map}
+          initialRegion={{
+            latitude: currentEvent.latitude,
+            longitude: currentEvent.longitude,
+            latitudeDelta: 0.0422,
+            longitudeDelta: 0.0121,
+          }}
+          onLongPress={this.mapPressLong}
+        >
+          <MapView.Marker
+            coordinate={{
+              latitude: currentEvent.latitude,
+              longitude: currentEvent.longitude
+            }}
+            title={currentEvent.title}
+            description={currentEvent.description}
+          />
+        </MapView>
         <View style={showInfo.container}>
 
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <View style={showInfo.dateTime}>
-                <Text style={[showInfo.showDetails, showInfo.date]}>{params.date}</Text>
-                <Text style={showInfo.showDetails}>{params.time}</Text>
-              </View>
-
-              <Text style={showInfo.title}>{params.title}</Text>
-
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={showInfo.dateTime}>
+              <Text style={[showInfo.showDetails, showInfo.date]}>{currentEvent.date}</Text>
+              <Text style={showInfo.showDetails}>{currentEvent.time}</Text>
             </View>
 
-            <Text style={[showInfo.showDetails, showInfo.address]}>
-              {params.address}
-            </Text>
-            <Text style={{textAlign: 'center', margin: '5%'}}>
-              Host: {params.host.fullName}
-            </Text>
-            <Text style={{textAlign: 'center', margin: '5%'}}>
-              {params.description}
-            </Text>
+            <Text style={showInfo.title}>{currentEvent.title}</Text>
+
+          </View>
+
+          <Text style={[showInfo.showDetails, showInfo.address]}>
+            {currentEvent.address}
+          </Text>
+          <Text style={{textAlign: 'center', margin: '5%'}}>
+            Host: {currentEvent.host.fullName}
+          </Text>
+          <Text style={{textAlign: 'center', margin: '5%'}}>
+            {currentEvent.description}
+          </Text>
 
           <View style={button.modalButtonContainer}>
             <TouchableOpacity
@@ -117,11 +122,10 @@ class EventShowPage extends React.Component {
               <Text style={button.buttonText}>Join</Text>
             </TouchableOpacity>
           </View>
+          
         </View>
       </View>
     );
-
-
   }
 }
 

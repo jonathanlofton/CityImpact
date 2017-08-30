@@ -18,9 +18,10 @@ class EventIndex extends React.Component {
     const { events } = this.props;
 
     const allEvents =
-      events.map((event, id) => (
-        <EventIndexItem key={`event-${id}`}
+      events.map((event, i) => (
+        <EventIndexItem key={`event-${i}`}
           navigator={this.props.navigation}
+          requestSingleEvent={this.props.requestSingleEvent}
           event={event}/>
       ));
 
