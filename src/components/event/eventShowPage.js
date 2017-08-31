@@ -10,6 +10,7 @@ class EventShowPage extends React.Component {
     super(props);
     this.coordsToAddress = this.coordsToAddress.bind(this);
     this.onJoinEvent = this.onJoinEvent.bind(this);
+    this.onLeaveEvent = this.onLeaveEvent.bind(this);
     this.reset = this.reset.bind(this);
   }
 
@@ -59,11 +60,52 @@ class EventShowPage extends React.Component {
     );
   }
 
-  render() {
-    const { currentEvent } = this.props;
-    if (!currentEvent) {
-      return null
+  onLeaveEvent() {
+    const { _id, address, attendees } = this.props.currentEvent;
+    const { currentUser } = this.props;
+    this.props.updateEvent({
+      _id,
+      attendees: attendees.filter(id => id !== currentUser._id)
+    })
+    .then(() => this.props.updateUser({
+        _id: currentUser._id,
+        joinedEvents: currentUser.joinedEvents.filter(id => id !== _id)
+      }))
+    .then(
+      () => this.reset()
+    );
+  }
+
+  joinOrLeaveButton() {
+    const { _id, address, attendees } = this.props.currentEvent;
+    const { currentUser } = this.props;
+    if (attendees.includes(currentUser._id)) {
+      return(
+        <TouchableOpacity
+          style={button.button}
+          onPress={() => this.onLeaveEvent()}
+          >
+          <Text style={button.buttonText}>Join</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return(
+        <TouchableOpacity
+          style={button.button}
+          onPress={() => this.onJoinEvent()}
+          >
+          <Text style={button.buttonText}>Join</Text>
+        </TouchableOpacity>
+      );
     }
+  }
+
+  render() {
+    const { currentEvent, currentUser } = this.props;
+    if (!currentEvent) {
+      return null;
+    }
+
     const { navigate } = this.props.navigation;
     return(
       <View style={styles.container}>
@@ -122,7 +164,7 @@ class EventShowPage extends React.Component {
               <Text style={button.buttonText}>Join</Text>
             </TouchableOpacity>
           </View>
-          
+
         </View>
       </View>
     );
