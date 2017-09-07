@@ -27,7 +27,40 @@ The mission is to make it effortless for someone to get involved with their resp
     </p>
 
 ## Features
-  ### OAuth integration
+  ### OAuth Integration
+  + Using Passport.js, we enable users to sign in with Facebook and Google. Upon selection, the user is sent to the respective web page to sign in, which generates a JSON Web Token to be sent to the backend. From the backend, we sign the token and make a request to the respective host for a JSON object containing that user's data (fullName, avatar, email, provider). Once successful, the user is either recognized in the database or created, and logged into the app with session persistence, so the process doesn't have to be repeated next time.
+
+  ``` javascript
+  export const loginWithAuth0 = async function (req, res) {
+    const { provider, token } = req.body;
+    let userInfo;
+
+    try {
+      if (provider === 'google') {
+        userInfo = await googleAuth(token);
+      } else {
+        userInfo = await facebookAuth(token);
+      }
+
+      const user = await User.findOrCreate(userInfo)
+
+      return res.status(200).json({
+        success: true,
+        user: {
+          _id: user._id,
+          fullName: user.fullName,
+          avatar: user.avatar,
+          email: user.email,
+          hostedEvents: user.hostedEvents,
+          joinedEvents: user.joinedEvents
+        },
+        token: `JWT ${createToken(user)}`,
+      });
+    } catch (e) {
+      return res.status(400).json({ error: true, errorMessage: e.message });
+    }
+  };
+  ```
 
   ### Requesting Geographical Data
   + When a new user logs into CityImpact their Geographical location will be requested so the map will be oriented appropriately.
