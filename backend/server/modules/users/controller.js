@@ -34,7 +34,6 @@ export const updateUser = async (req, res) => {
 };
 
 export const loginWithAuth0 = async function (req, res) {
-
   const { provider, token } = req.body;
   let userInfo;
 
@@ -46,8 +45,6 @@ export const loginWithAuth0 = async function (req, res) {
     }
 
     const user = await User.findOrCreate(userInfo)
-
-    console.log(`logged in or created user: ${user}`);
 
     return res.status(200).json({
       success: true,
